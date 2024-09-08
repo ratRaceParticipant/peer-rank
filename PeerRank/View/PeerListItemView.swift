@@ -8,11 +8,46 @@
 import SwiftUI
 
 struct PeerListItemView: View {
+    @StateObject var vm: PeerListItemViewModel
+    var peerDataModel: PeerModel
+    init(
+        localFileManager: LocalFileManager,
+        peerDataModel: PeerModel = PeerModel.sampleData[0]
+    ) {
+        self._vm = StateObject(
+            wrappedValue: PeerListItemViewModel(
+                localFileManager: localFileManager,
+                peerDataModel: peerDataModel
+            )
+        )
+        self.peerDataModel = peerDataModel
+    }
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            PeerPhotoView(
+                peerDataModel: peerDataModel,
+                enableEditing: false,
+                photoSize: 75,
+                localFileManager: vm.localFileManager
+            )
+            VStack(alignment: .leading) {
+                Text(peerDataModel.name)
+                    .fontWeight(.bold)
+                    .font(.title3)
+                RatingView(
+                    currentRating: .constant(peerDataModel.averageRating),
+                    enableEditing: false,
+                    starFont: .title3
+                )
+                
+            }
+            Spacer()
+            
+        }
+//        .padding(.horizontal,8)
     }
 }
 
 #Preview {
-    PeerListItemView()
+    PeerListItemView(localFileManager: LocalFileManager())
 }

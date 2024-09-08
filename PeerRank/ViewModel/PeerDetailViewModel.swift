@@ -6,3 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
+class PeerDetailViewModel: ObservableObject {
+    @Published var peerImage: UIImage?
+    
+    init(){
+        getImage()
+    }
+    func getImage() {
+        
+    }
+}

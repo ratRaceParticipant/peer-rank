@@ -8,11 +8,28 @@
 import SwiftUI
 
 struct IconWithPopoverView: View {
+    @State var isInfoPopTipShown: Bool = false
+    @State var popOverText: InfoText = .baseRatingWeightageInfo
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: {
+            isInfoPopTipShown.toggle()
+        }, label: {
+            Image(systemName: "info.circle")
+                .font(.title2)
+                
+        })
+        .popover(isPresented: $isInfoPopTipShown, attachmentAnchor: .point(.top), arrowEdge: .bottom) {
+            Text(popOverText.rawValue)
+                .lineLimit(5)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(8)
+                .foregroundStyle(.black)
+                .presentationCompactAdaptation(.none)
+                
+        }
     }
 }
 
 #Preview {
-    IconWithPopoverView()
+    IconWithPopoverView(popOverText: InfoText.baseRatingWeightageInfo)
 }

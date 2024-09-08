@@ -6,7 +6,8 @@
 //
 
 import Foundation
-enum PeerType: Int16 {
+import SwiftUI
+enum PeerType: Int16, CaseIterable {
     case friend = 1
     case colleague = 2
     case fatherSideRelative = 3
@@ -25,4 +26,22 @@ enum PeerType: Int16 {
         
         }
     }
+    func getBgColor() -> Color {
+        switch self {
+        case .friend:
+            return .green
+        case .colleague:
+            return .red
+        case .fatherSideRelative:
+            return .blue
+        case .motherSideRelative:
+            return .pink
+        
+        }
+    }
+}
+
+enum InfoText: String {
+    case baseRatingWeightageInfo = "This gives the weightage to the base rating."
+    case averageRating = "Rating of average of base rating and instance ratings"
 }

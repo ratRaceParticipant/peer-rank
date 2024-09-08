@@ -8,11 +8,33 @@
 import SwiftUI
 
 struct RatingWeightageView: View {
+    @Binding var ratingWeightage: Double
+    @State private var isEditing = false
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text("Rating Weightage")
+                .font(.headline)
+                .fontWeight(.bold)
+            Text("\(ratingWeightage, specifier: "%.f")")
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(isEditing ? .red : .accentColor)
+            IconWithPopoverView(popOverText: .baseRatingWeightageInfo)
+            Spacer()
+        }
+        Slider(value: $ratingWeightage, in: 0...20, step: 1.0){
+            Text("Slider")
+        } minimumValueLabel: {
+            Text("0")
+        } maximumValueLabel: {
+            Text("20")
+        } onEditingChanged: { editing in
+            isEditing = editing
+        }
+        
     }
 }
 
 #Preview {
-    RatingWeightageView()
+    RatingWeightageView(ratingWeightage: .constant(2.0))
 }

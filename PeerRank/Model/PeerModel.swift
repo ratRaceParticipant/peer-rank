@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreData
-struct PeerModel{
+struct PeerModel: Identifiable{
     var id: UUID
     var initials: String
     var name: String
@@ -29,12 +29,13 @@ struct PeerModel{
         self.peerInstance = peerInstance
         self.averageRating = averageRating
     }
+    static let emptyData = PeerModel(id: UUID(), initials: "", name: "", photoId: "", type: 1, baseRating: 3, baseRatingWeightage: 5, averageRating: 3.0, peerInstance:  [])
 }
 
 extension PeerModel {
     static let sampleData: [PeerModel] = [
-        PeerModel(id: UUID(), initials: "HK", name: "Himanshu Bhai", photoId: "sampleid", type: 1, baseRating: 4, baseRatingWeightage: 10, averageRating: 4.2, peerInstance: PeerInstanceModel.sampleData),
-        PeerModel(id: UUID(), initials: "RJ", name: "Rohit Janwar", photoId: "sampleid", type: 1, baseRating: 4, baseRatingWeightage: 10, averageRating: 3.7, peerInstance: PeerInstanceModel.sampleData)
+        PeerModel(id: UUID(), initials: "HK", name: "Himanshu Bhai", photoId: "sampleid", type: 3, baseRating: 4, baseRatingWeightage: 10, averageRating: 4.5, peerInstance: PeerInstanceModel.sampleData),
+        PeerModel(id: UUID(), initials: "RJ", name: "Rohit Janwar", photoId: "sampleid", type: 2, baseRating: 4, baseRatingWeightage: 10, averageRating: 3.7, peerInstance: PeerInstanceModel.sampleData)
     ]
     
     static func mapModelToEntity(peerModel: PeerModel, peerEntity: PeerEntity, coreDataHandler: CoreDataHandler){

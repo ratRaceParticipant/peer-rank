@@ -21,7 +21,6 @@ class ContentFileViewModel: ObservableObject {
             peerEntityData =  try dataHandler.viewContext.fetch(request)
             for entityData in peerEntityData {
                 peerModelData.append(PeerModel.mapEntityToModel(peerEntity: entityData, context: dataHandler.viewContext))
-//                print(PeerModel.mapEntityToModel(peerEntity: peerEntityData, context: dataHandler.viewContext))
             }
             
         } catch {

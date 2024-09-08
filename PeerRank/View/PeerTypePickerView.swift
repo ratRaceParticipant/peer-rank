@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct PeerTypePickerView: View {
+    @Binding var pickerTypeId: Int16
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        VStack {
+            Picker(selection: $pickerTypeId) {
+                ForEach(PeerType.allCases,id: \.rawValue) { item in
+                    Text(item.getPeerTypeString())
+                }
+            } label: {
+                Text("PICKER")
+            }
+            .pickerStyle(.menu)
+
+        }
     }
 }
 
 #Preview {
-    PeerTypePickerView()
+    PeerTypePickerView(pickerTypeId: .constant(4))
 }

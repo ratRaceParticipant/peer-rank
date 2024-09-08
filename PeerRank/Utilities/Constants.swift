@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+class Constants {
+    static let maxInitialsLength = 3
+}

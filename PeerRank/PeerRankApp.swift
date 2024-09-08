@@ -9,10 +9,16 @@ import SwiftUI
 
 @main
 struct PeerRankApp: App {
-    var coreDataHandler: CoreDataHandler = CoreDataHandler()
+    var localFileManager = LocalFileManager()
+    var coreDataHandler = CoreDataHandler()
     var body: some Scene {
         WindowGroup {
-            ContentView(coreDataHandler: CoreDataHandler())
+            NavigationStack {
+                PeerListView(
+                    localFileManager: localFileManager, coreDataHandler: coreDataHandler
+                )
+            }
+//            ContentView(coreDataHandler: coreDataHandler)
         }
     }
 }
