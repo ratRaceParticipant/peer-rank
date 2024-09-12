@@ -23,7 +23,7 @@ class LocalFileManager {
         }
         do {
             try data.write(to: path)
-            print("image saved")
+            print("image saved on: \(id)")
         } catch {
             print("Error saving image: \(error)")
         }
@@ -33,7 +33,7 @@ class LocalFileManager {
         guard
             let path = getPathForImage(id: id)?.path(percentEncoded: false),
             FileManager.default.fileExists(atPath: path) else {
-            print("Error getimage()")
+            print("Error getimage() on \(id)")
             return nil
         }
         return UIImage(contentsOfFile: path)
@@ -60,7 +60,7 @@ class LocalFileManager {
                 .default
                 .urls(for: .cachesDirectory, in: .userDomainMask)
                 .first?
-                .appending(path: "\(id).png")
+                .appending(path: "\(id).jpg")
         else {
             print("Erroe getting path")
             return nil

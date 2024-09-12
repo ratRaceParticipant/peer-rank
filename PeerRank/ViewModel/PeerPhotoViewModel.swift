@@ -7,24 +7,27 @@
 
 import Foundation
 import PhotosUI
-import _PhotosUI_SwiftUI
+import SwiftUI
 
+@MainActor
 class PeerPhotoViewModel: ObservableObject {
     @Published var peerDataModel: PeerModel
     var localFileManager: LocalFileManager
     @Published var photoPickerItem: PhotosPickerItem? = nil
-    @Published var selectedUIimage: UIImage?
-    init(peerDataModel: PeerModel, localFileManager: LocalFileManager){
+    init(
+        peerDataModel: PeerModel,
+        localFileManager: LocalFileManager
+    ){
         self.localFileManager = localFileManager
         self.peerDataModel = peerDataModel
-        getImage(uuid: peerDataModel.photoId)
+
     }
-    
-    func setImage(from selection: PhotosPickerItem?) async {
-        guard let selection else {return}
+    func setImage(from selection: PhotosPickerItem?) async -> UIImage?{
+        guard let selection else {return nil}
         
-        guard let imageData = try? await selection.loadTransferable(type: Data.self), let uiImage = UIImage(data: imageData) else {return}
-        selectedUIimage = uiImage
+        guard let imageData = try? await selection.loadTransferable(type: Data.self), let uiImage = UIImage(data: imageData) else {return nil}
+        return uiImage
+        
     }
     
     func getInitials(){
@@ -44,9 +47,15 @@ class PeerPhotoViewModel: ObservableObject {
             }
         }
         peerDataModel.initials = initials
+        peerDataModel.initials = peerDataModel.initials.uppercased()
+    }
+    func getImage() -> UIImage?{
+        guard !(peerDataModel.photoId == "") else {
+            
+            return nil
+        }
+        return localFileManager.getImage(id: peerDataModel.photoId)
     }
     
-    func getImage(uuid: String){
-        
-    }
+    
 }

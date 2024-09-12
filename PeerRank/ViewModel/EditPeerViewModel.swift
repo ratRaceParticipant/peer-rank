@@ -32,6 +32,8 @@ class EditPeerViewModel: ObservableObject {
         let peerEntity = isUpdate ? getDataToUpdate() : PeerEntity(context: coreDataHandler.viewContext)
         
         setPeerData()
+        saveImage()
+        deleteImage()
         PeerModel.mapModelToEntity(
             peerModel: peerModel,
             peerEntity: peerEntity ?? PeerEntity(context: coreDataHandler.viewContext),
@@ -76,14 +78,32 @@ class EditPeerViewModel: ObservableObject {
         } else {
             for word in nameArray {
                 if initials.count == Constants.maxInitialsLength {
-                    return initials
+                    return initials.uppercased()
                 } else {
                     if let letter = word.first {
-                        initials += String(letter).uppercased()
+                        initials += String(letter)
                     }
                 }
             }
         }
-        return initials
+        return initials.uppercased()
     }
+    
+    func saveImage(){
+        guard let uiImage = peerImage else { return }   
+        peerModel.photoId = peerModel.photoId.isEmpty ? UUID().uuidString : peerModel.photoId
+        localFileManager.saveImage(image: uiImage, id: peerModel.photoId)
+    }
+    
+    func deleteImage(){
+        guard let _ = peerImage else {
+            if !(peerModel.photoId == "") {
+                localFileManager.deleteImage(id: peerModel.photoId)
+                peerModel.photoId = ""
+            }
+            return
+        }
+        
+    }
+    
 }

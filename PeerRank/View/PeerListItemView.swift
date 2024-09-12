@@ -16,8 +16,7 @@ struct PeerListItemView: View {
     ) {
         self._vm = StateObject(
             wrappedValue: PeerListItemViewModel(
-                localFileManager: localFileManager,
-                peerDataModel: peerDataModel
+                localFileManager: localFileManager
             )
         )
         self.peerDataModel = peerDataModel
@@ -25,7 +24,9 @@ struct PeerListItemView: View {
     var body: some View {
         HStack {
             PeerPhotoView(
-                peerDataModel: peerDataModel,
+                peerDataModel: peerDataModel, 
+                selectedImage: .constant(vm.getImage(peerDataModel: peerDataModel)),
+                
                 enableEditing: false,
                 photoSize: 75,
                 localFileManager: vm.localFileManager
