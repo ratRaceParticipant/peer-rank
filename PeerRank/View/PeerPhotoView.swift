@@ -11,6 +11,8 @@ import PhotosUI
 struct PeerPhotoView: View {
     @StateObject var vm: PeerPhotoViewModel
     @Binding var selectedImage: UIImage?
+    var peerModel: PeerModel
+    
     var enableEditing: Bool = true
     var photoSize: CGFloat = 100
     init(
@@ -22,15 +24,13 @@ struct PeerPhotoView: View {
     ) {
         _vm = StateObject(
             wrappedValue: PeerPhotoViewModel(
-                peerDataModel: peerDataModel,
                 localFileManager: localFileManager
-                
             )
         )
         self._selectedImage = selectedImage
         self.enableEditing = enableEditing
         self.photoSize = photoSize
-        
+        self.peerModel = peerDataModel
     }
     
     var body: some View {
@@ -44,7 +44,10 @@ struct PeerPhotoView: View {
                         initialsPlaceholder
                     }
                 }
-                .foregroundStyle(PeerType(rawValue: vm.peerDataModel.type)?.getBgColor() ?? .clear)
+                .foregroundStyle(
+                    PeerType(
+                        rawValue: peerModel.type)?.getBgColor() ?? .clear
+                )
             }
             
             if enableEditing {
@@ -52,7 +55,7 @@ struct PeerPhotoView: View {
             }
         }
         .onAppear{
-            selectedImage = vm.getImage()
+            vm.initials = vm.getInitials(name: peerModel.name)
         }
         .onChange(of: vm.photoPickerItem) {
             Task {
@@ -84,12 +87,12 @@ struct PeerPhotoView: View {
             .foregroundStyle(.tertiary)
             .overlay {
                 Group {
-                    if vm.peerDataModel.initials.isEmpty {
+                    if vm.initials == "" {
                         Image(systemName: "camera")
                             .foregroundStyle(.primary)
                             .font(.headline)
                     } else {
-                        Text(vm.peerDataModel.initials)
+                        Text(vm.initials)
                             .foregroundStyle(.primary)
                             .font(.largeTitle)
                     }

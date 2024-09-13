@@ -19,21 +19,25 @@ struct PeerListView: View {
                 localFileManager: localFileManager
             )
         )
+        
     }
     
     var body: some View {
         List(vm.peerModelData) { data in
+            let peerImage: UIImage? = vm.getImage(peerDataModel: data)
             NavigationLink {
                 EditPeerView(
                     localFileManager: vm.localFileManager,
                     isUpdate: true,
                     peerModel: data,
-                    coreDataHandler: vm.coreDataHandler
+                    coreDataHandler: vm.coreDataHandler,
+                    peerImage: peerImage
                 )
             } label: {
                 PeerListItemView(
                     localFileManager: vm.localFileManager, 
-                    peerDataModel: data
+                    peerDataModel: data,
+                    peerImage: peerImage
                 )
             }
         }

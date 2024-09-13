@@ -10,9 +10,12 @@ import SwiftUI
 struct PeerListItemView: View {
     @StateObject var vm: PeerListItemViewModel
     var peerDataModel: PeerModel
+    var peerImage: UIImage?
     init(
         localFileManager: LocalFileManager,
-        peerDataModel: PeerModel = PeerModel.sampleData[0]
+        peerDataModel: PeerModel = PeerModel.sampleData[0],
+        peerImage: UIImage? = nil
+        
     ) {
         self._vm = StateObject(
             wrappedValue: PeerListItemViewModel(
@@ -20,12 +23,13 @@ struct PeerListItemView: View {
             )
         )
         self.peerDataModel = peerDataModel
+        self.peerImage = peerImage
     }
     var body: some View {
         HStack {
             PeerPhotoView(
                 peerDataModel: peerDataModel, 
-                selectedImage: .constant(vm.getImage(peerDataModel: peerDataModel)),
+                selectedImage: .constant(peerImage),
                 
                 enableEditing: false,
                 photoSize: 75,

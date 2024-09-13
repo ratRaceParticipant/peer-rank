@@ -18,13 +18,15 @@ class EditPeerViewModel: ObservableObject {
     init(
         localFileManager: LocalFileManager, 
         coreDatHandler: CoreDataHandler,
-        peerModel: PeerModel
+        peerModel: PeerModel,
+        peerImage: UIImage?
     ){
         self.localFileManager = localFileManager
         self.coreDataHandler = coreDatHandler
         self.peerModel = peerModel
         self.peerRatingWeightage = Double(peerModel.baseRatingWeightage)
         self.peerRating = Float(peerModel.baseRating)
+        self.peerImage = peerImage
     }
     
     func writePeerData(isUpdate: Bool = false){

@@ -19,13 +19,15 @@ struct EditPeerView: View {
         localFileManager: LocalFileManager,
         isUpdate: Bool = false,
         peerModel: PeerModel = PeerModel.emptyData,
-        coreDataHandler: CoreDataHandler
+        coreDataHandler: CoreDataHandler,
+        peerImage: UIImage? = nil
     ) {
         self._vm = StateObject(
             wrappedValue: EditPeerViewModel(
                 localFileManager: localFileManager,
                 coreDatHandler: coreDataHandler,
-                peerModel: peerModel
+                peerModel: peerModel,
+                peerImage: peerImage
             )
         )
         self.isUpdate = isUpdate

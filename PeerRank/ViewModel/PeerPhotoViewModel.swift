@@ -11,15 +11,14 @@ import SwiftUI
 
 @MainActor
 class PeerPhotoViewModel: ObservableObject {
-    @Published var peerDataModel: PeerModel
     var localFileManager: LocalFileManager
+    @Published var initials: String = ""
     @Published var photoPickerItem: PhotosPickerItem? = nil
     init(
-        peerDataModel: PeerModel,
         localFileManager: LocalFileManager
     ){
         self.localFileManager = localFileManager
-        self.peerDataModel = peerDataModel
+        
 
     }
     func setImage(from selection: PhotosPickerItem?) async -> UIImage?{
@@ -30,15 +29,15 @@ class PeerPhotoViewModel: ObservableObject {
         
     }
     
-    func getInitials(){
-        let nameArray: [String] = peerDataModel.name.components(separatedBy: " ")
+    func getInitials(name: String) -> String{
+        let nameArray: [String] = name.components(separatedBy: " ")
         var initials: String = ""
         if nameArray.count == 1 {
             initials = String(nameArray[0].prefix(2))
         } else {
             for word in nameArray {
                 if initials.count == Constants.maxInitialsLength {
-                    peerDataModel.initials = initials
+                    return initials.uppercased()
                 } else {
                     if let letter = word.first {
                         initials += String(letter).uppercased()
@@ -46,16 +45,7 @@ class PeerPhotoViewModel: ObservableObject {
                 }
             }
         }
-        peerDataModel.initials = initials
-        peerDataModel.initials = peerDataModel.initials.uppercased()
+        return initials.uppercased()
     }
-    func getImage() -> UIImage?{
-        guard !(peerDataModel.photoId == "") else {
-            
-            return nil
-        }
-        return localFileManager.getImage(id: peerDataModel.photoId)
-    }
-    
     
 }

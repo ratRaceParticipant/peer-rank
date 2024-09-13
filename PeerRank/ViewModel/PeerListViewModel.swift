@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreData
-
+import SwiftUI
 class PeerListViewModel: ObservableObject {
     
     @Published var peerModelData: [PeerModel] = []
@@ -39,5 +39,13 @@ class PeerListViewModel: ObservableObject {
         } catch {
             print("Error fetching data")
         }
+    }
+    
+    func getImage(peerDataModel: PeerModel) -> UIImage?{
+        guard !(peerDataModel.photoId == "") else {
+            
+            return nil
+        }
+        return localFileManager.getImage(id: peerDataModel.photoId)
     }
 }

@@ -13,11 +13,4 @@ class PeerListItemViewModel: ObservableObject {
     init(localFileManager: LocalFileManager) {
         self.localFileManager = localFileManager
     }
-    func getImage(peerDataModel: PeerModel) -> UIImage?{
-        guard !(peerDataModel.photoId == "") else {
-            
-            return nil
-        }
-        return localFileManager.getImage(id: peerDataModel.photoId)
-    }
 }
