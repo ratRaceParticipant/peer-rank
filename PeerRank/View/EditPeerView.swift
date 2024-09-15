@@ -13,26 +13,24 @@ struct EditPeerView: View {
     var isUpdate: Bool
     
     @Environment(\.presentationMode) var presentationMode
-    
-    
     init(
         localFileManager: LocalFileManager,
         isUpdate: Bool = false,
         peerModel: PeerModel = PeerModel.emptyData,
         coreDataHandler: CoreDataHandler,
-        peerImage: UIImage? = nil
+        peerImage: UIImage? = nil,
+        updateParentVarData: ((_ peerDataModel: PeerModel, _ peerImage: UIImage?) -> Void)? = nil
     ) {
         self._vm = StateObject(
             wrappedValue: EditPeerViewModel(
                 localFileManager: localFileManager,
                 coreDatHandler: coreDataHandler,
                 peerModel: peerModel,
-                peerImage: peerImage
+                peerImage: peerImage,
+                onChange: updateParentVarData
             )
         )
         self.isUpdate = isUpdate
-        
-        
     }
     
     var body: some View {
@@ -68,6 +66,9 @@ struct EditPeerView: View {
                     Spacer()
                     Button("Save") {
                         vm.writePeerData(isUpdate: isUpdate)
+                        if isUpdate {
+                            vm.updateParentVarData?(vm.peerModel, vm.peerImage)
+                        }
                         presentationMode.wrappedValue.dismiss()
                     }
                     .buttonStyle(.borderedProminent)

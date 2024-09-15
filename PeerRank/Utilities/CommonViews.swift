@@ -18,6 +18,20 @@ class CommonViews {
                 RoundedRectangle(cornerRadius: 5)
                     .foregroundColor(Color.gray.opacity(0.1))
             )
+    }
+    static func textEditor(bindingText: Binding<String>) -> some View {
+        TextEditor(text: bindingText)
             
+            .autocorrectionDisabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+            .foregroundColor(.primary)
+            .multilineTextAlignment(.leading)
+            .lineLimit(5)
+            .lineSpacing(1.0)
+            .cornerRadius(20) /// make the background rounded
+            .overlay( /// apply a rounded border
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(.secondary, lineWidth: 1)
+            )
+            .frame(height: 100)
     }
 }

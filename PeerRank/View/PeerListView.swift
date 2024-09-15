@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PeerListView: View {
     @StateObject var vm: PeerListViewModel
+    @State var selectedPeerModel: PeerModel?
     init(
         localFileManager: LocalFileManager,
         coreDataHandler: CoreDataHandler
@@ -19,30 +20,31 @@ struct PeerListView: View {
                 localFileManager: localFileManager
             )
         )
-        
     }
-    
     var body: some View {
         List(vm.peerModelData) { data in
-            let peerImage: UIImage? = vm.getImage(peerDataModel: data)
             NavigationLink {
-                EditPeerView(
-                    localFileManager: vm.localFileManager,
-                    isUpdate: true,
-                    peerModel: data,
+                PeerDetailView(
+                    peerDataModel: data,
+                    peerImage: data.peerImage,
                     coreDataHandler: vm.coreDataHandler,
-                    peerImage: peerImage
+                    localFileManager: vm.localFileManager
                 )
+                .onAppear{
+                    selectedPeerModel = data
+                }
             } label: {
                 PeerListItemView(
                     localFileManager: vm.localFileManager, 
                     peerDataModel: data,
-                    peerImage: peerImage
+                    peerImage: data.peerImage
                 )
             }
+            
+            
         }
-        .onAppear{
-            vm.fetchData()
+        .task{
+            await vm.fetchData(lastSelectedPeerModel: selectedPeerModel)
         }
         .listStyle(.inset)
         .navigationTitle("Peers")
@@ -56,7 +58,6 @@ struct PeerListView: View {
                 } label: {
                     Image(systemName: "plus")
                 }
-
             }
         })
     }

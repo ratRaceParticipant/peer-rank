@@ -15,11 +15,13 @@ class EditPeerViewModel: ObservableObject {
     @Published var peerRating: Float = 3.0
     var localFileManager: LocalFileManager
     var coreDataHandler: CoreDataHandler
+    var updateParentVarData: ((_ peerDataModel: PeerModel, _ peerImage: UIImage?) -> Void)?
     init(
         localFileManager: LocalFileManager, 
         coreDatHandler: CoreDataHandler,
         peerModel: PeerModel,
-        peerImage: UIImage?
+        peerImage: UIImage?,
+        onChange: ((_ peerDataModel: PeerModel, _ peerImage: UIImage?) -> Void)? = nil
     ){
         self.localFileManager = localFileManager
         self.coreDataHandler = coreDatHandler
@@ -27,6 +29,7 @@ class EditPeerViewModel: ObservableObject {
         self.peerRatingWeightage = Double(peerModel.baseRatingWeightage)
         self.peerRating = Float(peerModel.baseRating)
         self.peerImage = peerImage
+        self.updateParentVarData = onChange
     }
     
     func writePeerData(isUpdate: Bool = false){
@@ -47,6 +50,7 @@ class EditPeerViewModel: ObservableObject {
     
     
     func setPeerData() {
+        peerModel.id = UUID()
         peerModel.initials = getInitialsFromName(name: peerModel.name)
         peerModel.baseRatingWeightage = Int16(peerRatingWeightage)
         peerModel.baseRating = Int16(peerRating)

@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 struct PeerModel: Identifiable{
     var id: UUID
     var initials: String
@@ -17,6 +18,7 @@ struct PeerModel: Identifiable{
     var baseRatingWeightage: Int16
     var averageRating: Float
     var peerInstance: [PeerInstanceModel]
+    var peerImage: UIImage?
     init(id: UUID, initials: String, name: String, photoId: String, type: Int16, baseRating: Int16, baseRatingWeightage: Int16,
          averageRating: Float,peerInstance: [PeerInstanceModel]) {
         self.id = id
@@ -83,6 +85,24 @@ extension PeerModel {
                 )
             }) ?? []
         )
+    }
+    
+    static func getEntityFromDataModelId(id: UUID, viewContext: NSManagedObjectContext) -> PeerEntity? {
+        let request: NSFetchRequest<PeerEntity> = PeerEntity.fetchRequest()
+        request.fetchLimit = 1
+        let filter = NSPredicate(format: "id == %@", id as CVarArg)
+        request.predicate = filter
+        do {
+            
+            let peerEntityData =  try viewContext.fetch(request)
+            
+            return peerEntityData[0]
+            
+            
+        } catch {
+            print("Error fetching data")
+        }
+        return nil
     }
 }
 

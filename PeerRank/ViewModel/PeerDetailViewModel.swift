@@ -8,12 +8,11 @@
 import Foundation
 import SwiftUI
 class PeerDetailViewModel: ObservableObject {
-    @Published var peerImage: UIImage?
-    
-    init(){
-        getImage()
-    }
-    func getImage() {
-        
+ 
+    var coreDataHandler: CoreDataHandler
+    var localFileManager: LocalFileManager
+    init(coreDataHandler: CoreDataHandler, localFileManager: LocalFileManager) {
+        self.coreDataHandler = coreDataHandler
+        self.localFileManager = localFileManager
     }
 }

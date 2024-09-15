@@ -18,7 +18,7 @@ struct PeerRankApp: App {
                     localFileManager: localFileManager, coreDataHandler: coreDataHandler
                 )
             }
-//            ContentView(coreDataHandler: coreDataHandler)
+//            ContentView(coreDataHandler: coreDataHandler) 
         }
     }
 }

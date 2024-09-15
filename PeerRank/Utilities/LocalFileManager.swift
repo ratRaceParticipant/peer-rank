@@ -15,7 +15,7 @@ class LocalFileManager {
         
         guard
            
-            let data = image.jpegData(compressionQuality: 0.5),
+            let data = image.jpegData(compressionQuality: 0.3),
             let path = getPathForImage(id: id)
         else {
             print("Error getting image path")
@@ -36,9 +36,9 @@ class LocalFileManager {
             print("Error getimage() on \(id)")
             return nil
         }
-        return UIImage(contentsOfFile: path)
+        print(path)
+        return downsample(imageAt: URL(string: path), to: CGSize(width: 100, height: 100))
     }
-    
     func deleteImage(id: String) {
         guard
             let path = getPathForImage(id: id),
@@ -66,5 +66,32 @@ class LocalFileManager {
             return nil
         }
         return path
+    }
+    func downsample(imageAt imageURL: URL?,
+                    to pointSize: CGSize,
+                    scale: CGFloat = UIScreen.main.scale) -> UIImage? {
+        guard let imageURL else {return nil}
+        // Create an CGImageSource that represent an image
+        let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
+        guard let imageSource = CGImageSourceCreateWithURL(imageURL as CFURL, imageSourceOptions) else {
+            return nil
+        }
+        
+        // Calculate the desired dimension
+        let maxDimensionInPixels = max(pointSize.width, pointSize.height) * scale
+        
+        // Perform downsampling
+        let downsampleOptions = [
+            kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceShouldCacheImmediately: true,
+            kCGImageSourceCreateThumbnailWithTransform: true,
+            kCGImageSourceThumbnailMaxPixelSize: maxDimensionInPixels
+        ] as CFDictionary
+        guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downsampleOptions) else {
+            return nil
+        }
+        
+        // Return the downsampled image as UIImage
+        return UIImage(cgImage: downsampledImage)
     }
 }
