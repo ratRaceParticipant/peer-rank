@@ -43,6 +43,7 @@ struct PeerListView: View {
             
             
         }
+        
         .task{
             await vm.fetchData(lastSelectedPeerModel: selectedPeerModel)
         }
@@ -53,8 +54,9 @@ struct PeerListView: View {
                 NavigationLink {
                     EditPeerView(
                         localFileManager: vm.localFileManager,
-                        coreDataHandler: vm.coreDataHandler
-                    )
+                        coreDataHandler: vm.coreDataHandler) { peerDataModel, _ in
+                            selectedPeerModel = peerDataModel
+                        }
                 } label: {
                     Image(systemName: "plus")
                 }

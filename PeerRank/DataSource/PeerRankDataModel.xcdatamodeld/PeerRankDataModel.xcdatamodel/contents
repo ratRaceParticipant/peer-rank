@@ -7,6 +7,7 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="initials" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="peerId" optional="YES" attributeType="String"/>
         <attribute name="photoId" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="peerInstance" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PeerInstanceEntity" inverseName="peer" inverseEntity="PeerInstanceEntity"/>

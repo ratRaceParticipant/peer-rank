@@ -27,7 +27,7 @@ class EditPeerInstanceViewModel: ObservableObject {
     
     func writeToPeerInstance(isUpdate: Bool = false) {
         let peerEntity =  PeerModel.getEntityFromDataModelId(
-            id: peerModel.id,
+            peerId: peerModel.peerId,
             viewContext: coreDataHandler.viewContext
         )
         guard let peerEntity else {return}

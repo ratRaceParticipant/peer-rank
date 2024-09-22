@@ -23,34 +23,30 @@ class PeerListViewModel: ObservableObject {
     }
     
     func fetchData(lastSelectedPeerModel: PeerModel?) async {
+        
         guard let lastSelectedPeerModel else {
+            
             await fetchAllData()
             return
         }
         await fetchSingleData(lastSelectedPeerModel: lastSelectedPeerModel)
     }
     func fetchSingleData(lastSelectedPeerModel: PeerModel) async {
-        let request: NSFetchRequest<PeerEntity> = PeerEntity.fetchRequest()
-        request.fetchLimit = 1
-        let filter = NSPredicate(format: "id == %@", lastSelectedPeerModel.id as CVarArg)
-        request.predicate = filter
-        do {
-            
-            let peerEntityData =  try coreDataHandler.viewContext.fetch(request)
-            
-            var newPeerModelData = PeerModel.mapEntityToModel(peerEntity: peerEntityData[0], context: coreDataHandler.viewContext)
-            
-            newPeerModelData.peerImage = await getImage(peerDataModel: newPeerModelData)
-            
-            let indexToUpdateData = peerModelData.firstIndex { peerModel in
-                peerModel.id == newPeerModelData.id
-            }
-            guard let indexToUpdateData else {return}
-            peerModelData[indexToUpdateData] = newPeerModelData
-            
-        } catch {
-            print("Error fetching data")
+        
+        let peerEntityData =  PeerModel.getEntityFromDataModelId(peerId: lastSelectedPeerModel.peerId, viewContext: coreDataHandler.viewContext)
+        guard let peerEntityData else  {return}
+        var newPeerModelData = PeerModel.mapEntityToModel(peerEntity: peerEntityData, context: coreDataHandler.viewContext)
+        
+        newPeerModelData.peerImage = await getImage(peerDataModel: newPeerModelData)
+        
+        let indexToUpdateData = peerModelData.firstIndex { peerModel in
+            peerModel.peerId == newPeerModelData.peerId
         }
+        guard let indexToUpdateData else {
+            
+            return
+        }
+        peerModelData[indexToUpdateData] = newPeerModelData
         return
     }
     

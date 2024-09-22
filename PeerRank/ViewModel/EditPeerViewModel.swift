@@ -34,16 +34,25 @@ class EditPeerViewModel: ObservableObject {
     
     func writePeerData(isUpdate: Bool = false){
         
-        let peerEntity = isUpdate ? getDataToUpdate() : PeerEntity(context: coreDataHandler.viewContext)
-        
+        let peerEntity = isUpdate ?
+        PeerModel.getEntityFromDataModelId(
+            peerId: peerModel.peerId,
+            viewContext: coreDataHandler.viewContext
+        ) :
+        PeerEntity(context: coreDataHandler.viewContext)
+        guard let peerEntity else {
+            print("error in updating")
+            return
+        }
         setPeerData()
         saveImage()
         deleteImage()
         PeerModel.mapModelToEntity(
             peerModel: peerModel,
-            peerEntity: peerEntity ?? PeerEntity(context: coreDataHandler.viewContext),
+            peerEntity: peerEntity,
             coreDataHandler: coreDataHandler
         )
+        print("peerId Written: \(peerEntity.peerId)")
         coreDataHandler.saveData()
         
     }
@@ -55,25 +64,9 @@ class EditPeerViewModel: ObservableObject {
         peerModel.baseRatingWeightage = Int16(peerRatingWeightage)
         peerModel.baseRating = Int16(peerRating)
         peerModel.averageRating = peerRating
+//        peerModel.peerId = UUID().uuidString
     }
     
-    func getDataToUpdate() -> PeerEntity? {
-        let request: NSFetchRequest<PeerEntity> = PeerEntity.fetchRequest()
-        request.fetchLimit = 1
-        let filter = NSPredicate(format: "id == %@", peerModel.id as CVarArg)
-        request.predicate = filter
-        do {
-            
-            let peerEntityData =  try coreDataHandler.viewContext.fetch(request)
-            
-            return peerEntityData[0]
-            
-            
-        } catch {
-            print("Error fetching data")
-        }
-        return nil
-    }
     
     
     func getInitialsFromName(name: String) -> String {

@@ -56,7 +56,9 @@ extension PeerInstanceModel {
         do {
             
             let peerInstanceEntityData =  try viewContext.fetch(request)
-            
+            guard peerInstanceEntityData.isEmpty else {
+                return nil
+            }
             return peerInstanceEntityData[0]
             
             

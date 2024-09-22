@@ -24,7 +24,7 @@ class PeerInstanceListViewModel: ObservableObject {
         let request: NSFetchRequest<PeerInstanceEntity> = PeerInstanceEntity.fetchRequest()
         request.predicate = NSPredicate(format: "peer = %@",
                                         PeerModel.getEntityFromDataModelId(
-                                            id: peerModel.id,
+                                            peerId: peerModel.peerId,
                                             viewContext: coreDataHandler.viewContext
                                         ) ?? PeerEntity(context: coreDataHandler.viewContext)
         )
