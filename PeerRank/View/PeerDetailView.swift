@@ -63,7 +63,13 @@ struct PeerDetailView: View {
                             
                        
                         HStack {
-                            RatingView(currentRating: .constant(peerDataModel.averageRating),enableEditing: false)
+                            RatingView(
+                                currentRating: .constant(peerDataModel.averageRating),
+                                enableEditing: false,
+                                starFont: .title3
+                            )
+                            Text("\(vm.averageRating, specifier: "%.2f")")
+                                .fontWeight(.bold)
                             IconWithPopoverView(isInfoPopTipShown: false,popOverText: .averageRating)
                         }
                     }
@@ -75,8 +81,8 @@ struct PeerDetailView: View {
                             isUpdate: true,
                             peerModel: peerDataModel,
                             coreDataHandler: vm.coreDataHandler,
-                            peerImage: peerImage){ childData, peerImage  in
-                                self.peerDataModel = childData
+                            peerImage: peerImage){ _, peerImage  in
+                               
                                 self.peerImage = peerImage
                             }
                     } label: {
@@ -114,6 +120,11 @@ struct PeerDetailView: View {
                 )
                 .padding(.horizontal)
                 Spacer()
+            }
+            .onAppear{
+                vm.getAverageRatingToDisplay(peerModel: peerDataModel)
+                peerDataModel = vm.getUpdatedPeerModelData(peerModel: peerDataModel)
+//                print(peerDataModel.peerInstance)
             }
         }
         .ignoresSafeArea(.container,edges: .top)

@@ -30,7 +30,9 @@ struct RatingView: View {
                 ZStack(alignment: .leading) {
                     Rectangle()
                         .fill(.yellow)
-                        .frame(width: CGFloat(currentRating) / 5 * geometry.size.width)
+                        .frame(
+                            width: CGFloat(currentRating) / 5 * geometry.size.width
+                        )
                 }
             }
             .allowsHitTesting(false)

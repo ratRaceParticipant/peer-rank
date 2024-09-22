@@ -57,7 +57,7 @@ extension PeerInstanceModel {
         request.fetchLimit = 1
         let filter = NSPredicate(format: "peerInstanceId == %@", id)
         request.predicate = filter
-        print("tried fetching for:\(id)")
+        
         do {
             
             let peerInstanceEntityData =  try viewContext.fetch(request)

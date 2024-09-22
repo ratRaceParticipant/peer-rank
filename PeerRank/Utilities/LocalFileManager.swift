@@ -36,7 +36,7 @@ class LocalFileManager {
             print("Error getimage() on \(id)")
             return nil
         }
-        print(path)
+        
         return downsample(imageAt: getPathForImage(id: id), to: CGSize(width: 100, height: 100))
     }
     func deleteImage(id: String) {

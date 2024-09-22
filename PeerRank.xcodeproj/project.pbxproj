@@ -39,6 +39,7 @@
 		83954F0C2C82DBBE000D7492 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954F0B2C82DBBE000D7492 /* Enums.swift */; };
 		83954F0E2C830CE3000D7492 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954F0D2C830CE3000D7492 /* CoreDataHandler.swift */; };
 		83954F102C830D2F000D7492 /* ContentFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954F0F2C830D2F000D7492 /* ContentFileViewModel.swift */; };
+		83E2B5BE2CA030DE00928672 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E2B5BD2CA030DE00928672 /* CommonFunctions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		83954F0B2C82DBBE000D7492 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		83954F0D2C830CE3000D7492 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		83954F0F2C830D2F000D7492 /* ContentFileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFileViewModel.swift; sourceTree = "<group>"; };
+		83E2B5BD2CA030DE00928672 /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 				832351E52C8C6E99008A7D1C /* ViewModifiers.swift */,
 				832351E72C8C7045008A7D1C /* Constants.swift */,
 				832351F12C8D7D7D008A7D1C /* LocalFileManager.swift */,
+				83E2B5BD2CA030DE00928672 /* CommonFunctions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				83954EF22C82D612000D7492 /* PeerRankApp.swift in Sources */,
 				832351DA2C8C0F41008A7D1C /* PeerPhotoView.swift in Sources */,
 				83954F0C2C82DBBE000D7492 /* Enums.swift in Sources */,
+				83E2B5BE2CA030DE00928672 /* CommonFunctions.swift in Sources */,
 				83954F082C82D8DD000D7492 /* PeerModel.swift in Sources */,
 				832351F62C8D8248008A7D1C /* PeerDetailViewModel.swift in Sources */,
 			);

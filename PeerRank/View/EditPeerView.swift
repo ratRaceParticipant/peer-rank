@@ -66,9 +66,7 @@ struct EditPeerView: View {
                     Spacer()
                     Button("Save") {
                         vm.writePeerData(isUpdate: isUpdate)
-                        if isUpdate {
-                            vm.updateParentVarData?(vm.peerModel, vm.peerImage)
-                        }
+                        vm.updateParentVarData?(vm.peerModel, vm.peerImage)
                         presentationMode.wrappedValue.dismiss()
                     }
                     .buttonStyle(.borderedProminent)
@@ -86,6 +84,7 @@ struct EditPeerView: View {
                 name: vm.peerModel.name
             )
         }
+        
         .navigationTitle(isUpdate ? "Edit Peer Details" : "Add Peer")
     }
 }

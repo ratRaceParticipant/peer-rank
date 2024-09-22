@@ -39,21 +39,33 @@ class EditPeerInstanceViewModel: ObservableObject {
             print("error updating instance data \(peerInstanceModel.peerInstanceId)")
             return
         }
-        setData()
+        setData(isUpdate: isUpdate)
         PeerInstanceModel.mapModelToEntity(
             peerInstanceModel: peerInstanceModel,
             peerInstanceEntity: peerInstanceEntity
         )
         
         peerInstanceEntity.peer = peerEntity
-        
         coreDataHandler.saveData()
-        print("instance written for: \(peerInstanceEntity.peerInstanceId)")
+        
+        setAverageRating(peerEntity: peerEntity)
         
     }
-    func setData(){
+    func setData(isUpdate: Bool){
         peerInstanceModel.id = UUID()
         peerInstanceModel.instanceRatingWeightage = Int16(instanceRatingWeightage)
         peerInstanceModel.instanceRating = Int16(instanceRating)
+        if !isUpdate {
+            peerInstanceModel.peerInstanceId = UUID().uuidString
+        }
+    }
+    func setAverageRating(peerEntity: PeerEntity){
+        let averageRating = CommonFunctions.getPeerAverageRating(
+            from: peerModel, viewContext: coreDataHandler.viewContext
+        ) ?? peerModel.averageRating
+        
+        peerEntity.averageRating = averageRating
+        
+        coreDataHandler.saveData()
     }
 }

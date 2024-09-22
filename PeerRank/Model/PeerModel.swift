@@ -100,7 +100,7 @@ extension PeerModel {
             
             let peerEntityData =  try viewContext.fetch(request)
             guard !peerEntityData.isEmpty else {
-                print("no data for \(peerId)")
+                
                 return nil
             }
             return peerEntityData[0]

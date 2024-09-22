@@ -44,30 +44,42 @@ class EditPeerViewModel: ObservableObject {
             print("error in updating")
             return
         }
-        setPeerData()
+        setPeerData(isUpdate: isUpdate)
         saveImage()
         deleteImage()
+        
         PeerModel.mapModelToEntity(
             peerModel: peerModel,
             peerEntity: peerEntity,
             coreDataHandler: coreDataHandler
         )
-        print("peerId Written: \(peerEntity.peerId)")
-        coreDataHandler.saveData()
         
+        coreDataHandler.saveData()
+        setAverageRating(peerEntity: peerEntity)
     }
     
     
-    func setPeerData() {
+    func setPeerData(isUpdate: Bool) {
         peerModel.id = UUID()
         peerModel.initials = getInitialsFromName(name: peerModel.name)
         peerModel.baseRatingWeightage = Int16(peerRatingWeightage)
         peerModel.baseRating = Int16(peerRating)
         peerModel.averageRating = peerRating
-//        peerModel.peerId = UUID().uuidString
+        peerModel.peerImage = peerImage
+        if !isUpdate {
+            peerModel.peerId = UUID().uuidString
+        }
     }
     
-    
+    func setAverageRating(peerEntity: PeerEntity){
+        let averageRating = CommonFunctions.getPeerAverageRating(
+            from: peerModel, viewContext: coreDataHandler.viewContext
+        ) ?? peerModel.averageRating
+        
+        peerEntity.averageRating = averageRating
+        
+        coreDataHandler.saveData()
+    }
     
     func getInitialsFromName(name: String) -> String {
         let nameArray: [String] = name.components(separatedBy: " ")

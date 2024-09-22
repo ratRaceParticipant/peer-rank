@@ -22,7 +22,7 @@ struct PeerListView: View {
         )
     }
     var body: some View {
-        List(vm.peerModelData) { data in
+        List(vm.peerModelData, id: \.peerId) { data in
             NavigationLink {
                 PeerDetailView(
                     peerDataModel: data,
@@ -54,9 +54,11 @@ struct PeerListView: View {
                 NavigationLink {
                     EditPeerView(
                         localFileManager: vm.localFileManager,
-                        coreDataHandler: vm.coreDataHandler) { peerDataModel, _ in
-                            selectedPeerModel = peerDataModel
+                        coreDataHandler: vm.coreDataHandler) { peerDataModel, uiImage in
+                            
+                            vm.peerModelData.append(peerDataModel)
                         }
+                    
                 } label: {
                     Image(systemName: "plus")
                 }

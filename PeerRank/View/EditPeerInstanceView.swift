@@ -69,6 +69,7 @@ struct EditPeerInstanceView: View {
             }
             .padding()
         }
+        
         .navigationTitle(isUpdate ? "Edit Instance" : "Add Instance")
         .navigationBarTitleDisplayMode(.inline)
     }

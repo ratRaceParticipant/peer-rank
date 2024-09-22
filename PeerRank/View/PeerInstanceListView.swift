@@ -27,7 +27,7 @@ struct PeerInstanceListView: View {
             VStack(alignment: .leading) {
                 Text("Instances")
                     .fontWeight(.bold)
-                ForEach(vm.peerInstanceModel){ data in
+                ForEach(vm.peerInstanceModel, id: \.peerInstanceId){ data in
                     NavigationLink(
                         destination: {
                         EditPeerInstanceView(
