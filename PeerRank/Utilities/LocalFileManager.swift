@@ -37,7 +37,7 @@ class LocalFileManager {
             return nil
         }
         print(path)
-        return downsample(imageAt: URL(string: path), to: CGSize(width: 100, height: 100))
+        return downsample(imageAt: getPathForImage(id: id), to: CGSize(width: 100, height: 100))
     }
     func deleteImage(id: String) {
         guard

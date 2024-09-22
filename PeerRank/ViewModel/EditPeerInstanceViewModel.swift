@@ -30,20 +30,25 @@ class EditPeerInstanceViewModel: ObservableObject {
             peerId: peerModel.peerId,
             viewContext: coreDataHandler.viewContext
         )
-        guard let peerEntity else {return}
+        
         
         let peerInstanceEntity = isUpdate ?
-        PeerInstanceModel.getEntityFromDataModelId(id: peerInstanceModel.id, viewContext: coreDataHandler.viewContext) :
+        PeerInstanceModel.getEntityFromDataModelId(id: peerInstanceModel.peerInstanceId, viewContext: coreDataHandler.viewContext) :
         PeerInstanceEntity(context: coreDataHandler.viewContext)
-        
+        guard let peerEntity, let peerInstanceEntity else {
+            print("error updating instance data \(peerInstanceModel.peerInstanceId)")
+            return
+        }
         setData()
         PeerInstanceModel.mapModelToEntity(
             peerInstanceModel: peerInstanceModel,
-            peerInstanceEntity: peerInstanceEntity ?? PeerInstanceEntity(context: coreDataHandler.viewContext)
+            peerInstanceEntity: peerInstanceEntity
         )
         
-        peerInstanceEntity?.peer = peerEntity
+        peerInstanceEntity.peer = peerEntity
+        
         coreDataHandler.saveData()
+        print("instance written for: \(peerInstanceEntity.peerInstanceId)")
         
     }
     func setData(){

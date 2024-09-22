@@ -8,31 +8,34 @@
 import Foundation
 import CoreData
 struct PeerInstanceModel: Identifiable{
-    init(id: UUID,instanceDate: Date, instanceRating: Int16, instanceRatingWeightage: Int16, instanceDescription: String) {
+    init(id: UUID,peerInstanceId: String,instanceDate: Date, instanceRating: Int16, instanceRatingWeightage: Int16, instanceDescription: String) {
         self.id = id
+        self.peerInstanceId = peerInstanceId
         self.instanceDate = instanceDate
         self.instanceRating = instanceRating
         self.instanceRatingWeightage = instanceRatingWeightage
         self.instanceDescription = instanceDescription
     }
     var id: UUID
+    var peerInstanceId: String
     var instanceDate: Date
     var instanceRating: Int16
     var instanceRatingWeightage: Int16
     var instanceDescription: String
     
-    static let emptyData = PeerInstanceModel(id: UUID(),instanceDate: Date(), instanceRating: 3, instanceRatingWeightage: 1, instanceDescription: "")
+    static let emptyData = PeerInstanceModel(id: UUID(), peerInstanceId: UUID().uuidString,instanceDate: Date(), instanceRating: 3, instanceRatingWeightage: 1, instanceDescription: "")
 }
 
 extension PeerInstanceModel {
     static var sampleData: [PeerInstanceModel] = [
-        PeerInstanceModel(id: UUID(), instanceDate: Date(), instanceRating: 4, instanceRatingWeightage: 4, instanceDescription: "Sample Desc"),
-        PeerInstanceModel(id: UUID(), instanceDate: Date(), instanceRating: 5, instanceRatingWeightage: 1, instanceDescription: "Sample Desc"),
-        PeerInstanceModel(id: UUID(), instanceDate: Date(), instanceRating: 2, instanceRatingWeightage: 7, instanceDescription: "Sample Desc")
+        PeerInstanceModel(id: UUID(),peerInstanceId: UUID().uuidString, instanceDate: Date(), instanceRating: 4, instanceRatingWeightage: 4, instanceDescription: "Sample Desc"),
+        PeerInstanceModel(id: UUID(),peerInstanceId: UUID().uuidString, instanceDate: Date(), instanceRating: 5, instanceRatingWeightage: 1, instanceDescription: "Sample Desc"),
+        PeerInstanceModel(id: UUID(),peerInstanceId: UUID().uuidString, instanceDate: Date(), instanceRating: 2, instanceRatingWeightage: 7, instanceDescription: "Sample Desc")
     ]
     
     static func mapModelToEntity(peerInstanceModel: PeerInstanceModel, peerInstanceEntity: PeerInstanceEntity) {
         peerInstanceEntity.id = peerInstanceModel.id
+        peerInstanceEntity.peerInstanceId = peerInstanceModel.peerInstanceId
         peerInstanceEntity.instanceDate = peerInstanceModel.instanceDate
         
         peerInstanceEntity.instanceDescription = peerInstanceModel.instanceDescription
@@ -42,21 +45,23 @@ extension PeerInstanceModel {
     static func mapEntityToModel(peerInstanceEntity: PeerInstanceEntity) -> PeerInstanceModel {
         PeerInstanceModel(
             id: peerInstanceEntity.id ?? UUID(),
+            peerInstanceId:  peerInstanceEntity.peerInstanceId ?? UUID().uuidString,
             instanceDate: peerInstanceEntity.instanceDate ?? Date(),
             instanceRating: peerInstanceEntity.instanceRating,
             instanceRatingWeightage: peerInstanceEntity.isntanceRatingWeightage,
             instanceDescription: peerInstanceEntity.instanceDescription ?? ""
         )
     }
-    static func getEntityFromDataModelId(id: UUID, viewContext: NSManagedObjectContext) -> PeerInstanceEntity? {
+    static func getEntityFromDataModelId(id: String, viewContext: NSManagedObjectContext) -> PeerInstanceEntity? {
         let request: NSFetchRequest<PeerInstanceEntity> = PeerInstanceEntity.fetchRequest()
         request.fetchLimit = 1
-        let filter = NSPredicate(format: "id == %@", id as CVarArg)
+        let filter = NSPredicate(format: "peerInstanceId == %@", id)
         request.predicate = filter
+        print("tried fetching for:\(id)")
         do {
             
             let peerInstanceEntityData =  try viewContext.fetch(request)
-            guard peerInstanceEntityData.isEmpty else {
+            guard !peerInstanceEntityData.isEmpty else {
                 return nil
             }
             return peerInstanceEntityData[0]

@@ -54,6 +54,4 @@ class PeerInstanceListViewModel: ObservableObject {
             formatter.dateFormat = "dd/MM/yyyy 'at' h:mm a" 
             return formatter.string(from: date)
         }
-    
-    
 }

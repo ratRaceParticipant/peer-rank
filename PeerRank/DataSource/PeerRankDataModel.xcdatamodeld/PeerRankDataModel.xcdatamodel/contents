@@ -18,6 +18,7 @@
         <attribute name="instanceDescription" optional="YES" attributeType="String"/>
         <attribute name="instanceRating" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="isntanceRatingWeightage" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="peerInstanceId" optional="YES" attributeType="String"/>
         <relationship name="peer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PeerEntity" inverseName="peerInstance" inverseEntity="PeerEntity"/>
     </entity>
 </model>
