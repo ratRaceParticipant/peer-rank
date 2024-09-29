@@ -10,22 +10,31 @@ import SwiftUI
 struct HomeView: View {
     @StateObject var vm: HomeViewModel
     init(
-        coreDataHandler: CoreDataHandler
+        coreDataHandler: CoreDataHandler,
+        localFileManager: LocalFileManager
     ){
         self._vm = StateObject(
             wrappedValue: HomeViewModel(
-                coreDataHandler: coreDataHandler
+                coreDataHandler: coreDataHandler,
+                localFileManager: localFileManager
             )
         )
     }
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack(spacing: 0) {
                 
                 PeerBannerView(coreDataHandler: vm.coreDataHandler)
                 PeerBannerView(coreDataHandler: vm.coreDataHandler,fetchTopRatedPeers: false)
             }
-            
+            Text("Recent Peers")
+                .font(.subheadline)
+                .fontWeight(.bold)
+                .padding(.leading)
+            PeerListView(
+                coreDataHandler: vm.coreDataHandler,
+                localFileManager: vm.localFileManager
+            )
             Spacer()
         }
         .background{
@@ -37,6 +46,9 @@ struct HomeView: View {
 
 #Preview {
     NavigationStack {
-        HomeView(coreDataHandler: CoreDataHandler())
+        HomeView(
+            coreDataHandler: CoreDataHandler(),
+            localFileManager: LocalFileManager()
+        )
     }
 }

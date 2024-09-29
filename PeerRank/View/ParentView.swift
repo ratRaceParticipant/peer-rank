@@ -13,13 +13,16 @@ struct ParentView: View {
     var body: some View {
         TabView {
             NavigationStack {
-                HomeView(coreDataHandler: coreDataHandler)
+                HomeView(
+                    coreDataHandler: coreDataHandler,
+                    localFileManager: localFileManager
+                )
             }
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
             NavigationStack {
-                PeerListView(
+                PeerTabView(
                     localFileManager: localFileManager,
                     coreDataHandler: coreDataHandler
                 )

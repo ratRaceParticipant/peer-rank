@@ -32,6 +32,9 @@
 		8316B1012CA85E4800D4511E /* PeerBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B0D52CA7C40000D4511E /* PeerBannerView.swift */; };
 		8316B1042CA87EA100D4511E /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B1032CA87EA100D4511E /* WidgetView.swift */; };
 		8316B1052CA8847200D4511E /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B1032CA87EA100D4511E /* WidgetView.swift */; };
+		8316B1072CA969FC00D4511E /* PeerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B1062CA969FB00D4511E /* PeerListView.swift */; };
+		8316B1092CA96A1600D4511E /* PeerListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B1082CA96A1600D4511E /* PeerListViewModel.swift */; };
+		8316B10A2CA96EF900D4511E /* LocalFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351F12C8D7D7D008A7D1C /* LocalFileManager.swift */; };
 		832351D82C8C0B8C008A7D1C /* EditPeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351D72C8C0B8C008A7D1C /* EditPeerView.swift */; };
 		832351DA2C8C0F41008A7D1C /* PeerPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351D92C8C0F41008A7D1C /* PeerPhotoView.swift */; };
 		832351DC2C8C0F9C008A7D1C /* PeerPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351DB2C8C0F9C008A7D1C /* PeerPhotoViewModel.swift */; };
@@ -44,12 +47,12 @@
 		832351EA2C8C7885008A7D1C /* RatingWeightageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351E92C8C7885008A7D1C /* RatingWeightageView.swift */; };
 		832351EC2C8C8CF0008A7D1C /* IconWithPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351EB2C8C8CF0008A7D1C /* IconWithPopoverView.swift */; };
 		832351EE2C8CA576008A7D1C /* PeerListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351ED2C8CA576008A7D1C /* PeerListItemView.swift */; };
-		832351F02C8CB152008A7D1C /* PeerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351EF2C8CB152008A7D1C /* PeerListView.swift */; };
+		832351F02C8CB152008A7D1C /* PeerTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351EF2C8CB152008A7D1C /* PeerTabView.swift */; };
 		832351F22C8D7D7D008A7D1C /* LocalFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351F12C8D7D7D008A7D1C /* LocalFileManager.swift */; };
 		832351F42C8D8196008A7D1C /* PeerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351F32C8D8196008A7D1C /* PeerDetailView.swift */; };
 		832351F62C8D8248008A7D1C /* PeerDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351F52C8D8248008A7D1C /* PeerDetailViewModel.swift */; };
 		832351F82C8DC9DC008A7D1C /* PeerListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351F72C8DC9DC008A7D1C /* PeerListItemViewModel.swift */; };
-		832351FA2C8DCD18008A7D1C /* PeerListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351F92C8DCD18008A7D1C /* PeerListViewModel.swift */; };
+		832351FA2C8DCD18008A7D1C /* PeerTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351F92C8DCD18008A7D1C /* PeerTabViewModel.swift */; };
 		838A38912C95DDEF00BE0381 /* EditPeerInstanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A38902C95DDEF00BE0381 /* EditPeerInstanceView.swift */; };
 		838A38932C95E1C700BE0381 /* EditPeerInstanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A38922C95E1C700BE0381 /* EditPeerInstanceViewModel.swift */; };
 		83954EF22C82D612000D7492 /* PeerRankApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954EF12C82D612000D7492 /* PeerRankApp.swift */; };
@@ -109,6 +112,8 @@
 		8316B0FA2CA8592300D4511E /* PeerRank.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PeerRank.entitlements; sourceTree = "<group>"; };
 		8316B0FB2CA8599E00D4511E /* PeerRankWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PeerRankWidgetExtension.entitlements; sourceTree = "<group>"; };
 		8316B1032CA87EA100D4511E /* WidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetView.swift; sourceTree = "<group>"; };
+		8316B1062CA969FB00D4511E /* PeerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerListView.swift; sourceTree = "<group>"; };
+		8316B1082CA96A1600D4511E /* PeerListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerListViewModel.swift; sourceTree = "<group>"; };
 		832351D72C8C0B8C008A7D1C /* EditPeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPeerView.swift; sourceTree = "<group>"; };
 		832351D92C8C0F41008A7D1C /* PeerPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerPhotoView.swift; sourceTree = "<group>"; };
 		832351DB2C8C0F9C008A7D1C /* PeerPhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerPhotoViewModel.swift; sourceTree = "<group>"; };
@@ -121,12 +126,12 @@
 		832351E92C8C7885008A7D1C /* RatingWeightageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingWeightageView.swift; sourceTree = "<group>"; };
 		832351EB2C8C8CF0008A7D1C /* IconWithPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconWithPopoverView.swift; sourceTree = "<group>"; };
 		832351ED2C8CA576008A7D1C /* PeerListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerListItemView.swift; sourceTree = "<group>"; };
-		832351EF2C8CB152008A7D1C /* PeerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerListView.swift; sourceTree = "<group>"; };
+		832351EF2C8CB152008A7D1C /* PeerTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerTabView.swift; sourceTree = "<group>"; };
 		832351F12C8D7D7D008A7D1C /* LocalFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileManager.swift; sourceTree = "<group>"; };
 		832351F32C8D8196008A7D1C /* PeerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerDetailView.swift; sourceTree = "<group>"; };
 		832351F52C8D8248008A7D1C /* PeerDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerDetailViewModel.swift; sourceTree = "<group>"; };
 		832351F72C8DC9DC008A7D1C /* PeerListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerListItemViewModel.swift; sourceTree = "<group>"; };
-		832351F92C8DCD18008A7D1C /* PeerListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerListViewModel.swift; sourceTree = "<group>"; };
+		832351F92C8DCD18008A7D1C /* PeerTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerTabViewModel.swift; sourceTree = "<group>"; };
 		838A38902C95DDEF00BE0381 /* EditPeerInstanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPeerInstanceView.swift; sourceTree = "<group>"; };
 		838A38922C95E1C700BE0381 /* EditPeerInstanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPeerInstanceViewModel.swift; sourceTree = "<group>"; };
 		83954EEE2C82D612000D7492 /* PeerRank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeerRank.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,13 +254,14 @@
 				832351E92C8C7885008A7D1C /* RatingWeightageView.swift */,
 				832351EB2C8C8CF0008A7D1C /* IconWithPopoverView.swift */,
 				832351ED2C8CA576008A7D1C /* PeerListItemView.swift */,
-				832351EF2C8CB152008A7D1C /* PeerListView.swift */,
+				832351EF2C8CB152008A7D1C /* PeerTabView.swift */,
 				832351F32C8D8196008A7D1C /* PeerDetailView.swift */,
 				8306A14D2C95A0480062E14E /* PeerInstanceListView.swift */,
 				838A38902C95DDEF00BE0381 /* EditPeerInstanceView.swift */,
 				8316B0D12CA7C34300D4511E /* HomeView.swift */,
 				8316B0D52CA7C40000D4511E /* PeerBannerView.swift */,
 				8316B0D92CA7DD3A00D4511E /* ParentView.swift */,
+				8316B1062CA969FB00D4511E /* PeerListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -268,11 +274,12 @@
 				832351DB2C8C0F9C008A7D1C /* PeerPhotoViewModel.swift */,
 				832351F52C8D8248008A7D1C /* PeerDetailViewModel.swift */,
 				832351F72C8DC9DC008A7D1C /* PeerListItemViewModel.swift */,
-				832351F92C8DCD18008A7D1C /* PeerListViewModel.swift */,
+				832351F92C8DCD18008A7D1C /* PeerTabViewModel.swift */,
 				8306A14F2C95A18F0062E14E /* PeerInstanceListViewModel.swift */,
 				838A38922C95E1C700BE0381 /* EditPeerInstanceViewModel.swift */,
 				8316B0D32CA7C36900D4511E /* HomeViewModel.swift */,
 				8316B0D72CA7C42F00D4511E /* PeerBannerViewModel.swift */,
+				8316B1082CA96A1600D4511E /* PeerListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -422,6 +429,7 @@
 				8316B0E72CA8572900D4511E /* PeerRankWidgetBundle.swift in Sources */,
 				8316B0FD2CA85D8800D4511E /* PeerModel.swift in Sources */,
 				8316B1052CA8847200D4511E /* WidgetView.swift in Sources */,
+				8316B10A2CA96EF900D4511E /* LocalFileManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,7 +458,7 @@
 				838A38912C95DDEF00BE0381 /* EditPeerInstanceView.swift in Sources */,
 				83954F0A2C82DB13000D7492 /* PeerInstanceModel.swift in Sources */,
 				832351D82C8C0B8C008A7D1C /* EditPeerView.swift in Sources */,
-				832351F02C8CB152008A7D1C /* PeerListView.swift in Sources */,
+				832351F02C8CB152008A7D1C /* PeerTabView.swift in Sources */,
 				832351E42C8C6B96008A7D1C /* EditPeerViewModel.swift in Sources */,
 				832351DC2C8C0F9C008A7D1C /* PeerPhotoViewModel.swift in Sources */,
 				83954F102C830D2F000D7492 /* ContentFileViewModel.swift in Sources */,
@@ -459,8 +467,10 @@
 				832351EA2C8C7885008A7D1C /* RatingWeightageView.swift in Sources */,
 				832351EE2C8CA576008A7D1C /* PeerListItemView.swift in Sources */,
 				8316B0D82CA7C42F00D4511E /* PeerBannerViewModel.swift in Sources */,
-				832351FA2C8DCD18008A7D1C /* PeerListViewModel.swift in Sources */,
+				8316B1072CA969FC00D4511E /* PeerListView.swift in Sources */,
+				832351FA2C8DCD18008A7D1C /* PeerTabViewModel.swift in Sources */,
 				83954EF22C82D612000D7492 /* PeerRankApp.swift in Sources */,
+				8316B1092CA96A1600D4511E /* PeerListViewModel.swift in Sources */,
 				832351DA2C8C0F41008A7D1C /* PeerPhotoView.swift in Sources */,
 				83954F0C2C82DBBE000D7492 /* Enums.swift in Sources */,
 				83E2B5BE2CA030DE00928672 /* CommonFunctions.swift in Sources */,

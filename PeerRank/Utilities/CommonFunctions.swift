@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 class CommonFunctions {
     static func getPeerAverageRating(from peerModel: PeerModel,viewContext: NSManagedObjectContext) -> Float?{
         let peerEntityData = PeerModel.getEntityFromDataModelId(peerId: peerModel.peerId, viewContext: viewContext)
@@ -48,7 +49,6 @@ class CommonFunctions {
                                             peerEntity: entityData,
                                             context: viewContext
                                     )
-                
                 data.append(
                    peerModelData
                 )
@@ -61,5 +61,48 @@ class CommonFunctions {
         }
         return []
     }
-
+    
+    static func fetchPeerData(
+        viewContext: NSManagedObjectContext,
+        localFileManager: LocalFileManager,
+        numberofDataToFetch: Int = Constants.defaultNumberOfDataToFetch,
+        sortDescriptors: [NSSortDescriptor] = [NSSortDescriptor(key:"createdOn", ascending: false)]
+        
+    ) async -> [PeerModel] {
+        let request: NSFetchRequest<PeerEntity> = PeerEntity.fetchRequest()
+        request.fetchLimit = numberofDataToFetch
+        request.sortDescriptors = sortDescriptors
+        do {
+            var data: [PeerModel] = []
+            let peerEntityData =  try viewContext.fetch(request)
+            for entityData in peerEntityData {
+                var peerModelData =  PeerModel.mapEntityToModel(
+                                            peerEntity: entityData,
+                                            context: viewContext
+                                    )
+                peerModelData.peerImage = await CommonFunctions.getImageFromPhotoId(
+                    from: peerModelData.photoId, localFileManager: localFileManager
+                )
+                data.append(
+                   peerModelData
+                )
+            }
+            return data
+            
+            
+        } catch {
+            print("Error fetching data")
+        }
+        return []
+    }
+    
+    static func getImageFromPhotoId(from photoId: String, localFileManager: LocalFileManager) async -> UIImage?{
+        guard !(photoId == "") else {
+            
+            return nil
+        }
+        let image = localFileManager.getImage(id: photoId)
+        
+        return image
+    }
 }

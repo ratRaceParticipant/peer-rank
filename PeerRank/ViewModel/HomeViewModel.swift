@@ -8,7 +8,9 @@
 import Foundation
 class HomeViewModel: ObservableObject {
     var coreDataHandler: CoreDataHandler
-    init(coreDataHandler: CoreDataHandler) {
+    var localFileManager: LocalFileManager
+    init(coreDataHandler: CoreDataHandler, localFileManager: LocalFileManager) {
         self.coreDataHandler = coreDataHandler
+        self.localFileManager = localFileManager
     }
 }
