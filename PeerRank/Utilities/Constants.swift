@@ -9,4 +9,6 @@ import Foundation
 
 class Constants {
     static let maxInitialsLength = 3
+    static let dataSourceName = "PeerRankDataModel"
+    static let appGroup = "group.com.ratRaceParticipant.PeerRank"
 }

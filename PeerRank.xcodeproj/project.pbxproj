@@ -9,6 +9,29 @@
 /* Begin PBXBuildFile section */
 		8306A14E2C95A0480062E14E /* PeerInstanceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8306A14D2C95A0480062E14E /* PeerInstanceListView.swift */; };
 		8306A1502C95A18F0062E14E /* PeerInstanceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8306A14F2C95A18F0062E14E /* PeerInstanceListViewModel.swift */; };
+		8316B0D22CA7C34300D4511E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B0D12CA7C34300D4511E /* HomeView.swift */; };
+		8316B0D42CA7C36900D4511E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B0D32CA7C36900D4511E /* HomeViewModel.swift */; };
+		8316B0D62CA7C40000D4511E /* PeerBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B0D52CA7C40000D4511E /* PeerBannerView.swift */; };
+		8316B0D82CA7C42F00D4511E /* PeerBannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B0D72CA7C42F00D4511E /* PeerBannerViewModel.swift */; };
+		8316B0DA2CA7DD3A00D4511E /* ParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B0D92CA7DD3A00D4511E /* ParentView.swift */; };
+		8316B0E22CA8572900D4511E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8316B0E12CA8572900D4511E /* WidgetKit.framework */; };
+		8316B0E42CA8572900D4511E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8316B0E32CA8572900D4511E /* SwiftUI.framework */; };
+		8316B0E72CA8572900D4511E /* PeerRankWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B0E62CA8572900D4511E /* PeerRankWidgetBundle.swift */; };
+		8316B0E92CA8572900D4511E /* PeerRankWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B0E82CA8572900D4511E /* PeerRankWidgetLiveActivity.swift */; };
+		8316B0EB2CA8572900D4511E /* PeerRankWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B0EA2CA8572900D4511E /* PeerRankWidget.swift */; };
+		8316B0ED2CA8572900D4511E /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B0EC2CA8572900D4511E /* AppIntent.swift */; };
+		8316B0EF2CA8572B00D4511E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8316B0EE2CA8572B00D4511E /* Assets.xcassets */; };
+		8316B0F32CA8572B00D4511E /* PeerRankWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8316B0DF2CA8572900D4511E /* PeerRankWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8316B0F82CA857F600D4511E /* PeerRankDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 83954F032C82D65B000D7492 /* PeerRankDataModel.xcdatamodeld */; };
+		8316B0F92CA858E300D4511E /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954F0D2C830CE3000D7492 /* CoreDataHandler.swift */; };
+		8316B0FC2CA85B1000D4511E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351E72C8C7045008A7D1C /* Constants.swift */; };
+		8316B0FD2CA85D8800D4511E /* PeerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954F072C82D8DD000D7492 /* PeerModel.swift */; };
+		8316B0FE2CA85D9E00D4511E /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E2B5BD2CA030DE00928672 /* CommonFunctions.swift */; };
+		8316B0FF2CA85DF000D4511E /* PeerInstanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954F092C82DB13000D7492 /* PeerInstanceModel.swift */; };
+		8316B1002CA85E3D00D4511E /* PeerBannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B0D72CA7C42F00D4511E /* PeerBannerViewModel.swift */; };
+		8316B1012CA85E4800D4511E /* PeerBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B0D52CA7C40000D4511E /* PeerBannerView.swift */; };
+		8316B1042CA87EA100D4511E /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B1032CA87EA100D4511E /* WidgetView.swift */; };
+		8316B1052CA8847200D4511E /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B1032CA87EA100D4511E /* WidgetView.swift */; };
 		832351D82C8C0B8C008A7D1C /* EditPeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351D72C8C0B8C008A7D1C /* EditPeerView.swift */; };
 		832351DA2C8C0F41008A7D1C /* PeerPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351D92C8C0F41008A7D1C /* PeerPhotoView.swift */; };
 		832351DC2C8C0F9C008A7D1C /* PeerPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351DB2C8C0F9C008A7D1C /* PeerPhotoViewModel.swift */; };
@@ -42,9 +65,50 @@
 		83E2B5BE2CA030DE00928672 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E2B5BD2CA030DE00928672 /* CommonFunctions.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8316B0F12CA8572B00D4511E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83954EE62C82D612000D7492 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8316B0DE2CA8572900D4511E;
+			remoteInfo = PeerRankWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8316B0F42CA8572B00D4511E /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8316B0F32CA8572B00D4511E /* PeerRankWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		8306A14D2C95A0480062E14E /* PeerInstanceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerInstanceListView.swift; sourceTree = "<group>"; };
 		8306A14F2C95A18F0062E14E /* PeerInstanceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerInstanceListViewModel.swift; sourceTree = "<group>"; };
+		8316B0D12CA7C34300D4511E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		8316B0D32CA7C36900D4511E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		8316B0D52CA7C40000D4511E /* PeerBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerBannerView.swift; sourceTree = "<group>"; };
+		8316B0D72CA7C42F00D4511E /* PeerBannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerBannerViewModel.swift; sourceTree = "<group>"; };
+		8316B0D92CA7DD3A00D4511E /* ParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentView.swift; sourceTree = "<group>"; };
+		8316B0DF2CA8572900D4511E /* PeerRankWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PeerRankWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8316B0E12CA8572900D4511E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		8316B0E32CA8572900D4511E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		8316B0E62CA8572900D4511E /* PeerRankWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerRankWidgetBundle.swift; sourceTree = "<group>"; };
+		8316B0E82CA8572900D4511E /* PeerRankWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerRankWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		8316B0EA2CA8572900D4511E /* PeerRankWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerRankWidget.swift; sourceTree = "<group>"; };
+		8316B0EC2CA8572900D4511E /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		8316B0EE2CA8572B00D4511E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8316B0F02CA8572B00D4511E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8316B0FA2CA8592300D4511E /* PeerRank.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PeerRank.entitlements; sourceTree = "<group>"; };
+		8316B0FB2CA8599E00D4511E /* PeerRankWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PeerRankWidgetExtension.entitlements; sourceTree = "<group>"; };
+		8316B1032CA87EA100D4511E /* WidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetView.swift; sourceTree = "<group>"; };
 		832351D72C8C0B8C008A7D1C /* EditPeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPeerView.swift; sourceTree = "<group>"; };
 		832351D92C8C0F41008A7D1C /* PeerPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerPhotoView.swift; sourceTree = "<group>"; };
 		832351DB2C8C0F9C008A7D1C /* PeerPhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerPhotoViewModel.swift; sourceTree = "<group>"; };
@@ -80,6 +144,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8316B0DC2CA8572900D4511E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8316B0E42CA8572900D4511E /* SwiftUI.framework in Frameworks */,
+				8316B0E22CA8572900D4511E /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		83954EEB2C82D612000D7492 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -90,10 +163,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8316B0E02CA8572900D4511E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8316B0E12CA8572900D4511E /* WidgetKit.framework */,
+				8316B0E32CA8572900D4511E /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8316B0E52CA8572900D4511E /* PeerRankWidget */ = {
+			isa = PBXGroup;
+			children = (
+				8316B0E62CA8572900D4511E /* PeerRankWidgetBundle.swift */,
+				8316B0E82CA8572900D4511E /* PeerRankWidgetLiveActivity.swift */,
+				8316B0EA2CA8572900D4511E /* PeerRankWidget.swift */,
+				8316B0EC2CA8572900D4511E /* AppIntent.swift */,
+				8316B0EE2CA8572B00D4511E /* Assets.xcassets */,
+				8316B0F02CA8572B00D4511E /* Info.plist */,
+			);
+			path = PeerRankWidget;
+			sourceTree = "<group>";
+		};
+		8316B1022CA87E9200D4511E /* WidgetViews */ = {
+			isa = PBXGroup;
+			children = (
+				8316B1032CA87EA100D4511E /* WidgetView.swift */,
+			);
+			path = WidgetViews;
+			sourceTree = "<group>";
+		};
 		83954EE52C82D612000D7492 = {
 			isa = PBXGroup;
 			children = (
+				8316B0FB2CA8599E00D4511E /* PeerRankWidgetExtension.entitlements */,
 				83954EF02C82D612000D7492 /* PeerRank */,
+				8316B0E52CA8572900D4511E /* PeerRankWidget */,
+				8316B0E02CA8572900D4511E /* Frameworks */,
 				83954EEF2C82D612000D7492 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -102,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				83954EEE2C82D612000D7492 /* PeerRank.app */,
+				8316B0DF2CA8572900D4511E /* PeerRankWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -109,6 +216,7 @@
 		83954EF02C82D612000D7492 /* PeerRank */ = {
 			isa = PBXGroup;
 			children = (
+				8316B0FA2CA8592300D4511E /* PeerRank.entitlements */,
 				83954F062C82D88F000D7492 /* Model */,
 				83954F022C82D637000D7492 /* Utilities */,
 				83954F012C82D62E000D7492 /* DataSource */,
@@ -132,6 +240,7 @@
 		83954EFF2C82D618000D7492 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8316B1022CA87E9200D4511E /* WidgetViews */,
 				83954EF32C82D612000D7492 /* ContentView.swift */,
 				832351D72C8C0B8C008A7D1C /* EditPeerView.swift */,
 				832351D92C8C0F41008A7D1C /* PeerPhotoView.swift */,
@@ -144,6 +253,9 @@
 				832351F32C8D8196008A7D1C /* PeerDetailView.swift */,
 				8306A14D2C95A0480062E14E /* PeerInstanceListView.swift */,
 				838A38902C95DDEF00BE0381 /* EditPeerInstanceView.swift */,
+				8316B0D12CA7C34300D4511E /* HomeView.swift */,
+				8316B0D52CA7C40000D4511E /* PeerBannerView.swift */,
+				8316B0D92CA7DD3A00D4511E /* ParentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -159,6 +271,8 @@
 				832351F92C8DCD18008A7D1C /* PeerListViewModel.swift */,
 				8306A14F2C95A18F0062E14E /* PeerInstanceListViewModel.swift */,
 				838A38922C95E1C700BE0381 /* EditPeerInstanceViewModel.swift */,
+				8316B0D32CA7C36900D4511E /* HomeViewModel.swift */,
+				8316B0D72CA7C42F00D4511E /* PeerBannerViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -197,6 +311,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8316B0DE2CA8572900D4511E /* PeerRankWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8316B0F72CA8572B00D4511E /* Build configuration list for PBXNativeTarget "PeerRankWidgetExtension" */;
+			buildPhases = (
+				8316B0DB2CA8572900D4511E /* Sources */,
+				8316B0DC2CA8572900D4511E /* Frameworks */,
+				8316B0DD2CA8572900D4511E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PeerRankWidgetExtension;
+			productName = PeerRankWidgetExtension;
+			productReference = 8316B0DF2CA8572900D4511E /* PeerRankWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		83954EED2C82D612000D7492 /* PeerRank */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83954EFC2C82D614000D7492 /* Build configuration list for PBXNativeTarget "PeerRank" */;
@@ -204,10 +335,12 @@
 				83954EEA2C82D612000D7492 /* Sources */,
 				83954EEB2C82D612000D7492 /* Frameworks */,
 				83954EEC2C82D612000D7492 /* Resources */,
+				8316B0F42CA8572B00D4511E /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8316B0F22CA8572B00D4511E /* PBXTargetDependency */,
 			);
 			name = PeerRank;
 			productName = PeerRank;
@@ -224,6 +357,9 @@
 				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
+					8316B0DE2CA8572900D4511E = {
+						CreatedOnToolsVersion = 15.4;
+					};
 					83954EED2C82D612000D7492 = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -243,11 +379,20 @@
 			projectRoot = "";
 			targets = (
 				83954EED2C82D612000D7492 /* PeerRank */,
+				8316B0DE2CA8572900D4511E /* PeerRankWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8316B0DD2CA8572900D4511E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8316B0EF2CA8572B00D4511E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		83954EEC2C82D612000D7492 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -260,13 +405,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8316B0DB2CA8572900D4511E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8316B1012CA85E4800D4511E /* PeerBannerView.swift in Sources */,
+				8316B0FE2CA85D9E00D4511E /* CommonFunctions.swift in Sources */,
+				8316B0EB2CA8572900D4511E /* PeerRankWidget.swift in Sources */,
+				8316B0FF2CA85DF000D4511E /* PeerInstanceModel.swift in Sources */,
+				8316B0F92CA858E300D4511E /* CoreDataHandler.swift in Sources */,
+				8316B0ED2CA8572900D4511E /* AppIntent.swift in Sources */,
+				8316B0F82CA857F600D4511E /* PeerRankDataModel.xcdatamodeld in Sources */,
+				8316B1002CA85E3D00D4511E /* PeerBannerViewModel.swift in Sources */,
+				8316B0FC2CA85B1000D4511E /* Constants.swift in Sources */,
+				8316B0E92CA8572900D4511E /* PeerRankWidgetLiveActivity.swift in Sources */,
+				8316B0E72CA8572900D4511E /* PeerRankWidgetBundle.swift in Sources */,
+				8316B0FD2CA85D8800D4511E /* PeerModel.swift in Sources */,
+				8316B1052CA8847200D4511E /* WidgetView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		83954EEA2C82D612000D7492 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				83954F0E2C830CE3000D7492 /* CoreDataHandler.swift in Sources */,
+				8316B0D42CA7C36900D4511E /* HomeViewModel.swift in Sources */,
 				832351F22C8D7D7D008A7D1C /* LocalFileManager.swift in Sources */,
 				832351F82C8DC9DC008A7D1C /* PeerListItemViewModel.swift in Sources */,
+				8316B1042CA87EA100D4511E /* WidgetView.swift in Sources */,
+				8316B0DA2CA7DD3A00D4511E /* ParentView.swift in Sources */,
 				832351E82C8C7045008A7D1C /* Constants.swift in Sources */,
 				832351E22C8C6A34008A7D1C /* CommonViews.swift in Sources */,
 				8306A14E2C95A0480062E14E /* PeerInstanceListView.swift in Sources */,
@@ -275,8 +443,10 @@
 				83954EF42C82D612000D7492 /* ContentView.swift in Sources */,
 				832351EC2C8C8CF0008A7D1C /* IconWithPopoverView.swift in Sources */,
 				832351DE2C8C3D3A008A7D1C /* RatingView.swift in Sources */,
+				8316B0D62CA7C40000D4511E /* PeerBannerView.swift in Sources */,
 				838A38932C95E1C700BE0381 /* EditPeerInstanceViewModel.swift in Sources */,
 				832351F42C8D8196008A7D1C /* PeerDetailView.swift in Sources */,
+				8316B0D22CA7C34300D4511E /* HomeView.swift in Sources */,
 				838A38912C95DDEF00BE0381 /* EditPeerInstanceView.swift in Sources */,
 				83954F0A2C82DB13000D7492 /* PeerInstanceModel.swift in Sources */,
 				832351D82C8C0B8C008A7D1C /* EditPeerView.swift in Sources */,
@@ -288,6 +458,7 @@
 				832351E62C8C6E99008A7D1C /* ViewModifiers.swift in Sources */,
 				832351EA2C8C7885008A7D1C /* RatingWeightageView.swift in Sources */,
 				832351EE2C8CA576008A7D1C /* PeerListItemView.swift in Sources */,
+				8316B0D82CA7C42F00D4511E /* PeerBannerViewModel.swift in Sources */,
 				832351FA2C8DCD18008A7D1C /* PeerListViewModel.swift in Sources */,
 				83954EF22C82D612000D7492 /* PeerRankApp.swift in Sources */,
 				832351DA2C8C0F41008A7D1C /* PeerPhotoView.swift in Sources */,
@@ -300,7 +471,71 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8316B0F22CA8572B00D4511E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8316B0DE2CA8572900D4511E /* PeerRankWidgetExtension */;
+			targetProxy = 8316B0F12CA8572B00D4511E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		8316B0F52CA8572B00D4511E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = PeerRankWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 53U5W2PJ2Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PeerRankWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PeerRankWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ratRaceParticipant.PeerRank.PeerRankWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8316B0F62CA8572B00D4511E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = PeerRankWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 53U5W2PJ2Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PeerRankWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PeerRankWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ratRaceParticipant.PeerRank.PeerRankWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		83954EFA2C82D614000D7492 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -423,8 +658,10 @@
 		83954EFD2C82D614000D7492 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PeerRank/PeerRank.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PeerRank/Preview Content\"";
@@ -452,8 +689,10 @@
 		83954EFE2C82D614000D7492 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PeerRank/PeerRank.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PeerRank/Preview Content\"";
@@ -481,6 +720,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8316B0F72CA8572B00D4511E /* Build configuration list for PBXNativeTarget "PeerRankWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8316B0F52CA8572B00D4511E /* Debug */,
+				8316B0F62CA8572B00D4511E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		83954EE92C82D612000D7492 /* Build configuration list for PBXProject "PeerRank" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

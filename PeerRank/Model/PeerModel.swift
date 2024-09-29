@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 import SwiftUI
+
 struct PeerModel: Identifiable{
     var id: UUID
     var peerId: String
@@ -39,7 +40,8 @@ struct PeerModel: Identifiable{
 extension PeerModel {
     static let sampleData: [PeerModel] = [
         PeerModel(id: UUID(), peerId: UUID().uuidString, initials: "HK", name: "Himanshu Bhai", photoId: "sampleid", type: 3, baseRating: 4, baseRatingWeightage: 10, averageRating: 4.5, peerInstance: PeerInstanceModel.sampleData),
-        PeerModel(id: UUID(), peerId: UUID().uuidString, initials: "RJ", name: "Rohit Janwar", photoId: "sampleid", type: 2, baseRating: 4, baseRatingWeightage: 10, averageRating: 3.7, peerInstance: PeerInstanceModel.sampleData)
+        PeerModel(id: UUID(), peerId: UUID().uuidString, initials: "RJ", name: "Rohit Janwar", photoId: "sampleid", type: 2, baseRating: 4, baseRatingWeightage: 10, averageRating: 3.7, peerInstance: PeerInstanceModel.sampleData),
+        PeerModel(id: UUID(), peerId: UUID().uuidString, initials: "RJ", name: "Name 3", photoId: "sampleid", type: 2, baseRating: 4, baseRatingWeightage: 10, averageRating: 2.5, peerInstance: PeerInstanceModel.sampleData)
     ]
     
     static func mapModelToEntity(peerModel: PeerModel, peerEntity: PeerEntity, coreDataHandler: CoreDataHandler){
@@ -111,5 +113,6 @@ extension PeerModel {
         }
         return nil
     }
+    
 }
 

@@ -34,5 +34,32 @@ class CommonFunctions {
         return averageRating
         
     }
+    static func fetchBannerData(fetchTopRatedPeers: Bool = true, viewContext: NSManagedObjectContext) -> [PeerModel]{
+        let request: NSFetchRequest<PeerEntity> = PeerEntity.fetchRequest()
+        request.fetchLimit = 3
+        let averageRatingSort = NSSortDescriptor(key:"averageRating", ascending: !fetchTopRatedPeers)
+        request.sortDescriptors = [averageRatingSort]
+        do {
+            
+            var data: [PeerModel] = []
+            let peerEntityData =  try viewContext.fetch(request)
+            for entityData in peerEntityData {
+                let peerModelData =  PeerModel.mapEntityToModel(
+                                            peerEntity: entityData,
+                                            context: viewContext
+                                    )
+                
+                data.append(
+                   peerModelData
+                )
+            }
+            return data
+            
+            
+        } catch {
+            print("Error fetching data")
+        }
+        return []
+    }
 
 }
