@@ -64,12 +64,16 @@ class CommonFunctions {
     
     static func fetchPeerData(
         viewContext: NSManagedObjectContext,
-        localFileManager: LocalFileManager,
+        localFileManager: LocalFileManager?,
         numberofDataToFetch: Int = Constants.defaultNumberOfDataToFetch,
-        sortDescriptors: [NSSortDescriptor] = [NSSortDescriptor(key:"createdOn", ascending: false)]
-        
-    ) async -> [PeerModel] {
+        sortDescriptors: [NSSortDescriptor]? = [NSSortDescriptor(key:"createdOn", ascending: false)],
+        filter: NSPredicate?,
+        mapPeerImage: Bool = true
+    ) -> [PeerModel] {
         let request: NSFetchRequest<PeerEntity> = PeerEntity.fetchRequest()
+        if let filter {
+            request.predicate = filter
+        }
         request.fetchLimit = numberofDataToFetch
         request.sortDescriptors = sortDescriptors
         do {
@@ -80,9 +84,12 @@ class CommonFunctions {
                                             peerEntity: entityData,
                                             context: viewContext
                                     )
-                peerModelData.peerImage = await CommonFunctions.getImageFromPhotoId(
-                    from: peerModelData.photoId, localFileManager: localFileManager
-                )
+                if mapPeerImage, let localFileManager {
+                    
+                    peerModelData.peerImage = CommonFunctions.getImageFromPhotoId(
+                        from: peerModelData.photoId, localFileManager: localFileManager
+                    )
+                }
                 data.append(
                    peerModelData
                 )
@@ -96,7 +103,7 @@ class CommonFunctions {
         return []
     }
     
-    static func getImageFromPhotoId(from photoId: String, localFileManager: LocalFileManager) async -> UIImage?{
+    static func getImageFromPhotoId(from photoId: String, localFileManager: LocalFileManager) -> UIImage?{
         guard !(photoId == "") else {
             
             return nil
@@ -105,4 +112,8 @@ class CommonFunctions {
         
         return image
     }
+    
+//    static func validatePeerData(peerDataModel: PeerModel){
+//
+//    }
 }

@@ -23,38 +23,44 @@ struct PeerInstanceListView: View {
     }
     
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text("Instances")
-                    .fontWeight(.bold)
-                ForEach(vm.peerInstanceModel, id: \.peerInstanceId){ data in
-                    NavigationLink(
-                        destination: {
-                        EditPeerInstanceView(
-                            peerModel: vm.peerModel,
-                            isUpdate: true,
-                            peerInstanceModel: data,
-                            coreDataHandler: vm.coreDataHandler
-                        )
-                    }, label: {
-                        HStack {
-                            Text("\(vm.formattedDate(data.instanceDate))")
-                                .foregroundColor(.accentColor)
-                                .font(.title3)
-                                .padding([.trailing,.vertical],4)
-                            Spacer()
-                            RatingView(
-                                currentRating: .constant(Float(data.instanceRating)),
-                                enableEditing: false,
-                                starFont: .subheadline
-                            )
+        Group {
+            if !vm.peerInstanceModel.isEmpty {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Instances")
+                            .fontWeight(.bold)
+                        ForEach(vm.peerInstanceModel, id: \.peerInstanceId){ data in
+                            NavigationLink(
+                                destination: {
+                                EditPeerInstanceView(
+                                    peerModel: vm.peerModel,
+                                    isUpdate: true,
+                                    peerInstanceModel: data,
+                                    coreDataHandler: vm.coreDataHandler
+                                )
+                            }, label: {
+                                HStack {
+                                    Text("\(vm.formattedDate(data.instanceDate))")
+                                        .foregroundColor(.accentColor)
+                                        .font(.subheadline)
+                                        .padding([.trailing,.vertical],4)
+                                    Spacer()
+                                    RatingView(
+                                        currentRating: .constant(Float(data.instanceRating)),
+                                        enableEditing: false,
+                                        starFont: .subheadline
+                                    )
+                                }
+                            })
+                            .tint(.clear)
                         }
-                    })
-                    .tint(.clear)
+                    }
+                    
+                    Spacer()
                 }
+            } else {
+                Text("No Instances Available")
             }
-            
-            Spacer()
         }
         .onAppear{
             vm.fetchPeerInstnaceData()

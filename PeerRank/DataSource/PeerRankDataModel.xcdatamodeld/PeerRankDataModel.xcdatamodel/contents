@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23G93" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23231" systemVersion="24A335" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="PeerEntity" representedClassName="PeerEntity" syncable="YES" codeGenerationType="class">
         <attribute name="averageRating" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="baseRating" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -14,6 +14,7 @@
         <relationship name="peerInstance" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PeerInstanceEntity" inverseName="peer" inverseEntity="PeerInstanceEntity"/>
     </entity>
     <entity name="PeerInstanceEntity" representedClassName="PeerInstanceEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="averageRatingAtTimeOfInstance" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="instanceDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="instanceDescription" optional="YES" attributeType="String"/>

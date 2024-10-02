@@ -43,8 +43,8 @@ struct PeerListView: View {
                 )
             }
         }
-        .task{
-            await vm.fetchData()
+        .onAppear{
+            vm.fetchData()
         }
         
         .listStyle(.inset)

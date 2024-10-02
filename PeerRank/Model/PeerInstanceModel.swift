@@ -8,13 +8,21 @@
 import Foundation
 import CoreData
 struct PeerInstanceModel: Identifiable{
-    init(id: UUID,peerInstanceId: String,instanceDate: Date, instanceRating: Int16, instanceRatingWeightage: Int16, instanceDescription: String) {
+    init(id: UUID,
+         peerInstanceId: String,
+         instanceDate: Date,
+         instanceRating: Int16,
+         instanceRatingWeightage: Int16,
+         instanceDescription: String,
+         averageRatingAtTimeOfInstance: Float
+    ) {
         self.id = id
         self.peerInstanceId = peerInstanceId
         self.instanceDate = instanceDate
         self.instanceRating = instanceRating
         self.instanceRatingWeightage = instanceRatingWeightage
         self.instanceDescription = instanceDescription
+        self.averageRatingAtTimeOfInstance = averageRatingAtTimeOfInstance
     }
     var id: UUID
     var peerInstanceId: String
@@ -22,25 +30,49 @@ struct PeerInstanceModel: Identifiable{
     var instanceRating: Int16
     var instanceRatingWeightage: Int16
     var instanceDescription: String
+    var averageRatingAtTimeOfInstance: Float
     
-    static let emptyData = PeerInstanceModel(id: UUID(), peerInstanceId: UUID().uuidString,instanceDate: Date(), instanceRating: 3, instanceRatingWeightage: 1, instanceDescription: "")
+    static let emptyData = PeerInstanceModel(
+        id: UUID(),
+        peerInstanceId: UUID().uuidString,
+        instanceDate: Date(),
+        instanceRating: 3,
+        instanceRatingWeightage: 1,
+        instanceDescription: "",
+        averageRatingAtTimeOfInstance: 0.0
+    )
 }
 
 extension PeerInstanceModel {
     static var sampleData: [PeerInstanceModel] = [
-        PeerInstanceModel(id: UUID(),peerInstanceId: UUID().uuidString, instanceDate: Date(), instanceRating: 4, instanceRatingWeightage: 4, instanceDescription: "Sample Desc"),
-        PeerInstanceModel(id: UUID(),peerInstanceId: UUID().uuidString, instanceDate: Date(), instanceRating: 5, instanceRatingWeightage: 1, instanceDescription: "Sample Desc"),
-        PeerInstanceModel(id: UUID(),peerInstanceId: UUID().uuidString, instanceDate: Date(), instanceRating: 2, instanceRatingWeightage: 7, instanceDescription: "Sample Desc")
+        PeerInstanceModel(
+            id: UUID(),
+            peerInstanceId: UUID().uuidString,
+            instanceDate: Date(),
+            instanceRating: 4,
+            instanceRatingWeightage: 4,
+            instanceDescription: "Sample Desc",
+            averageRatingAtTimeOfInstance: 3.0
+        ),
+        PeerInstanceModel(
+            id: UUID(),
+            peerInstanceId: UUID().uuidString,
+            instanceDate: Date(),
+            instanceRating: 2,
+            instanceRatingWeightage: 4,
+            instanceDescription: "Sample Desc",
+            averageRatingAtTimeOfInstance: 5.0
+        ),
     ]
     
     static func mapModelToEntity(peerInstanceModel: PeerInstanceModel, peerInstanceEntity: PeerInstanceEntity) {
         peerInstanceEntity.id = peerInstanceModel.id
         peerInstanceEntity.peerInstanceId = peerInstanceModel.peerInstanceId
         peerInstanceEntity.instanceDate = peerInstanceModel.instanceDate
-        
         peerInstanceEntity.instanceDescription = peerInstanceModel.instanceDescription
         peerInstanceEntity.instanceRating = peerInstanceModel.instanceRating
         peerInstanceEntity.isntanceRatingWeightage = peerInstanceModel.instanceRatingWeightage
+        peerInstanceEntity.averageRatingAtTimeOfInstance = peerInstanceModel.averageRatingAtTimeOfInstance
     }
     static func mapEntityToModel(peerInstanceEntity: PeerInstanceEntity) -> PeerInstanceModel {
         PeerInstanceModel(
@@ -49,7 +81,8 @@ extension PeerInstanceModel {
             instanceDate: peerInstanceEntity.instanceDate ?? Date(),
             instanceRating: peerInstanceEntity.instanceRating,
             instanceRatingWeightage: peerInstanceEntity.isntanceRatingWeightage,
-            instanceDescription: peerInstanceEntity.instanceDescription ?? ""
+            instanceDescription: peerInstanceEntity.instanceDescription ?? "",
+            averageRatingAtTimeOfInstance: peerInstanceEntity.averageRatingAtTimeOfInstance
         )
     }
     static func getEntityFromDataModelId(id: String, viewContext: NSManagedObjectContext) -> PeerInstanceEntity? {

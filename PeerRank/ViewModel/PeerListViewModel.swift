@@ -27,12 +27,13 @@ class PeerListViewModel: ObservableObject {
         self.fetchFromCoreData = fetchFromCoreData
     }
     
-    func fetchData() async {
+    func fetchData() {
         if fetchFromCoreData {
-            peerModelData = await CommonFunctions.fetchPeerData(
+            peerModelData = CommonFunctions.fetchPeerData(
                 viewContext: coreDataHandler.viewContext,
                 localFileManager: localFileManager,
-                numberofDataToFetch: numberOfDataToFetch
+                numberofDataToFetch: numberOfDataToFetch,
+                filter: nil
             )
         }
     }

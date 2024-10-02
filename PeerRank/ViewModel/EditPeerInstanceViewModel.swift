@@ -48,7 +48,7 @@ class EditPeerInstanceViewModel: ObservableObject {
         peerInstanceEntity.peer = peerEntity
         coreDataHandler.saveData()
         
-        setAverageRating(peerEntity: peerEntity)
+        setAverageRating(peerEntity: peerEntity,peerInstanceEntity: peerInstanceEntity)
         
     }
     func setData(isUpdate: Bool){
@@ -59,13 +59,13 @@ class EditPeerInstanceViewModel: ObservableObject {
             peerInstanceModel.peerInstanceId = UUID().uuidString
         }
     }
-    func setAverageRating(peerEntity: PeerEntity){
+    func setAverageRating(peerEntity: PeerEntity,peerInstanceEntity: PeerInstanceEntity){
         let averageRating = CommonFunctions.getPeerAverageRating(
             from: peerModel, viewContext: coreDataHandler.viewContext
         ) ?? peerModel.averageRating
         
         peerEntity.averageRating = averageRating
-        
+        peerInstanceEntity.averageRatingAtTimeOfInstance = averageRating
         coreDataHandler.saveData()
     }
 }

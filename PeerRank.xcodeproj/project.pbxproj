@@ -66,6 +66,9 @@
 		83954F0E2C830CE3000D7492 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954F0D2C830CE3000D7492 /* CoreDataHandler.swift */; };
 		83954F102C830D2F000D7492 /* ContentFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954F0F2C830D2F000D7492 /* ContentFileViewModel.swift */; };
 		83E2B5BE2CA030DE00928672 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E2B5BD2CA030DE00928672 /* CommonFunctions.swift */; };
+		83F26A6D2CAB1E85003933FF /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 83F26A6C2CAB1E85003933FF /* SwiftUICharts */; };
+		83F773462CAAF35B0010ABFE /* PeerInstancesChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F773452CAAF35B0010ABFE /* PeerInstancesChartView.swift */; };
+		83F7734A2CAAF6030010ABFE /* PeerInstancesChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F773492CAAF6030010ABFE /* PeerInstancesChartViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +149,8 @@
 		83954F0D2C830CE3000D7492 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		83954F0F2C830D2F000D7492 /* ContentFileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFileViewModel.swift; sourceTree = "<group>"; };
 		83E2B5BD2CA030DE00928672 /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
+		83F773452CAAF35B0010ABFE /* PeerInstancesChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerInstancesChartView.swift; sourceTree = "<group>"; };
+		83F773492CAAF6030010ABFE /* PeerInstancesChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerInstancesChartViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +167,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83F26A6D2CAB1E85003933FF /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +268,7 @@
 				8316B0D52CA7C40000D4511E /* PeerBannerView.swift */,
 				8316B0D92CA7DD3A00D4511E /* ParentView.swift */,
 				8316B1062CA969FB00D4511E /* PeerListView.swift */,
+				83F773452CAAF35B0010ABFE /* PeerInstancesChartView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -280,6 +287,7 @@
 				8316B0D32CA7C36900D4511E /* HomeViewModel.swift */,
 				8316B0D72CA7C42F00D4511E /* PeerBannerViewModel.swift */,
 				8316B1082CA96A1600D4511E /* PeerListViewModel.swift */,
+				83F773492CAAF6030010ABFE /* PeerInstancesChartViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -381,6 +389,9 @@
 				Base,
 			);
 			mainGroup = 83954EE52C82D612000D7492;
+			packageReferences = (
+				83F26A6B2CAB1E85003933FF /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			productRefGroup = 83954EEF2C82D612000D7492 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -437,6 +448,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83F773462CAAF35B0010ABFE /* PeerInstancesChartView.swift in Sources */,
 				83954F0E2C830CE3000D7492 /* CoreDataHandler.swift in Sources */,
 				8316B0D42CA7C36900D4511E /* HomeViewModel.swift in Sources */,
 				832351F22C8D7D7D008A7D1C /* LocalFileManager.swift in Sources */,
@@ -444,6 +456,7 @@
 				8316B1042CA87EA100D4511E /* WidgetView.swift in Sources */,
 				8316B0DA2CA7DD3A00D4511E /* ParentView.swift in Sources */,
 				832351E82C8C7045008A7D1C /* Constants.swift in Sources */,
+				83F7734A2CAAF6030010ABFE /* PeerInstancesChartViewModel.swift in Sources */,
 				832351E22C8C6A34008A7D1C /* CommonViews.swift in Sources */,
 				8306A14E2C95A0480062E14E /* PeerInstanceListView.swift in Sources */,
 				83954F052C82D65B000D7492 /* PeerRankDataModel.xcdatamodeld in Sources */,
@@ -758,6 +771,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		83F26A6B2CAB1E85003933FF /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		83F26A6C2CAB1E85003933FF /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 83F26A6B2CAB1E85003933FF /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		83954F032C82D65B000D7492 /* PeerRankDataModel.xcdatamodeld */ = {

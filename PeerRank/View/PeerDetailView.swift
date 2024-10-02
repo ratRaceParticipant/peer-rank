@@ -100,6 +100,7 @@ struct PeerDetailView: View {
 
                 }
                 .padding(.horizontal)
+                
                 NavigationLink {
                     EditPeerInstanceView(
                         peerModel: peerDataModel,
@@ -113,12 +114,16 @@ struct PeerDetailView: View {
                     )
                     
                 }
-                .padding()
+                .padding([.horizontal,.top])
+                VStack{
+                    PeerInstancesChartView(coreDataHandler: vm.coreDataHandler, peerData: peerDataModel)
+                }
+                .padding([.horizontal,.bottom])
                 PeerInstanceListView(
                     peerModel: peerDataModel,
                     coreDataHandler: vm.coreDataHandler
                 )
-                .padding(.horizontal)
+                .padding([.horizontal,.top])
                 Spacer()
             }
             .onAppear{
