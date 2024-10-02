@@ -40,7 +40,7 @@ struct PeerInstanceListView: View {
                                 )
                             }, label: {
                                 HStack {
-                                    Text("\(vm.formattedDate(data.instanceDate))")
+                                    Text("\(CommonFunctions.formattedInstanceDate(data.instanceDate))")
                                         .foregroundColor(.accentColor)
                                         .font(.subheadline)
                                         .padding([.trailing,.vertical],4)
@@ -59,7 +59,7 @@ struct PeerInstanceListView: View {
                     Spacer()
                 }
             } else {
-                Text("No Instances Available")
+                DataUnavailableView(noDataType: .instanceData)
             }
         }
         .onAppear{

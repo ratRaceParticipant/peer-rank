@@ -23,7 +23,7 @@ struct IconWithPopoverView: View {
                 .lineLimit(5)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(8)
-                .foregroundStyle(.black)
+                .foregroundStyle(.primary)
                 .presentationCompactAdaptation(.none)
                 
         }

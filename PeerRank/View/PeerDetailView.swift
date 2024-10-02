@@ -31,90 +31,14 @@ struct PeerDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Group{
-                    if let image = peerImage {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 400,height: 300)
-                            .overlay{
-                                Color.black.opacity(0.3)
-                            }
-                    } else {
-                        Rectangle()
-                            .frame(width: 400,height: 300)
-                            .foregroundStyle(.tertiary)
-                            
-                            .overlay {
-                                Text(peerDataModel.initials)
-                                    .font(.system(size: 150))
-                            }
-                            
-                            .foregroundStyle(PeerType(rawValue: peerDataModel.type)?.getBgColor() ?? .clear)
-                    }
-                }
-                .padding(.bottom)
-                
+                peerImageView
                 HStack {
-                    VStack(alignment: .leading){
-                        Text(peerDataModel.name)
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            
-                       
-                        HStack {
-                            RatingView(
-                                currentRating: .constant(peerDataModel.averageRating),
-                                enableEditing: false,
-                                starFont: .title3
-                            )
-                            Text("\(vm.averageRating, specifier: "%.2f")")
-                                .fontWeight(.bold)
-                            IconWithPopoverView(isInfoPopTipShown: false,popOverText: .averageRating)
-                        }
-                    }
-                    
+                    nameAndRatingView
                     Spacer()
-                    NavigationLink {
-                        EditPeerView(
-                            localFileManager: vm.localFileManager,
-                            isUpdate: true,
-                            peerModel: peerDataModel,
-                            coreDataHandler: vm.coreDataHandler,
-                            peerImage: peerImage){ _, peerImage  in
-                               
-                                self.peerImage = peerImage
-                            }
-                    } label: {
-                        Label(
-                            title: { 
-                                Text("Edit")
-                                .font(.title3)
-                            },
-                            icon: {
-                                Image(systemName: "square.and.pencil")
-                            }
-                        )
-                        
-                    }
-
+                    navigationLinkToEditView
                 }
                 .padding(.horizontal)
-                
-                NavigationLink {
-                    EditPeerInstanceView(
-                        peerModel: peerDataModel,
-                        isUpdate: false,
-                        coreDataHandler: vm.coreDataHandler
-                    )
-                } label: {
-                    Label(
-                        title: { Text("Add Instance") },
-                        icon: { Image(systemName: "plus") }
-                    )
-                    
-                }
-                .padding([.horizontal,.top])
+                navigationLinkToAddInstanceView
                 VStack{
                     PeerInstancesChartView(coreDataHandler: vm.coreDataHandler, peerData: peerDataModel)
                 }
@@ -129,11 +53,95 @@ struct PeerDetailView: View {
             .onAppear{
                 vm.getAverageRatingToDisplay(peerModel: peerDataModel)
                 peerDataModel = vm.getUpdatedPeerModelData(peerModel: peerDataModel)
-//                print(peerDataModel.peerInstance)
             }
         }
         .ignoresSafeArea(.container,edges: .top)
         
+    }
+    
+    var peerImageView: some View {
+        Group{
+            if let image = peerImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 400,height: 300)
+                    .overlay{
+                        Color.black.opacity(0.3)
+                    }
+            } else {
+                Rectangle()
+                    .frame(width: 400,height: 300)
+                    .foregroundStyle(.tertiary)
+                    
+                    .overlay {
+                        Text(peerDataModel.initials)
+                            .font(.system(size: 150))
+                    }
+                    
+                    .foregroundStyle(PeerType(rawValue: peerDataModel.type)?.getBgColor() ?? .clear)
+            }
+        }
+        .padding(.bottom)
+    }
+    var nameAndRatingView: some View {
+        VStack(alignment: .leading){
+            Text(peerDataModel.name)
+                .font(.title2)
+                .fontWeight(.bold)
+                
+           
+            HStack {
+                RatingView(
+                    currentRating: .constant(peerDataModel.averageRating),
+                    enableEditing: false,
+                    starFont: .title3
+                )
+                Text("\(vm.averageRating, specifier: "%.2f")")
+                    .fontWeight(.bold)
+                IconWithPopoverView(isInfoPopTipShown: false,popOverText: .averageRating)
+            }
+        }
+    }
+    var navigationLinkToEditView: some View {
+        NavigationLink {
+            EditPeerView(
+                localFileManager: vm.localFileManager,
+                isUpdate: true,
+                peerModel: peerDataModel,
+                coreDataHandler: vm.coreDataHandler,
+                peerImage: peerImage){ _, peerImage  in
+                   
+                    self.peerImage = peerImage
+                }
+        } label: {
+            Label(
+                title: {
+                    Text("Edit")
+                    .font(.title3)
+                },
+                icon: {
+                    Image(systemName: "square.and.pencil")
+                }
+            )
+            
+        }
+    }
+    var navigationLinkToAddInstanceView: some View {
+        NavigationLink {
+            EditPeerInstanceView(
+                peerModel: peerDataModel,
+                isUpdate: false,
+                coreDataHandler: vm.coreDataHandler
+            )
+        } label: {
+            Label(
+                title: { Text("Add Instance") },
+                icon: { Image(systemName: "plus") }
+            )
+            
+        }
+        .padding([.horizontal,.top])
     }
 }
 

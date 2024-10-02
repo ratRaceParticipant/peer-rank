@@ -11,7 +11,7 @@ import SwiftUI
 @main
 struct PeerRankWidgetBundle: WidgetBundle {
     var body: some Widget {
-        PeerRankWidget()
+       
         PeerRankWidgetLiveActivity()
     }
 }

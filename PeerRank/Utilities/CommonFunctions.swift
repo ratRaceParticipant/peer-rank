@@ -113,7 +113,40 @@ class CommonFunctions {
         return image
     }
     
-//    static func validatePeerData(peerDataModel: PeerModel){
-//
-//    }
+    static func validatePeerData(peerDataModel: PeerModel) -> ValidationStatus {
+        if peerDataModel.name.isEmpty || peerDataModel.initials.isEmpty {
+            return .requiredFieldsError
+        }
+        if peerDataModel.name.count > 20 {
+            return .peerNameError
+        }
+        if peerDataModel.initials.count > 3 {
+            return .initialsError
+        }
+        return .noError
+    }
+    
+    static func getInitialsFromName(name: String) -> String {
+        let nameArray: [String] = name.components(separatedBy: " ")
+        var initials: String = ""
+        if nameArray.count == 1 {
+            initials = String(nameArray[0].prefix(2))
+        } else {
+            for word in nameArray {
+                if initials.count == Constants.maxInitialsLength {
+                    return initials.uppercased()
+                } else {
+                    if let letter = word.first {
+                        initials += String(letter)
+                    }
+                }
+            }
+        }
+        return initials.uppercased()
+    }
+    static func formattedInstanceDate(_ date: Date) -> String {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yyyy 'at' h:mm a"
+            return formatter.string(from: date)
+    }
 }

@@ -11,8 +11,11 @@ import CoreData
 class EditPeerViewModel: ObservableObject {
     @Published var peerModel: PeerModel
     @Published var peerImage: UIImage?
-    @Published var peerRatingWeightage: Double = 0.0
+    @Published var peerRatingWeightage: Double = 1.0
     @Published var peerRating: Float = 3.0
+    @Published var validationStatus: ValidationStatus = .noError
+    @Published var validationErrorMessage: String = ""
+    @Published var showValidationError: Bool = false
     var localFileManager: LocalFileManager
     var coreDataHandler: CoreDataHandler
     var updateParentVarData: ((_ peerDataModel: PeerModel, _ peerImage: UIImage?) -> Void)?
@@ -33,6 +36,14 @@ class EditPeerViewModel: ObservableObject {
     }
     
     func writePeerData(isUpdate: Bool = false){
+        
+        validationStatus = CommonFunctions.validatePeerData(peerDataModel: peerModel)
+        
+        guard validationStatus == .noError else {
+            validationErrorMessage = validationStatus.getValidationError()
+            showValidationError = true
+            return
+        }
         
         let peerEntity = isUpdate ?
         PeerModel.getEntityFromDataModelId(
@@ -61,7 +72,7 @@ class EditPeerViewModel: ObservableObject {
     
     func setPeerData(isUpdate: Bool) {
         peerModel.id = UUID()
-        peerModel.initials = getInitialsFromName(name: peerModel.name)
+        peerModel.initials = CommonFunctions.getInitialsFromName(name: peerModel.name)
         peerModel.baseRatingWeightage = Int16(peerRatingWeightage)
         peerModel.baseRating = Int16(peerRating)
         peerModel.averageRating = peerRating
@@ -77,27 +88,7 @@ class EditPeerViewModel: ObservableObject {
         ) ?? peerModel.averageRating
         
         peerEntity.averageRating = averageRating
-        
         coreDataHandler.saveData()
-    }
-    
-    func getInitialsFromName(name: String) -> String {
-        let nameArray: [String] = name.components(separatedBy: " ")
-        var initials: String = ""
-        if nameArray.count == 1 {
-            initials = String(nameArray[0].prefix(2))
-        } else {
-            for word in nameArray {
-                if initials.count == Constants.maxInitialsLength {
-                    return initials.uppercased()
-                } else {
-                    if let letter = word.first {
-                        initials += String(letter)
-                    }
-                }
-            }
-        }
-        return initials.uppercased()
     }
     
     func saveImage(){
@@ -114,7 +105,5 @@ class EditPeerViewModel: ObservableObject {
             }
             return
         }
-        
     }
-    
 }

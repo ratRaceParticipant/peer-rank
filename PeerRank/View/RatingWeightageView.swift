@@ -22,10 +22,10 @@ struct RatingWeightageView: View {
             IconWithPopoverView(popOverText: .baseRatingWeightageInfo)
             Spacer()
         }
-        Slider(value: $ratingWeightage, in: 0...20, step: 1.0){
+        Slider(value: $ratingWeightage, in: 1...20, step: 1.0){
             Text("Slider")
         } minimumValueLabel: {
-            Text("0")
+            Text("1")
         } maximumValueLabel: {
             Text("20")
         } onEditingChanged: { editing in

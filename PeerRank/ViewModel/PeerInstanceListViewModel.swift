@@ -48,10 +48,4 @@ class PeerInstanceListViewModel: ObservableObject {
             print("Error fetching data")
         }
     }
-    
-    func formattedDate(_ date: Date) -> String {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd/MM/yyyy 'at' h:mm a" 
-            return formatter.string(from: date)
-        }
 }

@@ -23,18 +23,10 @@
 		8316B0EF2CA8572B00D4511E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8316B0EE2CA8572B00D4511E /* Assets.xcassets */; };
 		8316B0F32CA8572B00D4511E /* PeerRankWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8316B0DF2CA8572900D4511E /* PeerRankWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8316B0F82CA857F600D4511E /* PeerRankDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 83954F032C82D65B000D7492 /* PeerRankDataModel.xcdatamodeld */; };
-		8316B0F92CA858E300D4511E /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954F0D2C830CE3000D7492 /* CoreDataHandler.swift */; };
-		8316B0FC2CA85B1000D4511E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351E72C8C7045008A7D1C /* Constants.swift */; };
-		8316B0FD2CA85D8800D4511E /* PeerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954F072C82D8DD000D7492 /* PeerModel.swift */; };
-		8316B0FE2CA85D9E00D4511E /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E2B5BD2CA030DE00928672 /* CommonFunctions.swift */; };
 		8316B0FF2CA85DF000D4511E /* PeerInstanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954F092C82DB13000D7492 /* PeerInstanceModel.swift */; };
-		8316B1002CA85E3D00D4511E /* PeerBannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B0D72CA7C42F00D4511E /* PeerBannerViewModel.swift */; };
-		8316B1012CA85E4800D4511E /* PeerBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B0D52CA7C40000D4511E /* PeerBannerView.swift */; };
 		8316B1042CA87EA100D4511E /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B1032CA87EA100D4511E /* WidgetView.swift */; };
-		8316B1052CA8847200D4511E /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B1032CA87EA100D4511E /* WidgetView.swift */; };
 		8316B1072CA969FC00D4511E /* PeerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B1062CA969FB00D4511E /* PeerListView.swift */; };
 		8316B1092CA96A1600D4511E /* PeerListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B1082CA96A1600D4511E /* PeerListViewModel.swift */; };
-		8316B10A2CA96EF900D4511E /* LocalFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351F12C8D7D7D008A7D1C /* LocalFileManager.swift */; };
 		832351D82C8C0B8C008A7D1C /* EditPeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351D72C8C0B8C008A7D1C /* EditPeerView.swift */; };
 		832351DA2C8C0F41008A7D1C /* PeerPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351D92C8C0F41008A7D1C /* PeerPhotoView.swift */; };
 		832351DC2C8C0F9C008A7D1C /* PeerPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351DB2C8C0F9C008A7D1C /* PeerPhotoViewModel.swift */; };
@@ -67,6 +59,7 @@
 		83954F102C830D2F000D7492 /* ContentFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954F0F2C830D2F000D7492 /* ContentFileViewModel.swift */; };
 		83E2B5BE2CA030DE00928672 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E2B5BD2CA030DE00928672 /* CommonFunctions.swift */; };
 		83F26A6D2CAB1E85003933FF /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 83F26A6C2CAB1E85003933FF /* SwiftUICharts */; };
+		83F26A702CAD2538003933FF /* DataUnavailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F26A6F2CAD2538003933FF /* DataUnavailableView.swift */; };
 		83F773462CAAF35B0010ABFE /* PeerInstancesChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F773452CAAF35B0010ABFE /* PeerInstancesChartView.swift */; };
 		83F7734A2CAAF6030010ABFE /* PeerInstancesChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F773492CAAF6030010ABFE /* PeerInstancesChartViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -149,6 +142,7 @@
 		83954F0D2C830CE3000D7492 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		83954F0F2C830D2F000D7492 /* ContentFileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFileViewModel.swift; sourceTree = "<group>"; };
 		83E2B5BD2CA030DE00928672 /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
+		83F26A6F2CAD2538003933FF /* DataUnavailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUnavailableView.swift; sourceTree = "<group>"; };
 		83F773452CAAF35B0010ABFE /* PeerInstancesChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerInstancesChartView.swift; sourceTree = "<group>"; };
 		83F773492CAAF6030010ABFE /* PeerInstancesChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerInstancesChartViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -269,6 +263,7 @@
 				8316B0D92CA7DD3A00D4511E /* ParentView.swift */,
 				8316B1062CA969FB00D4511E /* PeerListView.swift */,
 				83F773452CAAF35B0010ABFE /* PeerInstancesChartView.swift */,
+				83F26A6F2CAD2538003933FF /* DataUnavailableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -427,20 +422,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8316B1012CA85E4800D4511E /* PeerBannerView.swift in Sources */,
-				8316B0FE2CA85D9E00D4511E /* CommonFunctions.swift in Sources */,
 				8316B0EB2CA8572900D4511E /* PeerRankWidget.swift in Sources */,
 				8316B0FF2CA85DF000D4511E /* PeerInstanceModel.swift in Sources */,
-				8316B0F92CA858E300D4511E /* CoreDataHandler.swift in Sources */,
 				8316B0ED2CA8572900D4511E /* AppIntent.swift in Sources */,
 				8316B0F82CA857F600D4511E /* PeerRankDataModel.xcdatamodeld in Sources */,
-				8316B1002CA85E3D00D4511E /* PeerBannerViewModel.swift in Sources */,
-				8316B0FC2CA85B1000D4511E /* Constants.swift in Sources */,
 				8316B0E92CA8572900D4511E /* PeerRankWidgetLiveActivity.swift in Sources */,
 				8316B0E72CA8572900D4511E /* PeerRankWidgetBundle.swift in Sources */,
-				8316B0FD2CA85D8800D4511E /* PeerModel.swift in Sources */,
-				8316B1052CA8847200D4511E /* WidgetView.swift in Sources */,
-				8316B10A2CA96EF900D4511E /* LocalFileManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,6 +446,7 @@
 				83F7734A2CAAF6030010ABFE /* PeerInstancesChartViewModel.swift in Sources */,
 				832351E22C8C6A34008A7D1C /* CommonViews.swift in Sources */,
 				8306A14E2C95A0480062E14E /* PeerInstanceListView.swift in Sources */,
+				83F26A702CAD2538003933FF /* DataUnavailableView.swift in Sources */,
 				83954F052C82D65B000D7492 /* PeerRankDataModel.xcdatamodeld in Sources */,
 				8306A1502C95A18F0062E14E /* PeerInstanceListViewModel.swift in Sources */,
 				83954EF42C82D612000D7492 /* ContentView.swift in Sources */,

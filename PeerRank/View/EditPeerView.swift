@@ -46,6 +46,7 @@ struct EditPeerView: View {
                 HStack {
                     CommonViews.textField(bindingText: $vm.peerModel.name, placeholderText: "Name")
                         .frame(width: 250)
+                        .limitInputLength(value: $vm.peerModel.initials, length: Constants.peerNameMaxLength)
                         .padding(.leading)
                         
                     CommonViews.textField(bindingText: $vm.peerModel.initials, placeholderText: "Initials")
@@ -66,8 +67,10 @@ struct EditPeerView: View {
                     Spacer()
                     Button("Save") {
                         vm.writePeerData(isUpdate: isUpdate)
-                        vm.updateParentVarData?(vm.peerModel, vm.peerImage)
-                        presentationMode.wrappedValue.dismiss()
+                        if !vm.showValidationError {
+                            vm.updateParentVarData?(vm.peerModel, vm.peerImage)
+                            presentationMode.wrappedValue.dismiss()
+                        }
                     }
                     .buttonStyle(.borderedProminent)
                     .padding(.trailing)
@@ -80,10 +83,17 @@ struct EditPeerView: View {
         }
         //Need to utilise timers here
         .onChange(of: vm.peerModel.name) {
-            vm.peerModel.initials = vm.getInitialsFromName(
+            vm.peerModel.initials = CommonFunctions.getInitialsFromName(
                 name: vm.peerModel.name
             )
         }
+        .alert("Error!", isPresented: $vm.showValidationError, actions: {
+            Button("Ok") {
+                
+            }
+        }, message: {
+            Text(vm.validationErrorMessage)
+        })
         
         .navigationTitle(isUpdate ? "Edit Peer Details" : "Add Peer")
     }

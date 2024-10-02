@@ -12,4 +12,6 @@ class Constants {
     static let dataSourceName = "PeerRankDataModel"
     static let appGroup = "group.com.ratRaceParticipant.PeerRank"
     static let defaultNumberOfDataToFetch: Int = 4
+    static let peerNameMaxLength = 20
+    static let peerInitialsMaxLength = 3
 }

@@ -45,3 +45,62 @@ enum InfoText: String {
     case baseRatingWeightageInfo = "This gives the weightage to the base rating."
     case averageRating = "Rating of average of base rating and instance ratings"
 }
+
+enum PMError: Error {
+    case runtimeError(String)
+}
+enum ValidationStatus: String {
+    case requiredFieldsError
+    case peerNameError
+    case initialsError
+    case noError
+    func getValidationError() -> String{
+        switch self {
+        case .requiredFieldsError:
+            return "All the fields are mandatory"
+        case .initialsError:
+            return "Initials should not be greater than \(Constants.maxInitialsLength) letters"
+        case .peerNameError:
+            return "Peer name should not be greater than \(Constants.peerNameMaxLength) letters"
+        case .noError:
+            return ""
+        
+        }
+    }
+}
+
+enum DataUnavailable{
+    case chartData
+    case kpiData
+    case peerData
+    case instanceData
+    func getDataUnavailableMap() -> [String:String]{
+        switch self {
+        case .chartData:
+            return [
+                "title": "Not Enough Data Available",
+                "icon": "chart.xyaxis.line",
+                "description": "Add Atleast 3 instances to see the chart"
+            ]
+        case .kpiData:
+            return [
+                "title": "Not Enough Data Available",
+                "icon": "chart.bar.fill",
+                "description": "Add Atleast 3 Peers to see the metrics"
+            ]
+        case .peerData:
+            return [
+                "title": "No Data Available",
+                "icon": "person.fill.xmark",
+                "description": "Add Peers to get started"
+            ]
+        case .instanceData:
+            return [
+                "title": "No Data Available",
+                "icon": "square.grid.3x3.topleft.filled",
+                "description": "Added instances will be visible here"
+            ]
+        }
+    }
+    
+}

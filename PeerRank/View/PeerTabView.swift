@@ -40,10 +40,7 @@ struct PeerTabView: View {
                     peerImage: data.peerImage
                 )
             }
-            
-            
         }
-        
         .task{
             await vm.fetchData(lastSelectedPeerModel: selectedPeerModel)
         }
@@ -51,19 +48,20 @@ struct PeerTabView: View {
         .navigationTitle("Peers")
         .toolbar(content: {
             ToolbarItem {
-                NavigationLink {
-                    EditPeerView(
-                        localFileManager: vm.localFileManager,
-                        coreDataHandler: vm.coreDataHandler) { peerDataModel, uiImage in
-                            
-                            vm.peerModelData.append(peerDataModel)
-                        }
-                    
-                } label: {
-                    Image(systemName: "plus")
-                }
+                navigationLinkForAddingPeer
             }
         })
+    }
+    var navigationLinkForAddingPeer: some View {
+        NavigationLink {
+            EditPeerView(
+                localFileManager: vm.localFileManager,
+                coreDataHandler: vm.coreDataHandler) { peerDataModel, uiImage in
+                    vm.peerModelData.append(peerDataModel)
+                }
+        } label: {
+            Image(systemName: "plus")
+        }
     }
 }
 

@@ -55,7 +55,7 @@ struct PeerPhotoView: View {
             }
         }
         .onAppear{
-            vm.initials = vm.getInitials(name: peerModel.name)
+            vm.initials = CommonFunctions.getInitialsFromName(name: peerModel.name)
         }
         .onChange(of: vm.photoPickerItem) {
             Task {

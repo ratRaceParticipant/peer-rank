@@ -18,8 +18,6 @@ class PeerPhotoViewModel: ObservableObject {
         localFileManager: LocalFileManager
     ){
         self.localFileManager = localFileManager
-        
-
     }
     func setImage(from selection: PhotosPickerItem?) async -> UIImage?{
         guard let selection else {return nil}
@@ -28,24 +26,4 @@ class PeerPhotoViewModel: ObservableObject {
         return uiImage
         
     }
-    
-    func getInitials(name: String) -> String{
-        let nameArray: [String] = name.components(separatedBy: " ")
-        var initials: String = ""
-        if nameArray.count == 1 {
-            initials = String(nameArray[0].prefix(2))
-        } else {
-            for word in nameArray {
-                if initials.count == Constants.maxInitialsLength {
-                    return initials.uppercased()
-                } else {
-                    if let letter = word.first {
-                        initials += String(letter).uppercased()
-                    }
-                }
-            }
-        }
-        return initials.uppercased()
-    }
-    
 }
