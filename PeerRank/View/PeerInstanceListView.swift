@@ -29,31 +29,35 @@ struct PeerInstanceListView: View {
                     VStack(alignment: .leading) {
                         Text("Instances")
                             .fontWeight(.bold)
-                        ForEach(vm.peerInstanceModel, id: \.peerInstanceId){ data in
-                            NavigationLink(
-                                destination: {
-                                EditPeerInstanceView(
-                                    peerModel: vm.peerModel,
-                                    isUpdate: true,
-                                    peerInstanceModel: data,
-                                    coreDataHandler: vm.coreDataHandler
-                                )
-                            }, label: {
-                                HStack {
-                                    Text("\(CommonFunctions.formattedInstanceDate(data.instanceDate))")
-                                        .foregroundColor(.accentColor)
-                                        .font(.subheadline)
-                                        .padding([.trailing,.vertical],4)
-                                    Spacer()
-                                    RatingView(
-                                        currentRating: .constant(Float(data.instanceRating)),
-                                        enableEditing: false,
-                                        starFont: .subheadline
+                        ScrollView {
+                            ForEach(vm.peerInstanceModel, id: \.peerInstanceId){ data in
+                                NavigationLink(
+                                    destination: {
+                                    EditPeerInstanceView(
+                                        peerModel: vm.peerModel,
+                                        isUpdate: true,
+                                        peerInstanceModel: data,
+                                        coreDataHandler: vm.coreDataHandler
                                     )
-                                }
-                            })
-                            .tint(.clear)
+                                }, label: {
+                                    HStack {
+                                        Text("\(CommonFunctions.formattedInstanceDate(data.instanceDate))")
+                                            .foregroundColor(.accentColor)
+                                            .font(.subheadline)
+                                            .padding([.trailing,.vertical],4)
+                                        Spacer()
+                                        RatingView(
+                                            currentRating: .constant(Float(data.instanceRating)),
+                                            enableEditing: false,
+                                            starFont: .subheadline
+                                        )
+                                    }
+                                })
+                                .id(UUID())
+                                .tint(.clear)
+                            }
                         }
+                        Spacer()
                     }
                     
                     Spacer()
@@ -61,6 +65,14 @@ struct PeerInstanceListView: View {
             } else {
                 DataUnavailableView(noDataType: .instanceData)
             }
+        }
+        .frame(height: 300)
+        .padding(.horizontal)
+        .background{
+            RoundedRectangle(cornerRadius: 0)
+                .foregroundStyle(
+                    LinearGradient(gradient: Gradient(colors: [.clear, .secondary.opacity(0.2)]), startPoint: .top, endPoint: .bottom)
+                )
         }
         .onAppear{
             vm.fetchPeerInstnaceData()

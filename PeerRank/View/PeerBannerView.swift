@@ -32,7 +32,7 @@ struct PeerBannerView: View {
                 VStack(spacing: 0) {
                     
                     ForEach(vm.peerDataModel.indices, id: \.self) { index in
-                        let starSize: CGFloat = 30 - (CGFloat(index) * 2)
+                        let starSize: CGFloat = 35 - (CGFloat(index) * 1.5)
                         HStack {
                             ZStack {
                                 Image(systemName: "star.fill")
@@ -50,7 +50,7 @@ struct PeerBannerView: View {
                                     .font(
                                         .system(
 //                                            size: 10
-                                            size: 15 - (CGFloat(index) * 2)
+                                            size: 15 - (CGFloat(index) * 1)
                                         )
                                     )
                                     .foregroundStyle(.black)

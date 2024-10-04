@@ -22,35 +22,38 @@ struct PeerTabView: View {
         )
     }
     var body: some View {
-        List(vm.peerModelData, id: \.peerId) { data in
-            NavigationLink {
-                PeerDetailView(
-                    peerDataModel: data,
-                    peerImage: data.peerImage,
-                    coreDataHandler: vm.coreDataHandler,
-                    localFileManager: vm.localFileManager
-                )
-                .onAppear{
-                    selectedPeerModel = data
+        Group {
+            List(vm.peerModelData, id: \.peerId) { data in
+                NavigationLink {
+                    PeerDetailView(
+                        peerDataModel: data,
+                        peerImage: data.peerImage,
+                        coreDataHandler: vm.coreDataHandler,
+                        localFileManager: vm.localFileManager,
+                        isDataDeleted: $vm.isSelectedDataDeleted
+                    )
+                    .onAppear{
+                        selectedPeerModel = data
+                    }
+                } label: {
+                    PeerListItemView(
+                        localFileManager: vm.localFileManager,
+                        peerDataModel: data,
+                        peerImage: data.peerImage
+                    )
                 }
-            } label: {
-                PeerListItemView(
-                    localFileManager: vm.localFileManager, 
-                    peerDataModel: data,
-                    peerImage: data.peerImage
-                )
             }
-        }
-        .task{
-            await vm.fetchData(lastSelectedPeerModel: selectedPeerModel)
-        }
-        .listStyle(.inset)
-        .navigationTitle("Peers")
-        .toolbar(content: {
-            ToolbarItem {
-                navigationLinkForAddingPeer
+            .task{
+                await vm.fetchData(lastSelectedPeerModel: selectedPeerModel)
             }
-        })
+            .listStyle(.inset)
+            .navigationTitle("Peers")
+            .toolbar(content: {
+                ToolbarItem {
+                    navigationLinkForAddingPeer
+                }
+            })
+        }
     }
     var navigationLinkForAddingPeer: some View {
         NavigationLink {

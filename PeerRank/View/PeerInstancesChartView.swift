@@ -24,7 +24,7 @@ struct PeerInstancesChartView: View {
     }
     var body: some View {
         Group{
-            if !vm.getRatingsFromChartData().isEmpty {
+            if vm.getRatingsFromChartData().count >= 3 {
                 VStack {
                     LineView(data: vm.getRatingsFromChartData(),style: chartStyle)
                         .frame(height: 280)
@@ -34,8 +34,6 @@ struct PeerInstancesChartView: View {
                             Link(destination: appPearUrl) {
                                 Text("Charts are Provied by AppPear Github")
                                     .font(.caption2)
-//                                    .padding(.trailing,8)
-                                    
                             }
                         }
                     }
@@ -43,7 +41,7 @@ struct PeerInstancesChartView: View {
                 }
                     
             } else {
-                Text("Not Enough Data Available")
+                DataUnavailableView(noDataType: .chartData)
             }
         }
         .onAppear{

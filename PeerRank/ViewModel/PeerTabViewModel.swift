@@ -14,7 +14,7 @@ class PeerTabViewModel: ObservableObject {
     @Published var peerModelData: [PeerModel] = []
     var coreDataHandler: CoreDataHandler
     var localFileManager: LocalFileManager
-    
+    @Published var isSelectedDataDeleted: Bool = false
     init(coreDataHandler: CoreDataHandler, localFileManager: LocalFileManager) {
         
         self.coreDataHandler = coreDataHandler
@@ -24,7 +24,7 @@ class PeerTabViewModel: ObservableObject {
     
     func fetchData(lastSelectedPeerModel: PeerModel?) async {
         
-        guard let lastSelectedPeerModel else {
+        guard let lastSelectedPeerModel, !isSelectedDataDeleted else {
             
             await fetchAllData()
             return
@@ -51,21 +51,22 @@ class PeerTabViewModel: ObservableObject {
     }
     
     func fetchAllData() async {
+        peerModelData = []
         let request: NSFetchRequest<PeerEntity> = PeerEntity.fetchRequest()
         do {
-            var data: [PeerModel] = []
+            
             let peerEntityData =  try coreDataHandler.viewContext.fetch(request)
             for entityData in peerEntityData {
-                let peerModelData =  PeerModel.mapEntityToModel(
+                let data =  PeerModel.mapEntityToModel(
                                             peerEntity: entityData,
                                             context: coreDataHandler.viewContext
                                     )
                 
-                data.append(
-                   peerModelData
+                peerModelData.append(
+                   data
                 )
             }
-            peerModelData = data
+            
             await mapImagesToPeer()
             
         } catch {

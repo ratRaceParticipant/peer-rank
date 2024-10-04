@@ -10,6 +10,7 @@ class EditPeerInstanceViewModel: ObservableObject {
     @Published var instanceRatingWeightage: Double = 1.0
     @Published var instanceRating: Float = 3.0
     @Published var peerInstanceModel: PeerInstanceModel
+    @Published var showDeleteConfirmation: Bool = false
     var peerModel: PeerModel
     var coreDataHandler: CoreDataHandler
     
@@ -33,7 +34,7 @@ class EditPeerInstanceViewModel: ObservableObject {
         
         
         let peerInstanceEntity = isUpdate ?
-        PeerInstanceModel.getEntityFromDataModelId(id: peerInstanceModel.peerInstanceId, viewContext: coreDataHandler.viewContext) :
+        getPeerInstanceEntity() :
         PeerInstanceEntity(context: coreDataHandler.viewContext)
         guard let peerEntity, let peerInstanceEntity else {
             print("error updating instance data \(peerInstanceModel.peerInstanceId)")
@@ -67,5 +68,16 @@ class EditPeerInstanceViewModel: ObservableObject {
         peerEntity.averageRating = averageRating
         peerInstanceEntity.averageRatingAtTimeOfInstance = averageRating
         coreDataHandler.saveData()
+    }
+    func getPeerInstanceEntity() -> PeerInstanceEntity? {
+        PeerInstanceModel.getEntityFromDataModelId(id: peerInstanceModel.peerInstanceId, viewContext: coreDataHandler.viewContext)
+    }
+    func deleteData(){
+        let peerInstanceEntity = getPeerInstanceEntity()
+        
+        guard let peerInstanceEntity else {
+            return
+        }
+        coreDataHandler.deleteData(entityToDelete: peerInstanceEntity)
     }
 }

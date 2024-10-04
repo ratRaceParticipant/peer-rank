@@ -60,6 +60,8 @@
 		83E2B5BE2CA030DE00928672 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E2B5BD2CA030DE00928672 /* CommonFunctions.swift */; };
 		83F26A6D2CAB1E85003933FF /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 83F26A6C2CAB1E85003933FF /* SwiftUICharts */; };
 		83F26A702CAD2538003933FF /* DataUnavailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F26A6F2CAD2538003933FF /* DataUnavailableView.swift */; };
+		83F26A762CAE7CF6003933FF /* AddPeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F26A752CAE7CF6003933FF /* AddPeerView.swift */; };
+		83F26A7A2CAE8019003933FF /* ParentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F26A792CAE8019003933FF /* ParentViewModel.swift */; };
 		83F773462CAAF35B0010ABFE /* PeerInstancesChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F773452CAAF35B0010ABFE /* PeerInstancesChartView.swift */; };
 		83F7734A2CAAF6030010ABFE /* PeerInstancesChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F773492CAAF6030010ABFE /* PeerInstancesChartViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -143,6 +145,8 @@
 		83954F0F2C830D2F000D7492 /* ContentFileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFileViewModel.swift; sourceTree = "<group>"; };
 		83E2B5BD2CA030DE00928672 /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
 		83F26A6F2CAD2538003933FF /* DataUnavailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUnavailableView.swift; sourceTree = "<group>"; };
+		83F26A752CAE7CF6003933FF /* AddPeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPeerView.swift; sourceTree = "<group>"; };
+		83F26A792CAE8019003933FF /* ParentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewModel.swift; sourceTree = "<group>"; };
 		83F773452CAAF35B0010ABFE /* PeerInstancesChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerInstancesChartView.swift; sourceTree = "<group>"; };
 		83F773492CAAF6030010ABFE /* PeerInstancesChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerInstancesChartViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -264,6 +268,7 @@
 				8316B1062CA969FB00D4511E /* PeerListView.swift */,
 				83F773452CAAF35B0010ABFE /* PeerInstancesChartView.swift */,
 				83F26A6F2CAD2538003933FF /* DataUnavailableView.swift */,
+				83F26A752CAE7CF6003933FF /* AddPeerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -283,6 +288,7 @@
 				8316B0D72CA7C42F00D4511E /* PeerBannerViewModel.swift */,
 				8316B1082CA96A1600D4511E /* PeerListViewModel.swift */,
 				83F773492CAAF6030010ABFE /* PeerInstancesChartViewModel.swift */,
+				83F26A792CAE8019003933FF /* ParentViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -446,6 +452,7 @@
 				83F7734A2CAAF6030010ABFE /* PeerInstancesChartViewModel.swift in Sources */,
 				832351E22C8C6A34008A7D1C /* CommonViews.swift in Sources */,
 				8306A14E2C95A0480062E14E /* PeerInstanceListView.swift in Sources */,
+				83F26A762CAE7CF6003933FF /* AddPeerView.swift in Sources */,
 				83F26A702CAD2538003933FF /* DataUnavailableView.swift in Sources */,
 				83954F052C82D65B000D7492 /* PeerRankDataModel.xcdatamodeld in Sources */,
 				8306A1502C95A18F0062E14E /* PeerInstanceListViewModel.swift in Sources */,
@@ -468,6 +475,7 @@
 				832351EA2C8C7885008A7D1C /* RatingWeightageView.swift in Sources */,
 				832351EE2C8CA576008A7D1C /* PeerListItemView.swift in Sources */,
 				8316B0D82CA7C42F00D4511E /* PeerBannerViewModel.swift in Sources */,
+				83F26A7A2CAE8019003933FF /* ParentViewModel.swift in Sources */,
 				8316B1072CA969FC00D4511E /* PeerListView.swift in Sources */,
 				832351FA2C8DCD18008A7D1C /* PeerTabViewModel.swift in Sources */,
 				83954EF22C82D612000D7492 /* PeerRankApp.swift in Sources */,

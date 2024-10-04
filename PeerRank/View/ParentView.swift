@@ -8,32 +8,64 @@
 import SwiftUI
 
 struct ParentView: View {
-    var localFileManager = LocalFileManager()
-    var coreDataHandler = CoreDataHandler()
+    var localFileManager: LocalFileManager
+    var coreDataHandler: CoreDataHandler
+    @StateObject var vm: ParentViewModel
+    @State var isDataNull: Bool = false
+    
+    init(
+        localFileManager: LocalFileManager = LocalFileManager(),
+        coreDataHandler: CoreDataHandler = CoreDataHandler()
+    ){
+        self.localFileManager = localFileManager
+        self.coreDataHandler = coreDataHandler
+        self._vm = StateObject(
+            wrappedValue: ParentViewModel(
+                coreDataHandler: coreDataHandler,
+                localFileManager: localFileManager
+            )
+        )
+    }
     var body: some View {
-        TabView {
-            NavigationStack {
-                HomeView(
-                    coreDataHandler: coreDataHandler,
-                    localFileManager: localFileManager
-                )
-            }
-                .tabItem {
-                    Label("Home", systemImage: "house")
+        Group {
+            if isDataNull {
+                NavigationStack {
+                    AddPeerView(
+                        localFileManager: localFileManager,
+                        coreDataHandler: coreDataHandler,
+                        isDataNull: $isDataNull
+                    )
                 }
-            NavigationStack {
-                PeerTabView(
-                    localFileManager: localFileManager,
-                    coreDataHandler: coreDataHandler
-                )
-            }
-            .tabItem {
-                Label("Peers", systemImage: "person")
-            }
-            ContentView(coreDataHandler: coreDataHandler)
-                .tabItem {
-                    Label("Admin", systemImage: "person")
+            } else {
+                TabView {
+                    NavigationStack {
+                        HomeView(
+                            coreDataHandler: coreDataHandler,
+                            localFileManager: localFileManager
+                        )
+                    }
+                        .tabItem {
+                            Label("Home", systemImage: "house")
+                        }
+                    NavigationStack {
+                        PeerTabView(
+                            localFileManager: localFileManager,
+                            coreDataHandler: coreDataHandler
+                        )
+                    }
+                    .tabItem {
+                        Label("Peers", systemImage: "person")
+                    }
+                    ContentView(coreDataHandler: coreDataHandler)
+                        .tabItem {
+                            Label("Admin", systemImage: "person")
+                        }
                 }
+            }
+        }
+        
+        .onAppear{
+            isDataNull = vm.isDataNull()
         }
     }
 }

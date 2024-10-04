@@ -33,15 +33,7 @@ struct EditPeerInstanceView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading,spacing: 20.0) {
-                
-                DatePicker(
-                    selection: $vm.peerInstanceModel.instanceDate, displayedComponents: [.date,.hourAndMinute]
-                ) {
-                    Text("Instance Date & Time")
-                        .fontWeight(.bold)
-                }
-                
-                .datePickerStyle(.compact)
+                instanceDateSelectorView
                 RatingView(
                     currentRating: $vm.instanceRating,
                     enableEditing: true
@@ -69,9 +61,45 @@ struct EditPeerInstanceView: View {
             }
             .padding()
         }
-        
+        .toolbar(content: {
+            if isUpdate {
+                ToolbarItem {
+                    deleteIcon
+                }
+            }
+        })
+        .alert("Are you sure you want to delete?", isPresented: $vm.showDeleteConfirmation, actions: {
+            Button("Yes", role: .destructive){
+                vm.deleteData()
+                presentationMode.wrappedValue.dismiss()
+            }
+        }, message: {
+            Text("This action cannot be undone.")
+        })
         .navigationTitle(isUpdate ? "Edit Instance" : "Add Instance")
         .navigationBarTitleDisplayMode(.inline)
+    }
+    var deleteIcon: some View {
+        Button {
+            vm.showDeleteConfirmation = true
+        } label: {
+            Label(
+                title: { Text("Delete") },
+                icon: { Image(systemName: "trash") }
+            )
+            
+        }
+        .tint(.red)
+    }
+    var instanceDateSelectorView: some View {
+        DatePicker(
+            selection: $vm.peerInstanceModel.instanceDate, displayedComponents: [.date,.hourAndMinute]
+        ) {
+            Text("Instance Date & Time")
+                .fontWeight(.bold)
+        }
+        
+        .datePickerStyle(.compact)
     }
 }
 
@@ -79,7 +107,7 @@ struct EditPeerInstanceView: View {
     NavigationStack {
         EditPeerInstanceView(
             peerModel: PeerModel.emptyData,
-            coreDataHandler: CoreDataHandler()
+            isUpdate: true, coreDataHandler: CoreDataHandler()
         )
     }
 }

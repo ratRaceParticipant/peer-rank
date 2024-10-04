@@ -37,7 +37,7 @@ class CoreDataHandler {
         do {
             try viewContext.save()
         } catch {
-            fatalError("Error Saving data")
+            return
         }
     }
     

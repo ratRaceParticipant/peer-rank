@@ -11,12 +11,14 @@ struct PeerDetailView: View {
     @State var peerDataModel: PeerModel
     @StateObject var vm: PeerDetailViewModel
     @State var peerImage: UIImage?
-    
+    @Binding var isDataDeleted: Bool
+    @Environment(\.presentationMode) var presentationMode
     init(
         peerDataModel: PeerModel = PeerModel.sampleData[0],
         peerImage: UIImage? = nil,
         coreDataHandler: CoreDataHandler,
-        localFileManager: LocalFileManager
+        localFileManager: LocalFileManager,
+        isDataDeleted: Binding<Bool> = .constant(false)
     ){
         self.peerDataModel = peerDataModel
         self.peerImage = peerImage
@@ -26,6 +28,7 @@ struct PeerDetailView: View {
                 localFileManager: localFileManager
             )
         )
+        self._isDataDeleted = isDataDeleted
     }
     
     var body: some View {
@@ -39,24 +42,55 @@ struct PeerDetailView: View {
                 }
                 .padding(.horizontal)
                 navigationLinkToAddInstanceView
-                VStack{
+                TabView {
+                    PeerInstanceListView(
+                        peerModel: peerDataModel,
+                        coreDataHandler: vm.coreDataHandler
+                    )
                     PeerInstancesChartView(coreDataHandler: vm.coreDataHandler, peerData: peerDataModel)
+                        .padding(.horizontal)
                 }
-                .padding([.horizontal,.bottom])
-                PeerInstanceListView(
-                    peerModel: peerDataModel,
-                    coreDataHandler: vm.coreDataHandler
-                )
-                .padding([.horizontal,.top])
+                
+                .tabViewStyle(.page)
+                .frame(height: 300)
                 Spacer()
             }
+            .alert("Are you sure you want to delete?", isPresented: $vm.showDeleteConfirmation, actions: {
+                Button("Yes", role: .destructive){
+                    vm.deleteData(peerDataModel: peerDataModel)
+                    isDataDeleted = true
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }, message: {
+                Text("This action cannot be undone.")
+            })
+            
             .onAppear{
                 vm.getAverageRatingToDisplay(peerModel: peerDataModel)
                 peerDataModel = vm.getUpdatedPeerModelData(peerModel: peerDataModel)
             }
         }
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarTrailing) {
+                deleteIcon
+            }
+        })
         .ignoresSafeArea(.container,edges: .top)
         
+    }
+    
+    var deleteIcon: some View {
+        Button {
+            vm.showDeleteConfirmation = true
+            
+        } label: {
+            Label(
+                title: { Text("Delete") },
+                icon: { Image(systemName: "trash") }
+            )
+            
+        }
+        .tint(.red)
     }
     
     var peerImageView: some View {
@@ -78,7 +112,6 @@ struct PeerDetailView: View {
                         Text(peerDataModel.initials)
                             .font(.system(size: 150))
                     }
-                    
                     .foregroundStyle(PeerType(rawValue: peerDataModel.type)?.getBgColor() ?? .clear)
             }
         }
@@ -87,7 +120,7 @@ struct PeerDetailView: View {
     var nameAndRatingView: some View {
         VStack(alignment: .leading){
             Text(peerDataModel.name)
-                .font(.title2)
+                
                 .fontWeight(.bold)
                 
            
@@ -141,12 +174,16 @@ struct PeerDetailView: View {
             )
             
         }
+        .id(UUID())
         .padding([.horizontal,.top])
     }
 }
 
 #Preview {
-    PeerDetailView(
-        coreDataHandler: CoreDataHandler(), localFileManager: LocalFileManager()
-    )
+    NavigationStack {
+        PeerDetailView(
+            coreDataHandler: CoreDataHandler(), localFileManager: LocalFileManager(), isDataDeleted: .constant(false)
+            
+        )
+    }
 }
