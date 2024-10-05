@@ -39,14 +39,19 @@ struct PeerListItemView: View {
                 Text(peerDataModel.name)
                     .fontWeight(.bold)
                     .font(.title3)
-                RatingView(
-                    currentRating: .constant(peerDataModel.averageRating),
-                    enableEditing: false,
-                    starFont: .title3
-                )
+                if !peerDataModel.enableFaceId {
+                    RatingView(
+                        currentRating: .constant(peerDataModel.averageRating),
+                        enableEditing: false,
+                        starFont: .title3
+                    )
+                }
                 
             }
             Spacer()
+            if peerDataModel.enableFaceId {
+                Image(systemName: "lock.fill")
+            }
             
         }
 //        .padding(.horizontal,8)

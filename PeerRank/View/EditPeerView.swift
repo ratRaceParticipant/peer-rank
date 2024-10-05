@@ -62,6 +62,8 @@ struct EditPeerView: View {
                 .padding()
                 RatingWeightageView(ratingWeightage: $vm.peerRatingWeightage)
                     .padding(.horizontal)
+                Toggleview(label: "Enable Face Id for this Peer?", isToggleOn: $vm.peerModel.enableFaceId)
+                    .padding([.horizontal,.bottom])
                 Spacer()
                 HStack {
                     Spacer()

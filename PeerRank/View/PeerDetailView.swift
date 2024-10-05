@@ -32,50 +32,60 @@ struct PeerDetailView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                peerImageView
-                HStack {
-                    nameAndRatingView
-                    Spacer()
-                    navigationLinkToEditView
-                }
-                .padding(.horizontal)
-                navigationLinkToAddInstanceView
-                TabView {
-                    PeerInstanceListView(
-                        peerModel: peerDataModel,
-                        coreDataHandler: vm.coreDataHandler
-                    )
-                    PeerInstancesChartView(coreDataHandler: vm.coreDataHandler, peerData: peerDataModel)
+        Group {
+            if vm.isUnlocked {
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        peerImageView
+                        HStack {
+                            nameAndRatingView
+                            Spacer()
+                            navigationLinkToEditView
+                        }
                         .padding(.horizontal)
+                        navigationLinkToAddInstanceView
+                        TabView {
+                            PeerInstanceListView(
+                                peerModel: peerDataModel,
+                                coreDataHandler: vm.coreDataHandler
+                            )
+                            PeerInstancesChartView(coreDataHandler: vm.coreDataHandler, peerData: peerDataModel)
+                                .padding(.horizontal)
+                        }
+                        
+                        .tabViewStyle(.page)
+                        .frame(height: 300)
+                        Spacer()
+                    }
+                    
+                    .alert("Are you sure you want to delete?", isPresented: $vm.showDeleteConfirmation, actions: {
+                        Button("Yes", role: .destructive){
+                            vm.deleteData(peerDataModel: peerDataModel)
+                            isDataDeleted = true
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                    }, message: {
+                        Text("This action cannot be undone.")
+                    })
+                    .toolbar(content: {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            deleteIcon
+                        }
+                    })
                 }
-                
-                .tabViewStyle(.page)
-                .frame(height: 300)
-                Spacer()
-            }
-            .alert("Are you sure you want to delete?", isPresented: $vm.showDeleteConfirmation, actions: {
-                Button("Yes", role: .destructive){
-                    vm.deleteData(peerDataModel: peerDataModel)
-                    isDataDeleted = true
-                    presentationMode.wrappedValue.dismiss()
-                }
-            }, message: {
-                Text("This action cannot be undone.")
-            })
-            
-            .onAppear{
-                vm.getAverageRatingToDisplay(peerModel: peerDataModel)
-                peerDataModel = vm.getUpdatedPeerModelData(peerModel: peerDataModel)
+                .ignoresSafeArea(.container,edges: .top)
+            } else {
+                DataUnavailableView(noDataType: .peerDetailDataAuthenticationFailed)
             }
         }
-        .toolbar(content: {
-            ToolbarItem(placement: .topBarTrailing) {
-                deleteIcon
-            }
-        })
-        .ignoresSafeArea(.container,edges: .top)
+        
+        
+        .onAppear{
+            vm.authenticate(peerDataModel: peerDataModel)
+            vm.getAverageRatingToDisplay(peerModel: peerDataModel)
+            peerDataModel = vm.getUpdatedPeerModelData(peerModel: peerDataModel)
+        }
+        
         
     }
     
@@ -159,6 +169,7 @@ struct PeerDetailView: View {
             )
             
         }
+        .id(UUID())
     }
     var navigationLinkToAddInstanceView: some View {
         NavigationLink {

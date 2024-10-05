@@ -74,6 +74,7 @@ enum DataUnavailable{
     case kpiData
     case peerData
     case instanceData
+    case peerDetailDataAuthenticationFailed
     func getDataUnavailableMap() -> [String:String]{
         switch self {
         case .chartData:
@@ -99,6 +100,12 @@ enum DataUnavailable{
                 "title": "No Data Available",
                 "icon": "square.grid.3x3.topleft.filled",
                 "description": "Added instances will be visible here"
+            ]
+        case .peerDetailDataAuthenticationFailed:
+            return [
+                "title": "Data Hidden",
+                "icon": "person.fill.xmark",
+                "description": "Authentication Failed"
             ]
         }
     }

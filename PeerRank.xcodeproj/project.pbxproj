@@ -45,6 +45,7 @@
 		832351F62C8D8248008A7D1C /* PeerDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351F52C8D8248008A7D1C /* PeerDetailViewModel.swift */; };
 		832351F82C8DC9DC008A7D1C /* PeerListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351F72C8DC9DC008A7D1C /* PeerListItemViewModel.swift */; };
 		832351FA2C8DCD18008A7D1C /* PeerTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351F92C8DCD18008A7D1C /* PeerTabViewModel.swift */; };
+		834254E02CB11D9E00A696B2 /* Toggleview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834254DF2CB11D9E00A696B2 /* Toggleview.swift */; };
 		838A38912C95DDEF00BE0381 /* EditPeerInstanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A38902C95DDEF00BE0381 /* EditPeerInstanceView.swift */; };
 		838A38932C95E1C700BE0381 /* EditPeerInstanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A38922C95E1C700BE0381 /* EditPeerInstanceViewModel.swift */; };
 		83954EF22C82D612000D7492 /* PeerRankApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954EF12C82D612000D7492 /* PeerRankApp.swift */; };
@@ -130,6 +131,7 @@
 		832351F52C8D8248008A7D1C /* PeerDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerDetailViewModel.swift; sourceTree = "<group>"; };
 		832351F72C8DC9DC008A7D1C /* PeerListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerListItemViewModel.swift; sourceTree = "<group>"; };
 		832351F92C8DCD18008A7D1C /* PeerTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerTabViewModel.swift; sourceTree = "<group>"; };
+		834254DF2CB11D9E00A696B2 /* Toggleview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toggleview.swift; sourceTree = "<group>"; };
 		838A38902C95DDEF00BE0381 /* EditPeerInstanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPeerInstanceView.swift; sourceTree = "<group>"; };
 		838A38922C95E1C700BE0381 /* EditPeerInstanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPeerInstanceViewModel.swift; sourceTree = "<group>"; };
 		83954EEE2C82D612000D7492 /* PeerRank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeerRank.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -269,6 +271,7 @@
 				83F773452CAAF35B0010ABFE /* PeerInstancesChartView.swift */,
 				83F26A6F2CAD2538003933FF /* DataUnavailableView.swift */,
 				83F26A752CAE7CF6003933FF /* AddPeerView.swift */,
+				834254DF2CB11D9E00A696B2 /* Toggleview.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				832351FA2C8DCD18008A7D1C /* PeerTabViewModel.swift in Sources */,
 				83954EF22C82D612000D7492 /* PeerRankApp.swift in Sources */,
 				8316B1092CA96A1600D4511E /* PeerListViewModel.swift in Sources */,
+				834254E02CB11D9E00A696B2 /* Toggleview.swift in Sources */,
 				832351DA2C8C0F41008A7D1C /* PeerPhotoView.swift in Sources */,
 				83954F0C2C82DBBE000D7492 /* Enums.swift in Sources */,
 				83E2B5BE2CA030DE00928672 /* CommonFunctions.swift in Sources */,
@@ -607,7 +611,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -664,7 +668,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -687,11 +691,14 @@
 				DEVELOPMENT_TEAM = 53U5W2PJ2Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Peer Rank";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Authentication for locked Peers.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -699,9 +706,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ratRaceParticipant.PeerRank;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -718,11 +728,14 @@
 				DEVELOPMENT_TEAM = 53U5W2PJ2Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Peer Rank";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Authentication for locked Peers.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -730,9 +743,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ratRaceParticipant.PeerRank;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
