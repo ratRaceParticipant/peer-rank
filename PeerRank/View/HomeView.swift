@@ -22,10 +22,18 @@ struct HomeView: View {
     }
     var body: some View {
         VStack(alignment: .leading) {
-            HStack(spacing: 0) {
-                
-                PeerBannerView(coreDataHandler: vm.coreDataHandler)
-                PeerBannerView(coreDataHandler: vm.coreDataHandler,fetchTopRatedPeers: false)
+            Group {
+                if vm.peerDataModel.count >= 3 {
+                    HStack(spacing: 0) {
+                        PeerBannerView(coreDataHandler: vm.coreDataHandler)
+                        PeerBannerView(coreDataHandler: vm.coreDataHandler,fetchTopRatedPeers: false)
+                    }
+                } else {
+                    DataUnavailableView(noDataType: .kpiData)
+                }
+            }
+            .onAppear{
+                vm.fetchPeerData()
             }
             Text("Recent Peers")
                 .font(.subheadline)

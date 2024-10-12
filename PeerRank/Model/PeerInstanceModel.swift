@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreData
-struct PeerInstanceModel: Identifiable{
+struct PeerInstanceModel: Identifiable, Codable{
     init(id: UUID,
          peerInstanceId: String,
          instanceDate: Date,

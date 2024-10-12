@@ -23,36 +23,43 @@ struct PeerTabView: View {
     }
     var body: some View {
         Group {
-            List(vm.peerModelData, id: \.peerId) { data in
-                NavigationLink {
-                    PeerDetailView(
-                        peerDataModel: data,
-                        peerImage: data.peerImage,
-                        coreDataHandler: vm.coreDataHandler,
-                        localFileManager: vm.localFileManager,
-                        isDataDeleted: $vm.isSelectedDataDeleted
-                    )
-                    .onAppear{
-                        selectedPeerModel = data
+            if !vm.peerModelData.isEmpty {
+                List(vm.peerModelData, id: \.peerId) { data in
+                    NavigationLink {
+                        PeerDetailView(
+                            peerDataModel: data,
+                            peerImage: data.peerImage,
+                            coreDataHandler: vm.coreDataHandler,
+                            localFileManager: vm.localFileManager,
+                            isDataDeleted: $vm.isSelectedDataDeleted
+                        )
+                        .onAppear{
+                            selectedPeerModel = data
+                        }
+                    } label: {
+                        PeerListItemView(
+                            localFileManager: vm.localFileManager,
+                            peerDataModel: data,
+                            peerImage: data.peerImage
+                        )
                     }
-                } label: {
-                    PeerListItemView(
-                        localFileManager: vm.localFileManager,
-                        peerDataModel: data,
-                        peerImage: data.peerImage
-                    )
                 }
+                
+                .listStyle(.inset)
+                
+            } else {
+                DataUnavailableView(noDataType: .peerData)
             }
-            .task{
-                await vm.fetchData(lastSelectedPeerModel: selectedPeerModel)
+            
+        }
+        .navigationTitle("Peers")
+        .toolbar(content: {
+            ToolbarItem {
+                navigationLinkForAddingPeer
             }
-            .listStyle(.inset)
-            .navigationTitle("Peers")
-            .toolbar(content: {
-                ToolbarItem {
-                    navigationLinkForAddingPeer
-                }
-            })
+        })
+        .task{
+            await vm.fetchData(lastSelectedPeerModel: selectedPeerModel)
         }
     }
     var navigationLinkForAddingPeer: some View {

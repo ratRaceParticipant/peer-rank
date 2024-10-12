@@ -66,12 +66,12 @@ struct PeerInstanceListView: View {
                 DataUnavailableView(noDataType: .instanceData)
             }
         }
-        .frame(height: 300)
+        
         .padding(.horizontal)
         .background{
             RoundedRectangle(cornerRadius: 0)
                 .foregroundStyle(
-                    LinearGradient(gradient: Gradient(colors: [.clear, .secondary.opacity(0.2)]), startPoint: .top, endPoint: .bottom)
+                    LinearGradient(gradient: Gradient(colors: [.clear, .secondary.opacity(0.1)]), startPoint: .top, endPoint: .bottom)
                 )
         }
         .onAppear{

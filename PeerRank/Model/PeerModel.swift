@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 import SwiftUI
 
-struct PeerModel: Identifiable{
+struct PeerModel: Identifiable, Codable{
     var id: UUID
     var peerId: String
     var initials: String
@@ -39,6 +39,10 @@ struct PeerModel: Identifiable{
         self.enableFaceId = enableFaceId
     }
     static let emptyData = PeerModel(id: UUID(), peerId: UUID().uuidString, initials: "", name: "", photoId: "", type: 1, baseRating: 3, baseRatingWeightage: 5, averageRating: 3.0, peerInstance:  [])
+    
+    enum CodingKeys: String, CodingKey {
+        case id, peerId, initials, name, photoId, type, baseRating, baseRatingWeightage, peerInstance, averageRating, enableFaceId
+    }
 }
 
 extension PeerModel {

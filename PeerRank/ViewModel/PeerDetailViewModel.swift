@@ -47,7 +47,7 @@ class PeerDetailViewModel: ObservableObject {
     }
     
     func authenticate(peerDataModel: PeerModel){
-        if !peerDataModel.enableFaceId {
+        if !peerDataModel.enableFaceId || isUnlocked {
             isUnlocked = true
             return
         }

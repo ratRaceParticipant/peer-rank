@@ -44,17 +44,12 @@ struct PeerDetailView: View {
                         }
                         .padding(.horizontal)
                         navigationLinkToAddInstanceView
-                        TabView {
-                            PeerInstanceListView(
-                                peerModel: peerDataModel,
-                                coreDataHandler: vm.coreDataHandler
-                            )
-                            PeerInstancesChartView(coreDataHandler: vm.coreDataHandler, peerData: peerDataModel)
-                                .padding(.horizontal)
-                        }
-                        
-                        .tabViewStyle(.page)
-                        .frame(height: 300)
+                        PeerInstanceListView(
+                            peerModel: peerDataModel,
+                            coreDataHandler: vm.coreDataHandler
+                        )
+                        PeerInstancesChartView(coreDataHandler: vm.coreDataHandler, peerData: peerDataModel)
+                            .padding(.horizontal)
                         Spacer()
                     }
                     
@@ -186,7 +181,7 @@ struct PeerDetailView: View {
             
         }
         .id(UUID())
-        .padding([.horizontal,.top])
+        .padding()
     }
 }
 
