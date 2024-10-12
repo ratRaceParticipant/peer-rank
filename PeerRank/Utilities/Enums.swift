@@ -111,3 +111,64 @@ enum DataUnavailable{
     }
     
 }
+enum DataManagmentError {
+    case exportJsonConversionError
+    case tempFileDeletionError
+    case importJsonConversionError
+    func getMessage() -> String{
+        switch self {
+        case .exportJsonConversionError:
+            return "Error in converting Json for exporting"
+        case .tempFileDeletionError:
+            return "Error in deleting temporary file"
+        case .importJsonConversionError:
+            return "Error in importing Json Data"
+        }
+    }
+}
+
+enum LoadingStatus {
+    case notStarted
+    case inprogress
+    case complete
+    case failed
+    
+    func getColor() -> Color{
+        switch self{
+        case .inprogress:
+            return .yellow
+        case .complete:
+            return .green
+        case .failed:
+            return .red
+        default :
+            return .gray
+        }
+    }
+    
+    func getIcon() -> String {
+        switch self{
+        case .inprogress:
+            return "checkmark"
+        case .complete:
+            return "checkmark"
+        case .failed:
+            return "multiply"
+        default:
+            return "exclamationmark"
+        }
+    }
+    
+    func getStatus() -> String {
+        switch self{
+        case .inprogress:
+            return "In Progress"
+        case .complete:
+            return "Success"
+        case .failed:
+            return "Failed"
+        case .notStarted:
+            return "Not Started"
+        }
+    }
+}

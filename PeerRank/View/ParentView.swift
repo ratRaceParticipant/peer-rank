@@ -38,11 +38,16 @@ struct ParentView: View {
                 }
             } else {
                 TabView {
-                    NavigationStack {
-                        HomeView(
-                            coreDataHandler: coreDataHandler,
-                            localFileManager: localFileManager
-                        )
+                    ZStack {
+//                        CircleDesignView()
+                        NavigationStack {
+                            HomeView(
+                                coreDataHandler: coreDataHandler,
+                                localFileManager: localFileManager
+                            )
+                        }
+                        .background(Color.clear)
+                        
                     }
                         .tabItem {
                             Label("Home", systemImage: "house")
@@ -56,10 +61,12 @@ struct ParentView: View {
                     .tabItem {
                         Label("Peers", systemImage: "person")
                     }
-                    ContentView(coreDataHandler: coreDataHandler)
-                        .tabItem {
-                            Label("Admin", systemImage: "person")
-                        }
+                    NavigationStack {
+                        SettingsView(coreDataHandler: coreDataHandler)
+                    }
+                    .tabItem {
+                        Label("Settings", systemImage: "gear")
+                    }
                 }
             }
         }

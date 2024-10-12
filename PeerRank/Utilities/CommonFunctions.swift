@@ -149,4 +149,17 @@ class CommonFunctions {
             formatter.dateFormat = "dd/MM/yyyy 'at' h:mm a"
             return formatter.string(from: date)
     }
+    static func deleteAllPeerData(coreDataHandler: CoreDataHandler) {
+        do {
+            let request: NSFetchRequest<PeerEntity> = PeerEntity.fetchRequest()
+            let fetchedPeerEntityData =  try coreDataHandler.viewContext.fetch(request)
+            for data in fetchedPeerEntityData {
+                
+                coreDataHandler.viewContext.delete(data)
+            }
+            coreDataHandler.saveData()
+        } catch {
+            print("error")
+            }
+        }
 }

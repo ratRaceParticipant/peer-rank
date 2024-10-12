@@ -15,9 +15,9 @@ class CoreDataHandler {
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: persistentContainerName)
-//        let url = URL.getDatabaseStoreUrl(for: Constants.appGroup, databaseName: persistentContainerName)
-//        let storeDescription = NSPersistentStoreDescription(url: url)
-//        container.persistentStoreDescriptions = [storeDescription]
+        let url = URL.getDatabaseStoreUrl(for: Constants.appGroup, databaseName: persistentContainerName)
+        let storeDescription = NSPersistentStoreDescription(url: url)
+        container.persistentStoreDescriptions = [storeDescription]
         container.loadPersistentStores { _, error in
             if let error = error {
                 print("error: \(error)")
