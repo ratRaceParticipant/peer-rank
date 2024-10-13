@@ -12,6 +12,7 @@ class SettingViewModel: ObservableObject {
     @Published var showShareSheet: Bool = false
     @Published var presentFilePicker: Bool = false
     @Published var importingStatus: LoadingStatus = .notStarted
+    @Published var isExporting: Bool = false
     init(coreDataHandler: CoreDataHandler) {
         self.coreDataHandler = coreDataHandler
     }
@@ -26,10 +27,13 @@ class SettingViewModel: ObservableObject {
                     let pathUrl = tempUrl.appending(path: Constants.exportedJsonTempFileName)
                     try jsonString.write(to: pathUrl, atomically: true, encoding: .utf8)
                     exportUrl = pathUrl
+                    
                     showShareSheet = true
                 }
             }
+            
         } catch {
+            
             print(DataManagmentError.exportJsonConversionError.getMessage(),error)
         }
     }
@@ -64,6 +68,7 @@ class SettingViewModel: ObservableObject {
                 importingStatus = .failed
                 return
             }
+            
             importDataFromJsonFile(url[0])
             
         case .failure(let faliure):

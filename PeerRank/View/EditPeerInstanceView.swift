@@ -93,7 +93,9 @@ struct EditPeerInstanceView: View {
     }
     var instanceDateSelectorView: some View {
         DatePicker(
-            selection: $vm.peerInstanceModel.instanceDate, displayedComponents: [.date,.hourAndMinute]
+            selection: $vm.peerInstanceModel.instanceDate,
+            in: ...Date(),
+            displayedComponents: [.date,.hourAndMinute]
         ) {
             Text("Instance Date & Time")
                 .fontWeight(.bold)

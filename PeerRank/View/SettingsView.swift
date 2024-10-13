@@ -46,10 +46,13 @@ struct SettingsView: View {
             }
             PopupView(loadingStatus: vm.importingStatus)
                 .scaleEffect(vm.importingStatus == .notStarted ? 0 : 1)
+            
         }
         .sheet(isPresented: $vm.showShareSheet, onDismiss: {
             vm.deleteTempFile()
+           
         }, content: {
+            
             CustomShareSheetView(url: $vm.exportUrl)
         })
         .fileImporter(
@@ -81,9 +84,16 @@ struct SettingsView: View {
     }
     var exportButton: some View {
         Button {
+            vm.isExporting = true
             vm.exportDataToJsonFile()
+            vm.isExporting = false
+           
         } label: {
-            Text("Export Data")
+            if vm.isExporting {
+                ProgressView()
+            } else {
+                Text("Export Data")
+            }
         }
         
     }

@@ -54,6 +54,7 @@
 		83954F0C2C82DBBE000D7492 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954F0B2C82DBBE000D7492 /* Enums.swift */; };
 		83954F0E2C830CE3000D7492 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954F0D2C830CE3000D7492 /* CoreDataHandler.swift */; };
 		83954F102C830D2F000D7492 /* ContentFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954F0F2C830D2F000D7492 /* ContentFileViewModel.swift */; };
+		83CB1C252CBC2D9100EB5E0C /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 83CB1C242CBC2D9100EB5E0C /* image.png */; };
 		83E2B5BE2CA030DE00928672 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E2B5BD2CA030DE00928672 /* CommonFunctions.swift */; };
 		83F26A6D2CAB1E85003933FF /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 83F26A6C2CAB1E85003933FF /* SwiftUICharts */; };
 		83F26A702CAD2538003933FF /* DataUnavailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F26A6F2CAD2538003933FF /* DataUnavailableView.swift */; };
@@ -79,6 +80,7 @@
 /* Begin PBXFileReference section */
 		8306A14D2C95A0480062E14E /* PeerInstanceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerInstanceListView.swift; sourceTree = "<group>"; };
 		8306A14F2C95A18F0062E14E /* PeerInstanceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerInstanceListViewModel.swift; sourceTree = "<group>"; };
+		8308DEA72CBC188D0012D825 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8316B0D12CA7C34300D4511E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		8316B0D32CA7C36900D4511E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		8316B0D52CA7C40000D4511E /* PeerBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerBannerView.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		83954F0B2C82DBBE000D7492 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		83954F0D2C830CE3000D7492 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		83954F0F2C830D2F000D7492 /* ContentFileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFileViewModel.swift; sourceTree = "<group>"; };
+		83CB1C242CBC2D9100EB5E0C /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
 		83E2B5BD2CA030DE00928672 /* CommonFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
 		83F26A6F2CAD2538003933FF /* DataUnavailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUnavailableView.swift; sourceTree = "<group>"; };
 		83F26A752CAE7CF6003933FF /* AddPeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPeerView.swift; sourceTree = "<group>"; };
@@ -172,6 +175,7 @@
 				8316B0EA2CA8572900D4511E /* PeerRankWidget.swift */,
 				8316B0EC2CA8572900D4511E /* AppIntent.swift */,
 				8316B0EE2CA8572B00D4511E /* Assets.xcassets */,
+				83CB1C242CBC2D9100EB5E0C /* image.png */,
 				8316B0F02CA8572B00D4511E /* Info.plist */,
 			);
 			path = PeerRankWidget;
@@ -207,6 +211,7 @@
 		83954EF02C82D612000D7492 /* PeerRank */ = {
 			isa = PBXGroup;
 			children = (
+				8308DEA72CBC188D0012D825 /* Info.plist */,
 				8316B0FA2CA8592300D4511E /* PeerRank.entitlements */,
 				83954F062C82D88F000D7492 /* Model */,
 				83954F022C82D637000D7492 /* Utilities */,
@@ -378,6 +383,7 @@
 				83954EF92C82D614000D7492 /* Preview Assets.xcassets in Resources */,
 				834254E22CB17B1300A696B2 /* PeerRankLaunchScreen.storyboard in Resources */,
 				83954EF62C82D614000D7492 /* Assets.xcassets in Resources */,
+				83CB1C252CBC2D9100EB5E0C /* image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,12 +584,13 @@
 				DEVELOPMENT_TEAM = Z6F6N3ADPX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PeerRank/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Peer Rank";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Authentication for locked Peers.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = PeerRankLaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -619,12 +626,13 @@
 				DEVELOPMENT_TEAM = Z6F6N3ADPX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PeerRank/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Peer Rank";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Authentication for locked Peers.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = PeerRankLaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
