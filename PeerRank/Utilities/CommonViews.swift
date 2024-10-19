@@ -34,4 +34,15 @@ class CommonViews {
             )
             .frame(height: 100)
     }
+    static func buttonLabel(buttonText: String = "Save") -> some View {
+        Text(buttonText)
+            .tint(.white)
+            .fontWeight(.bold)
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(
+                Color.accentColor
+            )
+            .cornerRadius(10)
+    }
 }

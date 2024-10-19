@@ -117,11 +117,18 @@ class CommonFunctions {
         if peerDataModel.name.isEmpty || peerDataModel.initials.isEmpty {
             return .requiredFieldsError
         }
-        if peerDataModel.name.count > 20 {
+        if peerDataModel.name.count > Constants.peerNameMaxLength {
             return .peerNameError
         }
-        if peerDataModel.initials.count > 3 {
+        if peerDataModel.initials.count > Constants.peerInitialsMaxLength {
             return .initialsError
+        }
+        return .noError
+    }
+    
+    static func validatePeerInstanceData(peerInstanceModel: PeerInstanceModel) -> ValidationStatus {
+        if peerInstanceModel.instanceDescription.count > Constants.peerInstanceDescriptionMaxLength {
+            return .peerInstanceDescriptionError
         }
         return .noError
     }
@@ -133,7 +140,7 @@ class CommonFunctions {
             initials = String(nameArray[0].prefix(2))
         } else {
             for word in nameArray {
-                if initials.count == Constants.maxInitialsLength {
+                if initials.count == Constants.peerInitialsMaxLength {
                     return initials.uppercased()
                 } else {
                     if let letter = word.first {

@@ -18,14 +18,16 @@ struct PeerDetailView: View {
         peerImage: UIImage? = nil,
         coreDataHandler: CoreDataHandler,
         localFileManager: LocalFileManager,
-        isDataDeleted: Binding<Bool> = .constant(false)
+        isDataDeleted: Binding<Bool> = .constant(false),
+        showDeleteAction: Bool = false
     ){
         self.peerDataModel = peerDataModel
         self.peerImage = peerImage
         self._vm = StateObject(
             wrappedValue: PeerDetailViewModel(
                 coreDataHandler: coreDataHandler,
-                localFileManager: localFileManager
+                localFileManager: localFileManager,
+                showDeleteAction: showDeleteAction
             )
         )
         self._isDataDeleted = isDataDeleted
@@ -63,8 +65,10 @@ struct PeerDetailView: View {
                         Text("This action cannot be undone.")
                     })
                     .toolbar(content: {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            deleteIcon
+                        if vm.showDeleteAction {
+                            ToolbarItem(placement: .topBarTrailing) {
+                                deleteIcon
+                            }
                         }
                     })
                 }
@@ -104,7 +108,9 @@ struct PeerDetailView: View {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
+                    
                     .frame(width: 400,height: 300)
+                    .clipped()
                     .overlay{
                         Color.black.opacity(0.3)
                     }

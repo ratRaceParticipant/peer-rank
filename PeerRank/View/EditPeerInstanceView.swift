@@ -7,6 +7,19 @@
 
 import SwiftUI
 
+
+extension Binding where Value == Bool {
+    init(value: Binding<ValidationStatus>) {
+        self.init {
+            return value.wrappedValue != ValidationStatus.noError
+        } set: { newValue in
+            if !newValue {
+                value.wrappedValue = ValidationStatus.noError
+            }
+        }
+    }
+}
+
 struct EditPeerInstanceView: View {
     
     var isUpdate: Bool
@@ -48,14 +61,15 @@ struct EditPeerInstanceView: View {
                 )
                     
                 HStack {
-                    Spacer()
-                    Button("Save") {
+//                    Spacer()
+                    Button {
                         vm.writeToPeerInstance(isUpdate: isUpdate)
-                        presentationMode.wrappedValue.dismiss()
+                        if vm.validationStatus == .noError {
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                    } label: {
+                        CommonViews.buttonLabel()
                     }
-                    .buttonStyle(.borderedProminent)
-                    .buttonBorderShape(.roundedRectangle)
-                    
                 }
                 Spacer()
             }
@@ -76,6 +90,14 @@ struct EditPeerInstanceView: View {
         }, message: {
             Text("This action cannot be undone.")
         })
+        .alert("Error!", isPresented: Binding(value: $vm.validationStatus), actions: {
+            Button("Ok") {
+                
+            }
+        }, message: {
+            Text(vm.validationStatus.getValidationError())
+        })
+        
         .navigationTitle(isUpdate ? "Edit Instance" : "Add Instance")
         .navigationBarTitleDisplayMode(.inline)
     }

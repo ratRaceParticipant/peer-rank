@@ -43,7 +43,7 @@ struct PeerInstanceListView: View {
                                     HStack {
                                         Text("\(CommonFunctions.formattedInstanceDate(data.instanceDate))")
                                             .foregroundColor(.accentColor)
-                                            .font(.subheadline)
+                                            .font(.headline)
                                             .padding([.trailing,.vertical],4)
                                         Spacer()
                                         RatingView(

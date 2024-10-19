@@ -14,9 +14,11 @@ class PeerDetailViewModel: ObservableObject {
     @Published var showDeleteConfirmation: Bool = false
     var coreDataHandler: CoreDataHandler
     var localFileManager: LocalFileManager
-    init(coreDataHandler: CoreDataHandler, localFileManager: LocalFileManager) {
+    var showDeleteAction: Bool
+    init(coreDataHandler: CoreDataHandler, localFileManager: LocalFileManager, showDeleteAction: Bool) {
         self.coreDataHandler = coreDataHandler
         self.localFileManager = localFileManager
+        self.showDeleteAction = showDeleteAction
     }
     
     func getAverageRatingToDisplay(peerModel: PeerModel){

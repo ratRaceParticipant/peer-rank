@@ -50,7 +50,7 @@ struct EditPeerView: View {
                         .padding(.leading)
                         
                     CommonViews.textField(bindingText: $vm.peerModel.initials, placeholderText: "Initials")
-                        .limitInputLength(value: $vm.peerModel.initials, length: Constants.maxInitialsLength)
+                        .limitInputLength(value: $vm.peerModel.initials, length: Constants.peerInitialsMaxLength)
                         .padding(.trailing)
                 }
                 Divider()
@@ -66,17 +66,17 @@ struct EditPeerView: View {
                     .padding([.horizontal,.bottom])
                 Spacer()
                 HStack {
-                    Spacer()
-                    Button("Save") {
+//                    Spacer()
+                    Button {
                         vm.writePeerData(isUpdate: isUpdate)
                         if !vm.showValidationError {
                             vm.updateParentVarData?(vm.peerModel, vm.peerImage)
                             presentationMode.wrappedValue.dismiss()
                         }
+                    } label: {
+                        CommonViews.buttonLabel()
                     }
-                    .buttonStyle(.borderedProminent)
-                    .padding(.trailing)
-                    .buttonBorderShape(.roundedRectangle)
+                    .padding(.horizontal)
                     
                 }
                 Spacer()

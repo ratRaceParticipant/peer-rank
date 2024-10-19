@@ -11,6 +11,7 @@ class EditPeerInstanceViewModel: ObservableObject {
     @Published var instanceRating: Float = 3.0
     @Published var peerInstanceModel: PeerInstanceModel
     @Published var showDeleteConfirmation: Bool = false
+    @Published var validationStatus: ValidationStatus = .noError
     var peerModel: PeerModel
     var coreDataHandler: CoreDataHandler
     
@@ -27,6 +28,13 @@ class EditPeerInstanceViewModel: ObservableObject {
     }
     
     func writeToPeerInstance(isUpdate: Bool = false) {
+        
+        validationStatus = CommonFunctions.validatePeerInstanceData(peerInstanceModel: peerInstanceModel)
+        
+        guard validationStatus == .noError else {
+            return
+        }
+        
         let peerEntity =  PeerModel.getEntityFromDataModelId(
             peerId: peerModel.peerId,
             viewContext: coreDataHandler.viewContext

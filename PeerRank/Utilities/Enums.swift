@@ -49,19 +49,22 @@ enum InfoText: String {
 enum PMError: Error {
     case runtimeError(String)
 }
-enum ValidationStatus: String {
+enum ValidationStatus: String, Equatable {
     case requiredFieldsError
     case peerNameError
     case initialsError
+    case peerInstanceDescriptionError
     case noError
     func getValidationError() -> String{
         switch self {
         case .requiredFieldsError:
             return "All the fields are mandatory"
         case .initialsError:
-            return "Initials should not be greater than \(Constants.maxInitialsLength) letters"
+            return "Initials should not be greater than \(Constants.peerInitialsMaxLength) letters"
         case .peerNameError:
             return "Peer name should not be greater than \(Constants.peerNameMaxLength) letters"
+        case .peerInstanceDescriptionError:
+            return "Description should not be more than \(Constants.peerInstanceDescriptionMaxLength) letters"
         case .noError:
             return ""
         

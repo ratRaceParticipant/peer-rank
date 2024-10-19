@@ -33,7 +33,8 @@ struct PeerListView: View {
                     peerDataModel: data,
                     peerImage: data.peerImage,
                     coreDataHandler: vm.coreDataHandler,
-                    localFileManager: vm.localFileManager
+                    localFileManager: vm.localFileManager,
+                    showDeleteAction: false
                 )
             } label: {
                 PeerListItemView(

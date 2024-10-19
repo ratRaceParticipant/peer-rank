@@ -37,6 +37,7 @@ struct PeerListItemView: View {
             )
             VStack(alignment: .leading) {
                 Text(peerDataModel.name)
+                    .lineLimit(1)
                     .fontWeight(.bold)
                     .font(.title3)
                 if !peerDataModel.enableFaceId {
