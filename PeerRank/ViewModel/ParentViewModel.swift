@@ -10,10 +10,15 @@ class ParentViewModel: ObservableObject {
     
     var coreDataHandler: CoreDataHandler
     var localFileManager: LocalFileManager
-    
-    init(coreDataHandler: CoreDataHandler, localFileManager: LocalFileManager) {
+    var cloudKitHandler: CloudKitHandler
+    init(
+        coreDataHandler: CoreDataHandler,
+        localFileManager: LocalFileManager,
+        cloudKitHandler: CloudKitHandler
+    ) {
         self.coreDataHandler = coreDataHandler
         self.localFileManager = localFileManager
+        self.cloudKitHandler = cloudKitHandler
     }
     
     func isDataNull() -> Bool {
@@ -23,6 +28,14 @@ class ParentViewModel: ObservableObject {
             filter: nil
         )
         return fetchedData.isEmpty
+    }
+    
+    func mapiCloudUserDataWithUserConfig() async {
+        do {
+            let _ = try await cloudKitHandler.mapUserDataWithUserConfig()
+        } catch {
+            print(error)
+        }
     }
     
 }

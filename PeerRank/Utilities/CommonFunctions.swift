@@ -168,5 +168,35 @@ class CommonFunctions {
         } catch {
             print("error")
             }
+    }
+    
+    static func setUserConfigToCache(userConfigModel: UserConfigModel){
+        if let encodedData = try? JSONEncoder().encode(userConfigModel) {
+            UserDefaults.standard.set(
+                encodedData,
+                forKey: Constants.userConfigModelUserDefaultKey
+            )
         }
+    }
+    
+    static func getUserConfigFromCache() -> UserConfigModel? {
+        guard let data = UserDefaults.standard.data(forKey: Constants.userConfigModelUserDefaultKey) else {
+            return nil
+        }
+        guard let savedItems = try? JSONDecoder().decode(UserConfigModel.self, from: data) else {
+            return nil
+        }
+        return savedItems
+    }
+    
+    static func regexValidate(inputToValidate input : String, regexPattern: String = "^[a-zA-Z0-9._]+$") -> Bool {
+        do {
+            let regex = try NSRegularExpression(pattern: regexPattern)
+            let range = NSRange(location: 0, length: input.utf16.count)
+            return regex.firstMatch(in: input, options: [], range: range) != nil
+        } catch {
+            print(error)
+            return false
+        }
+    }
 }

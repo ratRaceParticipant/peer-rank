@@ -6,15 +6,24 @@
 //
 
 import Foundation
+@MainActor
 class SettingViewModel: ObservableObject {
     var coreDataHandler: CoreDataHandler
+    var cloudKitHandler: CloudKitHandler
     @Published var exportUrl: URL?
     @Published var showShareSheet: Bool = false
     @Published var presentFilePicker: Bool = false
     @Published var importingStatus: LoadingStatus = .notStarted
     @Published var isExporting: Bool = false
-    init(coreDataHandler: CoreDataHandler) {
+    @Published var userConfigModel: UserConfigModel?
+    @Published var showRegisterSheet: Bool = false
+    @Published var updateUserConfigData: Bool = false
+    init(
+        coreDataHandler: CoreDataHandler,
+        cloudKitHandler: CloudKitHandler
+    ) {
         self.coreDataHandler = coreDataHandler
+        self.cloudKitHandler = cloudKitHandler
     }
     
     func exportDataToJsonFile(){
@@ -97,4 +106,14 @@ class SettingViewModel: ObservableObject {
         return data
     }
     
+    func refreshUserConfig() async {
+        userConfigModel = CommonFunctions.getUserConfigFromCache()
+        do {
+            userConfigModel = try await cloudKitHandler.mapUserDataWithUserConfig()
+        } catch {
+            print(error)
+        }
+        
+//        print("user name: \(userConfigModel)")
+    }
 }

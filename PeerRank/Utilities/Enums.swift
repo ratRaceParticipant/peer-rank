@@ -55,6 +55,9 @@ enum ValidationStatus: String, Equatable {
     case initialsError
     case peerInstanceDescriptionError
     case noError
+    case userNameLengthError
+    case displayNameLengthError
+    case userNameInvalidCharacterError
     func getValidationError() -> String{
         switch self {
         case .requiredFieldsError:
@@ -65,6 +68,12 @@ enum ValidationStatus: String, Equatable {
             return "Peer name should not be greater than \(Constants.peerNameMaxLength) letters"
         case .peerInstanceDescriptionError:
             return "Description should not be more than \(Constants.peerInstanceDescriptionMaxLength) letters"
+        case .userNameLengthError:
+            return "Username should not be more than \(Constants.userNameMaxLength) letters"
+        case .displayNameLengthError:
+            return "Display name should not be more than \(Constants.displayNameMaxLength) letters"
+        case .userNameInvalidCharacterError:
+            return "Username can only contain \".\" &  \"_\" other than alphanumeric values"
         case .noError:
             return ""
         
@@ -174,4 +183,33 @@ enum LoadingStatus {
             return "Not Started"
         }
     }
+}
+enum iCloudConnectionStatus: String, Codable {
+    case connected = "Connected"
+    case notConnected = "Not Connected"
+}
+enum iCloudError: Error, CustomStringConvertible {
+    case faliureFetchingAccountStatus
+    case faliureFetchingUserId
+    case faliureWritingRecord
+    case faliureFetchingRecord
+    case faliureUpdatingRecord
+    public var description: String {
+        switch self{
+        case .faliureFetchingAccountStatus:
+            return "Error in fetching iCloud Account Status"
+        case .faliureFetchingUserId:
+            return "Error in fetching iCloud User id"
+        case .faliureWritingRecord:
+            return "Error in writing data to iCloud"
+        case .faliureFetchingRecord:
+            return "Error in fetching data from iCloud"
+        case .faliureUpdatingRecord:
+            return "Error in updating data in iCloud"
+        }
+    }
+}
+enum iCloudDetailsToMap {
+    case userId, accountStatus, userNameAndDisplayName, allData
+    
 }

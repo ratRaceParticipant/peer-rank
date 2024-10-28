@@ -10,21 +10,25 @@ import SwiftUI
 struct ParentView: View {
     var localFileManager: LocalFileManager
     var coreDataHandler: CoreDataHandler
+    var cloudKitHandler: CloudKitHandler
     @StateObject var vm: ParentViewModel
     @State var isDataNull: Bool = false
     
     init(
         localFileManager: LocalFileManager = LocalFileManager(),
-        coreDataHandler: CoreDataHandler = CoreDataHandler()
+        coreDataHandler: CoreDataHandler = CoreDataHandler(),
+        cloudKitHandler: CloudKitHandler = CloudKitHandler()
     ){
         self.localFileManager = localFileManager
         self.coreDataHandler = coreDataHandler
         self._vm = StateObject(
             wrappedValue: ParentViewModel(
                 coreDataHandler: coreDataHandler,
-                localFileManager: localFileManager
+                localFileManager: localFileManager,
+                cloudKitHandler: cloudKitHandler
             )
         )
+        self.cloudKitHandler = cloudKitHandler
     }
     var body: some View {
         Group {
@@ -62,7 +66,10 @@ struct ParentView: View {
                         Label("Peers", systemImage: "person")
                     }
                     NavigationStack {
-                        SettingsView(coreDataHandler: coreDataHandler)
+                        SettingsView(
+                            coreDataHandler: coreDataHandler,
+                            cloudKitHandler: cloudKitHandler
+                        )
                     }
                     .tabItem {
                         Label("Settings", systemImage: "gear")
@@ -70,7 +77,9 @@ struct ParentView: View {
                 }
             }
         }
-        
+        .task {
+            await vm.mapiCloudUserDataWithUserConfig()
+        }
         .onAppear{
             isDataNull = vm.isDataNull()
         }

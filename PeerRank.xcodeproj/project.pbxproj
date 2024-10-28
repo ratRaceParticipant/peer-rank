@@ -44,6 +44,10 @@
 		837ED0412CBAB5FE00A6F0AE /* CircleDesignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837ED0402CBAB5FE00A6F0AE /* CircleDesignView.swift */; };
 		838A38912C95DDEF00BE0381 /* EditPeerInstanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A38902C95DDEF00BE0381 /* EditPeerInstanceView.swift */; };
 		838A38932C95E1C700BE0381 /* EditPeerInstanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A38922C95E1C700BE0381 /* EditPeerInstanceViewModel.swift */; };
+		839052352CCBD59900DCEE3B /* CloudKitHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839052342CCBD59900DCEE3B /* CloudKitHandler.swift */; };
+		839052372CCBD6D700DCEE3B /* UserConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839052362CCBD6D700DCEE3B /* UserConfigModel.swift */; };
+		839052392CCD26DD00DCEE3B /* RegisterAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839052382CCD26DD00DCEE3B /* RegisterAccountView.swift */; };
+		8390523B2CCD271F00DCEE3B /* RegisterAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8390523A2CCD271F00DCEE3B /* RegisterAccountViewModel.swift */; };
 		83954EF22C82D612000D7492 /* PeerRankApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954EF12C82D612000D7492 /* PeerRankApp.swift */; };
 		83954EF42C82D612000D7492 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83954EF32C82D612000D7492 /* ContentView.swift */; };
 		83954EF62C82D614000D7492 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83954EF52C82D614000D7492 /* Assets.xcassets */; };
@@ -126,6 +130,10 @@
 		837ED0402CBAB5FE00A6F0AE /* CircleDesignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleDesignView.swift; sourceTree = "<group>"; };
 		838A38902C95DDEF00BE0381 /* EditPeerInstanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPeerInstanceView.swift; sourceTree = "<group>"; };
 		838A38922C95E1C700BE0381 /* EditPeerInstanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPeerInstanceViewModel.swift; sourceTree = "<group>"; };
+		839052342CCBD59900DCEE3B /* CloudKitHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitHandler.swift; sourceTree = "<group>"; };
+		839052362CCBD6D700DCEE3B /* UserConfigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfigModel.swift; sourceTree = "<group>"; };
+		839052382CCD26DD00DCEE3B /* RegisterAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAccountView.swift; sourceTree = "<group>"; };
+		8390523A2CCD271F00DCEE3B /* RegisterAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAccountViewModel.swift; sourceTree = "<group>"; };
 		83954EEE2C82D612000D7492 /* PeerRank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeerRank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83954EF12C82D612000D7492 /* PeerRankApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerRankApp.swift; sourceTree = "<group>"; };
 		83954EF32C82D612000D7492 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -262,6 +270,7 @@
 				837ED03C2CBA608F00A6F0AE /* CustomShareSheetView.swift */,
 				837ED03E2CBAA77100A6F0AE /* PopupView.swift */,
 				837ED0402CBAB5FE00A6F0AE /* CircleDesignView.swift */,
+				839052382CCD26DD00DCEE3B /* RegisterAccountView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -283,6 +292,7 @@
 				83F773492CAAF6030010ABFE /* PeerInstancesChartViewModel.swift */,
 				83F26A792CAE8019003933FF /* ParentViewModel.swift */,
 				837ED0202CBA36E300A6F0AE /* SettingViewModel.swift */,
+				8390523A2CCD271F00DCEE3B /* RegisterAccountViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -305,6 +315,7 @@
 				832351E72C8C7045008A7D1C /* Constants.swift */,
 				832351F12C8D7D7D008A7D1C /* LocalFileManager.swift */,
 				83E2B5BD2CA030DE00928672 /* CommonFunctions.swift */,
+				839052342CCBD59900DCEE3B /* CloudKitHandler.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -314,6 +325,7 @@
 			children = (
 				83954F072C82D8DD000D7492 /* PeerModel.swift */,
 				83954F092C82DB13000D7492 /* PeerInstanceModel.swift */,
+				839052362CCBD6D700DCEE3B /* UserConfigModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -400,9 +412,11 @@
 				837ED0212CBA36E300A6F0AE /* SettingViewModel.swift in Sources */,
 				83954F0E2C830CE3000D7492 /* CoreDataHandler.swift in Sources */,
 				8316B0D42CA7C36900D4511E /* HomeViewModel.swift in Sources */,
+				839052372CCBD6D700DCEE3B /* UserConfigModel.swift in Sources */,
 				832351F22C8D7D7D008A7D1C /* LocalFileManager.swift in Sources */,
 				832351F82C8DC9DC008A7D1C /* PeerListItemViewModel.swift in Sources */,
 				837ED03D2CBA608F00A6F0AE /* CustomShareSheetView.swift in Sources */,
+				839052352CCBD59900DCEE3B /* CloudKitHandler.swift in Sources */,
 				8316B1042CA87EA100D4511E /* WidgetView.swift in Sources */,
 				8316B0DA2CA7DD3A00D4511E /* ParentView.swift in Sources */,
 				832351E82C8C7045008A7D1C /* Constants.swift in Sources */,
@@ -414,6 +428,7 @@
 				83954F052C82D65B000D7492 /* PeerRankDataModel.xcdatamodeld in Sources */,
 				8306A1502C95A18F0062E14E /* PeerInstanceListViewModel.swift in Sources */,
 				83954EF42C82D612000D7492 /* ContentView.swift in Sources */,
+				839052392CCD26DD00DCEE3B /* RegisterAccountView.swift in Sources */,
 				832351EC2C8C8CF0008A7D1C /* IconWithPopoverView.swift in Sources */,
 				832351DE2C8C3D3A008A7D1C /* RatingView.swift in Sources */,
 				8316B0D62CA7C40000D4511E /* PeerBannerView.swift in Sources */,
@@ -430,6 +445,7 @@
 				832351E02C8C3E92008A7D1C /* PeerTypePickerView.swift in Sources */,
 				832351E62C8C6E99008A7D1C /* ViewModifiers.swift in Sources */,
 				832351EA2C8C7885008A7D1C /* RatingWeightageView.swift in Sources */,
+				8390523B2CCD271F00DCEE3B /* RegisterAccountViewModel.swift in Sources */,
 				832351EE2C8CA576008A7D1C /* PeerListItemView.swift in Sources */,
 				8316B0D82CA7C42F00D4511E /* PeerBannerViewModel.swift in Sources */,
 				83F26A7A2CAE8019003933FF /* ParentViewModel.swift in Sources */,

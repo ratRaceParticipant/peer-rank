@@ -15,5 +15,8 @@ class Constants {
     static let peerInitialsMaxLength = 3
     static let peerInstanceDescriptionMaxLength = 1000
     static let exportedJsonTempFileName: String = "Peer Rank Export - \(Date().formatted(date: .complete, time: .omitted)).json"
-    
+    static let userConfigModelUserDefaultKey: String = "UserConfigModel"
+    static let userConfigiCloudRecordName: String = "UserConfig"
+    static let userNameMaxLength = 20
+    static let displayNameMaxLength = 30
 }
