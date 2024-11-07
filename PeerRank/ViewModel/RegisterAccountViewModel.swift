@@ -9,13 +9,13 @@ import Foundation
 @MainActor
 class RegisterAccountViewModel: ObservableObject {
     
-    var cloudKitHandler: CloudKitHandler
+    var cloudKitHandler: CloudKitHandler = CloudKitHandler.shared
     @Published var userName: String = ""
     @Published var displayName: String = ""
     @Published var validationStatus: ValidationStatus = .noError
     @Published var userConfigModel: UserConfigModel
-    init(cloudKitHandler: CloudKitHandler, userConfigModel: UserConfigModel) {
-        self.cloudKitHandler = cloudKitHandler
+    @Published var registerLoadingStatus: LoadingStatus = .notStarted
+    init(userConfigModel: UserConfigModel) {
         self.userConfigModel = userConfigModel
         self.userName = userConfigModel.userName ?? ""
         self.displayName = userConfigModel.displayName ?? ""
@@ -23,7 +23,8 @@ class RegisterAccountViewModel: ObservableObject {
     
     
     func writeUserConfigToiCloud(isUpdate: Bool = false) async {
-        validationStatus = validateData()
+        
+        validationStatus = await validateData(isUpdate: isUpdate)
         guard validationStatus == .noError else {return}
 //        print("Data correct")
         var userConfigModel = CommonFunctions.getUserConfigFromCache()
@@ -38,12 +39,13 @@ class RegisterAccountViewModel: ObservableObject {
             CommonFunctions.setUserConfigToCache(userConfigModel: userConfigModel)
             
             try await isUpdate ? cloudKitHandler.updateiCloudUserConfigRecord(userConfigModel: userConfigModel) : cloudKitHandler.writeToUserConfig(userConfigModel: userConfigModel)
+            
         } catch {
-            print(error)
+            print("error at writeUserConfigToiCloud of RegisterAccountViewModel: \(error)")
         }
     }
     
-    func validateData() -> ValidationStatus {
+    func validateData(isUpdate: Bool = false) async -> ValidationStatus {
         
         if userName.isEmpty || displayName.isEmpty {
             return .requiredFieldsError
@@ -54,7 +56,21 @@ class RegisterAccountViewModel: ObservableObject {
         } else if !CommonFunctions.regexValidate(inputToValidate: userName) {
             return .userNameInvalidCharacterError
         }
-        
+        if isUpdate {
+            return .noError
+        } else {
+            do {
+                let fetchedUserConfigData = try await CommonFunctions.fetchUserConfigDataWithUsername(
+                    userName: userName,
+                    cloudKitHandler: cloudKitHandler
+                )
+                if fetchedUserConfigData != nil {
+                    return .userNameAlreadyExists
+                }
+            } catch {
+                print("Error at validateData of RegisterAccountViewModel: \(error)")
+            }
+        }
         return .noError
     }
     

@@ -35,7 +35,8 @@ struct PeerTabView: View {
                                     peerImage: data.peerImage,
                                     coreDataHandler: vm.coreDataHandler,
                                     localFileManager: vm.localFileManager,
-                                    isDataDeleted: $vm.isSelectedDataDeleted
+                                    isDataDeleted: $vm.isSelectedDataDeleted,
+                                    showDeleteAction: true
                                 )
                                 .onAppear{
                                     selectedPeerModel = data

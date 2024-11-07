@@ -11,13 +11,11 @@ struct SettingsView: View {
     @StateObject var vm: SettingViewModel
     
     init(
-        coreDataHandler: CoreDataHandler,
-        cloudKitHandler: CloudKitHandler
+        coreDataHandler: CoreDataHandler
     ) {
         self._vm = StateObject(
             wrappedValue: SettingViewModel(
-                coreDataHandler: coreDataHandler,
-                cloudKitHandler: cloudKitHandler
+                coreDataHandler: coreDataHandler
             )
         )
     }
@@ -33,7 +31,7 @@ struct SettingsView: View {
                 Section {
                     if let userName = vm.userConfigModel?.userName{
                         HStack {
-                            Text("\(userName)")
+                            Text("username: **\(userName)**")
                             Spacer()
                             Button("Edit") {
                                 vm.showRegisterSheet = true
@@ -61,7 +59,7 @@ struct SettingsView: View {
                     Text("Data Managment")
                 } footer: {
                     VStack(alignment: .leading) {
-                        Text("Warning: As of now searching peers takes huge computing resources.\n")
+                        Text("Warning: As of now searching peers takes huge computing resources.")
                         Text(
                             "\nCharts for Individual Peers used from: [AppPear Github](https://github.com/AppPear/ChartView).\n")
                         Text("Peer Image Downsampling Code used from: [Swift Senpai](https://swiftsenpai.com/development/reduce-uiimage-memory-footprint/)\n")
@@ -82,12 +80,11 @@ struct SettingsView: View {
         }, content: {
             NavigationStack {
                 RegisterAccountView(
-                    cloudKitHandler: vm.cloudKitHandler,
                     userConfigModel: vm.userConfigModel ?? UserConfigModel(),
                     isUpdate: vm.updateUserConfigData
                 )
             }
-            .presentationDetents([.fraction(0.5)])
+            .presentationDetents([.fraction(0.6)])
             .presentationDragIndicator(.visible)
         })
         .sheet(isPresented: $vm.showShareSheet, onDismiss: {
@@ -165,5 +162,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(coreDataHandler: CoreDataHandler(),cloudKitHandler: CloudKitHandler())
+    SettingsView(coreDataHandler: CoreDataHandler())
 }

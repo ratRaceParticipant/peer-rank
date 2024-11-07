@@ -19,17 +19,21 @@ struct EditPeerView: View {
         peerModel: PeerModel = PeerModel.emptyData,
         coreDataHandler: CoreDataHandler,
         peerImage: UIImage? = nil,
+        ratedPeerModel: RatedPeerModel? = nil,
         updateParentVarData: ((_ peerDataModel: PeerModel, _ peerImage: UIImage?) -> Void)? = nil
     ) {
+        
         self._vm = StateObject(
             wrappedValue: EditPeerViewModel(
                 localFileManager: localFileManager,
                 coreDatHandler: coreDataHandler,
                 peerModel: peerModel,
                 peerImage: peerImage,
+                ratedPeerModel: ratedPeerModel,
                 onChange: updateParentVarData
             )
         )
+        
         self.isUpdate = isUpdate
     }
     
@@ -64,6 +68,12 @@ struct EditPeerView: View {
                     .padding(.horizontal)
                 Toggleview(label: "Enable Face Id for this Peer?", isToggleOn: $vm.peerModel.enableFaceId)
                     .padding([.horizontal,.bottom])
+                PeerSelectorView(
+                    selectedPeerUserName: $vm.selectedPeerUserName,
+                    peerModel: vm.peerModel
+                )
+                    .padding()
+                
                 Spacer()
                 HStack {
 //                    Spacer()
@@ -96,7 +106,6 @@ struct EditPeerView: View {
         }, message: {
             Text(vm.validationErrorMessage)
         })
-        
         .navigationTitle(isUpdate ? "Edit Peer Details" : "Add Peer")
     }
 }

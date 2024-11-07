@@ -16,14 +16,20 @@ class EditPeerViewModel: ObservableObject {
     @Published var validationStatus: ValidationStatus = .noError
     @Published var validationErrorMessage: String = ""
     @Published var showValidationError: Bool = false
+    @Published var selectedPeerUserName: String?
     var localFileManager: LocalFileManager
     var coreDataHandler: CoreDataHandler
+    var cloudKitHandler: CloudKitHandler = CloudKitHandler.shared
+    var ratedPeerModel: RatedPeerModel?
+    var currentUserConfigModel: UserConfigModel?
+    
     var updateParentVarData: ((_ peerDataModel: PeerModel, _ peerImage: UIImage?) -> Void)?
     init(
         localFileManager: LocalFileManager, 
         coreDatHandler: CoreDataHandler,
         peerModel: PeerModel,
         peerImage: UIImage?,
+        ratedPeerModel: RatedPeerModel?,
         onChange: ((_ peerDataModel: PeerModel, _ peerImage: UIImage?) -> Void)? = nil
     ){
         self.localFileManager = localFileManager
@@ -33,6 +39,9 @@ class EditPeerViewModel: ObservableObject {
         self.peerRating = Float(peerModel.baseRating)
         self.peerImage = peerImage
         self.updateParentVarData = onChange
+        self.currentUserConfigModel = CommonFunctions.getUserConfigFromCache()
+        self.ratedPeerModel = ratedPeerModel
+        self.selectedPeerUserName = ratedPeerModel?.peerToRateUserName
     }
     
     func writePeerData(isUpdate: Bool = false){
@@ -66,7 +75,11 @@ class EditPeerViewModel: ObservableObject {
         )
         
         coreDataHandler.saveData()
-        setAverageRating(peerEntity: peerEntity)
+        
+        peerModel.averageRating = setAverageRating(peerEntity: peerEntity)
+        Task {
+           await writeToRatedPeerData()
+        }
     }
     
     
@@ -82,13 +95,14 @@ class EditPeerViewModel: ObservableObject {
         }
     }
     
-    func setAverageRating(peerEntity: PeerEntity){
+    func setAverageRating(peerEntity: PeerEntity) -> Float{
         let averageRating = CommonFunctions.getPeerAverageRating(
             from: peerModel, viewContext: coreDataHandler.viewContext
         ) ?? peerModel.averageRating
         
         peerEntity.averageRating = averageRating
         coreDataHandler.saveData()
+        return averageRating
     }
     
     func saveImage(){
@@ -96,6 +110,25 @@ class EditPeerViewModel: ObservableObject {
         peerModel.photoId = peerModel.photoId.isEmpty ? UUID().uuidString : peerModel.photoId
         localFileManager.saveImage(image: uiImage, id: peerModel.photoId)
     }
+    
+    private func writeToRatedPeerData() async {
+        print("writeToRatedPeerData")
+        guard let userName = currentUserConfigModel?.userName else {return}
+        do {
+            
+            let dataToWrite = RatedPeerModel(
+                peerUserName: userName,
+                peerToRateUserName: selectedPeerUserName ?? "",
+                peerToRateRating: peerModel.averageRating,
+                peerToRatePeerId: peerModel.peerId,
+                cloudKitRecordMetaData: ratedPeerModel?.cloudKitRecordMetaData
+            )
+            try await cloudKitHandler.writeToRatedPeerModel(ratedPeerModel: dataToWrite)
+        } catch {
+            print("Error at writeToRatedPeerData of EditPeerViewModel: \(error)")
+        }
+    }
+    
     
     func deleteImage(){
         guard let _ = peerImage else {

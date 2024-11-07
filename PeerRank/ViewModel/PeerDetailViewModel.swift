@@ -15,6 +15,8 @@ class PeerDetailViewModel: ObservableObject {
     var coreDataHandler: CoreDataHandler
     var localFileManager: LocalFileManager
     var showDeleteAction: Bool
+    @Published var ratedPeerModel: RatedPeerModel?
+    var cloudKitHandler = CloudKitHandler.shared
     init(coreDataHandler: CoreDataHandler, localFileManager: LocalFileManager, showDeleteAction: Bool) {
         self.coreDataHandler = coreDataHandler
         self.localFileManager = localFileManager
@@ -46,6 +48,31 @@ class PeerDetailViewModel: ObservableObject {
             return
         }
         coreDataHandler.deleteData(entityToDelete: peerEntity)
+    }
+    
+    func setRatedPeerData(peerModel: PeerModel) async -> RatedPeerModel?{
+        
+        do {
+            
+            let fetchedData = try await CommonFunctions.fetchRatedPeerDataWithUsername(
+                value: peerModel.peerId,
+                key: "peerToRatePeerId",
+                cloudKitHandler: cloudKitHandler
+            )
+            print("setRatedPeerData")
+            guard let fetchedData else {return nil}
+        
+            return RatedPeerModel(
+                peerUserName: fetchedData.peerUserName,
+                peerToRateUserName: fetchedData.peerToRateUserName,
+                peerToRateRating: fetchedData.peerToRateRating,
+                peerToRatePeerId: peerModel.peerId,
+                cloudKitRecordMetaData: fetchedData.cloudKitRecordMetaData
+            )
+        } catch {
+            print("Error in setRatedPeerData of EditPeerViewModel: \(error)")
+        }
+        return nil
     }
     
     func authenticate(peerDataModel: PeerModel){

@@ -12,13 +12,11 @@ struct RegisterAccountView: View {
     @Environment(\.presentationMode) var presentationMode
     var isUpdate: Bool
     init(
-        cloudKitHandler: CloudKitHandler,
         userConfigModel: UserConfigModel,
         isUpdate: Bool = false
     ){
         self._vm = StateObject(
             wrappedValue: RegisterAccountViewModel(
-                cloudKitHandler: cloudKitHandler,
                 userConfigModel: userConfigModel
             )
         )
@@ -27,9 +25,7 @@ struct RegisterAccountView: View {
     
     var body: some View {
         VStack(alignment: .leading,spacing: 15) {
-            Text("You will not be able to update the username after the first time.")
-                .foregroundStyle(.secondary)
-                .font(.footnote)
+            WarningTextView(warningType: .userNameCanBeEditedOnce)
             CommonViews.textField(
                 bindingText: $vm.userName,
                 placeholderText: "Enter Username"
@@ -42,15 +38,34 @@ struct RegisterAccountView: View {
                 placeholderText: "Enter Display Name"
             )
             Button {
-                if vm.validationStatus == .noError {
-                    Task {
-                        await vm.writeUserConfigToiCloud(isUpdate: isUpdate)
+                Task {
+                    withAnimation {
+                        vm.registerLoadingStatus = .inprogress
                     }
-                    presentationMode.wrappedValue.dismiss()
+                    await vm.writeUserConfigToiCloud(isUpdate: isUpdate)
+                    withAnimation {
+                        vm.registerLoadingStatus = .notStarted
+                    }
+                    if vm.validationStatus == .noError {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    
+                }
+            } label: {
+                if vm.registerLoadingStatus == .notStarted {
+                    CommonViews.buttonLabel()
+                } else {
+                    ProgressView()
+                        .tint(.white)
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(
+                            Color.accentColor
+                        )
+                        .cornerRadius(10)
                 }
                 
-            } label: {
-                CommonViews.buttonLabel()
             }
             .padding(.horizontal)
 
@@ -65,13 +80,13 @@ struct RegisterAccountView: View {
         })
         .padding()
         .navigationTitle("Register")
+        
     }
 }
 
 #Preview {
     NavigationStack {
         RegisterAccountView(
-            cloudKitHandler: CloudKitHandler(),
             userConfigModel: UserConfigModel(),
             isUpdate: false
         )

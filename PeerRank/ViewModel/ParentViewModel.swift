@@ -10,15 +10,15 @@ class ParentViewModel: ObservableObject {
     
     var coreDataHandler: CoreDataHandler
     var localFileManager: LocalFileManager
-    var cloudKitHandler: CloudKitHandler
+    var cloudKitHandler: CloudKitHandler = CloudKitHandler.shared
     init(
         coreDataHandler: CoreDataHandler,
-        localFileManager: LocalFileManager,
-        cloudKitHandler: CloudKitHandler
+        localFileManager: LocalFileManager
+        
     ) {
         self.coreDataHandler = coreDataHandler
         self.localFileManager = localFileManager
-        self.cloudKitHandler = cloudKitHandler
+        
     }
     
     func isDataNull() -> Bool {

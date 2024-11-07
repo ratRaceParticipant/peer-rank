@@ -16,19 +16,17 @@ struct ParentView: View {
     
     init(
         localFileManager: LocalFileManager = LocalFileManager(),
-        coreDataHandler: CoreDataHandler = CoreDataHandler(),
-        cloudKitHandler: CloudKitHandler = CloudKitHandler()
+        coreDataHandler: CoreDataHandler = CoreDataHandler()
     ){
         self.localFileManager = localFileManager
         self.coreDataHandler = coreDataHandler
         self._vm = StateObject(
             wrappedValue: ParentViewModel(
                 coreDataHandler: coreDataHandler,
-                localFileManager: localFileManager,
-                cloudKitHandler: cloudKitHandler
+                localFileManager: localFileManager
             )
         )
-        self.cloudKitHandler = cloudKitHandler
+        self.cloudKitHandler = CloudKitHandler.shared
     }
     var body: some View {
         Group {
@@ -67,8 +65,7 @@ struct ParentView: View {
                     }
                     NavigationStack {
                         SettingsView(
-                            coreDataHandler: coreDataHandler,
-                            cloudKitHandler: cloudKitHandler
+                            coreDataHandler: coreDataHandler
                         )
                     }
                     .tabItem {

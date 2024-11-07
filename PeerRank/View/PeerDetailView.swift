@@ -78,8 +78,16 @@ struct PeerDetailView: View {
             }
         }
         
-        
+        .task {
+            vm.ratedPeerModel = await vm.setRatedPeerData(peerModel: peerDataModel)
+        }
         .onAppear{
+//            Task {
+//                let data = await vm.setRatedPeerData(peerModel: peerDataModel)
+//                
+//                vm.ratedPeerModel = data
+//                
+//            }
             vm.authenticate(peerDataModel: peerDataModel)
             vm.getAverageRatingToDisplay(peerModel: peerDataModel)
             peerDataModel = vm.getUpdatedPeerModelData(peerModel: peerDataModel)
@@ -149,15 +157,21 @@ struct PeerDetailView: View {
     }
     var navigationLinkToEditView: some View {
         NavigationLink {
-            EditPeerView(
-                localFileManager: vm.localFileManager,
-                isUpdate: true,
-                peerModel: peerDataModel,
-                coreDataHandler: vm.coreDataHandler,
-                peerImage: peerImage){ _, peerImage  in
-                   
-                    self.peerImage = peerImage
-                }
+            if let _ = vm.ratedPeerModel {
+                EditPeerView(
+                    localFileManager: vm.localFileManager,
+                    isUpdate: true,
+                    peerModel: peerDataModel,
+                    coreDataHandler: vm.coreDataHandler,
+                    peerImage: peerImage,
+                    ratedPeerModel: vm.ratedPeerModel){ _, peerImage  in
+                       
+                        self.peerImage = peerImage
+                    }
+            } else {
+                ProgressView()
+            }
+                
         } label: {
             Label(
                 title: {

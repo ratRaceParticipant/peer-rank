@@ -9,7 +9,7 @@ import Foundation
 @MainActor
 class SettingViewModel: ObservableObject {
     var coreDataHandler: CoreDataHandler
-    var cloudKitHandler: CloudKitHandler
+    var cloudKitHandler: CloudKitHandler = CloudKitHandler.shared
     @Published var exportUrl: URL?
     @Published var showShareSheet: Bool = false
     @Published var presentFilePicker: Bool = false
@@ -19,11 +19,9 @@ class SettingViewModel: ObservableObject {
     @Published var showRegisterSheet: Bool = false
     @Published var updateUserConfigData: Bool = false
     init(
-        coreDataHandler: CoreDataHandler,
-        cloudKitHandler: CloudKitHandler
+        coreDataHandler: CoreDataHandler
     ) {
         self.coreDataHandler = coreDataHandler
-        self.cloudKitHandler = cloudKitHandler
     }
     
     func exportDataToJsonFile(){
@@ -111,7 +109,7 @@ class SettingViewModel: ObservableObject {
         do {
             userConfigModel = try await cloudKitHandler.mapUserDataWithUserConfig()
         } catch {
-            print(error)
+            print("error at refreshUserConfig of SettingViewModel\(error)")
         }
         
 //        print("user name: \(userConfigModel)")

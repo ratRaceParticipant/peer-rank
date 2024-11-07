@@ -19,4 +19,5 @@ class Constants {
     static let userConfigiCloudRecordName: String = "UserConfig"
     static let userNameMaxLength = 20
     static let displayNameMaxLength = 30
+    static let ratedPeeriCloudRecordName = "RatedPeer"
 }

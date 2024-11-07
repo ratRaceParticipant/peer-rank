@@ -58,6 +58,7 @@ enum ValidationStatus: String, Equatable {
     case userNameLengthError
     case displayNameLengthError
     case userNameInvalidCharacterError
+    case userNameAlreadyExists
     func getValidationError() -> String{
         switch self {
         case .requiredFieldsError:
@@ -74,6 +75,8 @@ enum ValidationStatus: String, Equatable {
             return "Display name should not be more than \(Constants.displayNameMaxLength) letters"
         case .userNameInvalidCharacterError:
             return "Username can only contain \".\" &  \"_\" other than alphanumeric values"
+        case .userNameAlreadyExists:
+            return "Username already exists."
         case .noError:
             return ""
         
@@ -194,6 +197,7 @@ enum iCloudError: Error, CustomStringConvertible {
     case faliureWritingRecord
     case faliureFetchingRecord
     case faliureUpdatingRecord
+    case faliureExtractingRecordFromMetaData
     public var description: String {
         switch self{
         case .faliureFetchingAccountStatus:
@@ -206,10 +210,30 @@ enum iCloudError: Error, CustomStringConvertible {
             return "Error in fetching data from iCloud"
         case .faliureUpdatingRecord:
             return "Error in updating data in iCloud"
+        case .faliureExtractingRecordFromMetaData:
+            return "Error in extracting record data from meta data"
         }
+    }
+}
+enum PeerLinkingError {
+    case peerUserNameSameAsUserName, peerUserNameNotFound, peerUserNameAlreadyLinked
+    func getMessage() -> String {
+        switch self {
+        case .peerUserNameNotFound:
+            return "Username not found"
+        case .peerUserNameSameAsUserName:
+            return "Peer username cannot be same as user's username"
+        case .peerUserNameAlreadyLinked:
+            return "Username is already linked with some other peer"
+        }
+        
     }
 }
 enum iCloudDetailsToMap {
     case userId, accountStatus, userNameAndDisplayName, allData
     
+}
+enum WarningType: String {
+    case userNameCanBeEditedOnce = "Username will not be editable after registration."
+    case peerLinkingNotAvailable = "Peer linking is not available as either app is not connected to iCloud or the registration is not complete.\nGo to settings to check the status or register."
 }

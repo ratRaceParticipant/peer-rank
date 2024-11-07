@@ -199,4 +199,25 @@ class CommonFunctions {
             return false
         }
     }
+    static func fetchUserConfigDataWithUsername(userName: String, cloudKitHandler: CloudKitHandler) async throws -> UserConfigModel? {
+        let fetchedData = try await cloudKitHandler.fetchUserConfigData(
+            predicate: NSPredicate(format: "userName == %@", userName),
+            resultsLimit: 1
+        )
+        guard !fetchedData.isEmpty else {return nil}
+        return fetchedData[0]
+    }
+    static func fetchRatedPeerDataWithUsername(
+        value: String,
+        key: String = "peerUserName",
+        cloudKitHandler: CloudKitHandler
+    ) async throws -> RatedPeerModel? {
+        let fetchedData = try await cloudKitHandler.fetchRatedPeerData(
+            predicate: NSPredicate(format: "\(key) == %@", value),
+            resultsLimit: 1
+        )
+        guard !fetchedData.isEmpty else {return nil}
+        
+        return fetchedData[0]
+    }
 }
