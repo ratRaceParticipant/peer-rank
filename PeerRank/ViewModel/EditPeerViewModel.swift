@@ -113,7 +113,7 @@ class EditPeerViewModel: ObservableObject {
     
     private func writeToRatedPeerData() async {
         print("writeToRatedPeerData")
-        guard let userName = currentUserConfigModel?.userName else {return}
+        guard let userName = currentUserConfigModel?.userName, currentUserConfigModel?.iCloudConnectionStatus == .connected else {return}
         do {
             
             let dataToWrite = RatedPeerModel(

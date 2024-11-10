@@ -30,7 +30,8 @@ struct EditPeerInstanceView: View {
         peerModel: PeerModel,
         isUpdate: Bool = false,
         peerInstanceModel: PeerInstanceModel = PeerInstanceModel.emptyData,
-        coreDataHandler: CoreDataHandler
+        coreDataHandler: CoreDataHandler,
+        ratedPeerModel: RatedPeerModel?
     ) {
         
         self.isUpdate = isUpdate
@@ -38,7 +39,8 @@ struct EditPeerInstanceView: View {
             wrappedValue: EditPeerInstanceViewModel(
                 peerModel: peerModel, 
                 peerInstanceModel: peerInstanceModel,
-                coreDataHandler: coreDataHandler
+                coreDataHandler: coreDataHandler,
+                ratedPeerModel: ratedPeerModel
             )
         )
     }
@@ -63,12 +65,14 @@ struct EditPeerInstanceView: View {
                 HStack {
 //                    Spacer()
                     Button {
-                        vm.writeToPeerInstance(isUpdate: isUpdate)
-                        if vm.validationStatus == .noError {
-                            presentationMode.wrappedValue.dismiss()
+                        Task {
+                            await vm.writeToPeerInstance(isUpdate: isUpdate)
+                            if vm.validationStatus == .noError {
+                                presentationMode.wrappedValue.dismiss()
+                            }
                         }
                     } label: {
-                        CommonViews.buttonLabel()
+                        CommonViews.buttonLabel(loadingStatus: vm.dataWriteStatus)
                     }
                 }
                 Spacer()
@@ -84,8 +88,10 @@ struct EditPeerInstanceView: View {
         })
         .alert("Are you sure you want to delete?", isPresented: $vm.showDeleteConfirmation, actions: {
             Button("Yes", role: .destructive){
-                vm.deleteData()
-                presentationMode.wrappedValue.dismiss()
+                Task {
+                    await vm.deleteData()
+                    presentationMode.wrappedValue.dismiss()
+                }
             }
         }, message: {
             Text("This action cannot be undone.")
@@ -131,7 +137,8 @@ struct EditPeerInstanceView: View {
     NavigationStack {
         EditPeerInstanceView(
             peerModel: PeerModel.emptyData,
-            isUpdate: true, coreDataHandler: CoreDataHandler()
+            isUpdate: true, coreDataHandler: CoreDataHandler(),
+            ratedPeerModel: nil
         )
     }
 }

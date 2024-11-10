@@ -46,10 +46,13 @@ struct PeerDetailView: View {
                         }
                         .padding(.horizontal)
                         navigationLinkToAddInstanceView
-                        PeerInstanceListView(
-                            peerModel: peerDataModel,
-                            coreDataHandler: vm.coreDataHandler
-                        )
+                        if let _ = vm.ratedPeerModel {
+                            PeerInstanceListView(
+                                peerModel: peerDataModel,
+                                coreDataHandler: vm.coreDataHandler,
+                                ratedPeerModel: vm.ratedPeerModel
+                            )
+                        }
                         PeerInstancesChartView(coreDataHandler: vm.coreDataHandler, peerData: peerDataModel)
                             .padding(.horizontal)
                         Spacer()
@@ -57,9 +60,11 @@ struct PeerDetailView: View {
                     
                     .alert("Are you sure you want to delete?", isPresented: $vm.showDeleteConfirmation, actions: {
                         Button("Yes", role: .destructive){
-                            vm.deleteData(peerDataModel: peerDataModel)
-                            isDataDeleted = true
-                            presentationMode.wrappedValue.dismiss()
+                            Task {
+                                await vm.deleteData(peerDataModel: peerDataModel)
+                                isDataDeleted = true
+                                presentationMode.wrappedValue.dismiss()
+                            }
                         }
                     }, message: {
                         Text("This action cannot be undone.")
@@ -77,21 +82,19 @@ struct PeerDetailView: View {
                 DataUnavailableView(noDataType: .peerDetailDataAuthenticationFailed)
             }
         }
-        
-        .task {
-            vm.ratedPeerModel = await vm.setRatedPeerData(peerModel: peerDataModel)
-        }
         .onAppear{
-//            Task {
-//                let data = await vm.setRatedPeerData(peerModel: peerDataModel)
-//                
-//                vm.ratedPeerModel = data
-//                
-//            }
+            print("on appear called")
             vm.authenticate(peerDataModel: peerDataModel)
+            
             vm.getAverageRatingToDisplay(peerModel: peerDataModel)
             peerDataModel = vm.getUpdatedPeerModelData(peerModel: peerDataModel)
+            Task {
+                vm.ratedPeerModel = await vm.setRatedPeerData(peerModel: peerDataModel)
+            }
         }
+//        .task {
+//            vm.ratedPeerModel = await vm.setRatedPeerData(peerModel: peerDataModel)
+//        }
         
         
     }
@@ -184,15 +187,22 @@ struct PeerDetailView: View {
             )
             
         }
+        
         .id(UUID())
     }
     var navigationLinkToAddInstanceView: some View {
         NavigationLink {
-            EditPeerInstanceView(
-                peerModel: peerDataModel,
-                isUpdate: false,
-                coreDataHandler: vm.coreDataHandler
-            )
+            if let _ = vm.ratedPeerModel {
+                EditPeerInstanceView(
+                    peerModel: peerDataModel,
+                    isUpdate: false,
+                    coreDataHandler: vm.coreDataHandler,
+                    ratedPeerModel: vm.ratedPeerModel
+                )
+                
+            } else {
+                ProgressView()
+            }
         } label: {
             Label(
                 title: { Text("Add Instance") },

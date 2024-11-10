@@ -220,4 +220,20 @@ class CommonFunctions {
         
         return fetchedData[0]
     }
+    static func cancelOperation<T>(after seconds: Double, operation: @escaping () async throws -> T) async throws -> T {
+            try await withThrowingTaskGroup(of: T.self) { group in
+                group.addTask {
+                    try await operation()
+                }
+                
+                group.addTask {
+                    try await Task.sleep(nanoseconds: UInt64(seconds * 1_000_000_000))
+                    throw iCloudError.connectionTimeout
+                }
+                
+                let result = try await group.next()!
+                group.cancelAll() // Cancel other tasks if one succeeds
+                return result
+            }
+        }
 }

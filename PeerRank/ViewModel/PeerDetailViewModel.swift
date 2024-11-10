@@ -41,17 +41,27 @@ class PeerDetailViewModel: ObservableObject {
         PeerModel.getEntityFromDataModelId(peerId: peerModel.peerId, viewContext: coreDataHandler.viewContext)
     }
     
-    func deleteData(peerDataModel: PeerModel){
+    func deleteData(peerDataModel: PeerModel) async {
         let peerEntity = getPeerEntity(peerModel: peerDataModel)
         
         guard let peerEntity else {
             return
         }
         coreDataHandler.deleteData(entityToDelete: peerEntity)
+        
+        guard let ratedPeerModel else {return}
+        
+        do {
+            try await cloudKitHandler.deleteRatedPeerRecord(ratedPeerModel: ratedPeerModel)
+        } catch {
+            print("Error at deleteData of PeerDetailViewModel: \(error)")
+        }
     }
     
     func setRatedPeerData(peerModel: PeerModel) async -> RatedPeerModel?{
-        
+        if ratedPeerModel != nil {
+            return ratedPeerModel
+        }
         do {
             
             let fetchedData = try await CommonFunctions.fetchRatedPeerDataWithUsername(

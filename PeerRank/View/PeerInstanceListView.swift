@@ -12,12 +12,14 @@ struct PeerInstanceListView: View {
     
     init(
         peerModel: PeerModel,
-        coreDataHandler: CoreDataHandler
+        coreDataHandler: CoreDataHandler,
+        ratedPeerModel: RatedPeerModel? = nil
     ){
         self._vm = StateObject(
             wrappedValue: PeerInstanceListViewModel(
                 peerModel: peerModel,
-                coreDataHandler: coreDataHandler
+                coreDataHandler: coreDataHandler,
+                ratedPeerModel: ratedPeerModel
             )
         )
     }
@@ -30,32 +32,7 @@ struct PeerInstanceListView: View {
                         Text("Instances")
                             .fontWeight(.bold)
                         ScrollView {
-                            ForEach(vm.peerInstanceModel, id: \.peerInstanceId){ data in
-                                NavigationLink(
-                                    destination: {
-                                    EditPeerInstanceView(
-                                        peerModel: vm.peerModel,
-                                        isUpdate: true,
-                                        peerInstanceModel: data,
-                                        coreDataHandler: vm.coreDataHandler
-                                    )
-                                }, label: {
-                                    HStack {
-                                        Text("\(CommonFunctions.formattedInstanceDate(data.instanceDate))")
-                                            .foregroundColor(.accentColor)
-                                            .font(.headline)
-                                            .padding([.trailing,.vertical],4)
-                                        Spacer()
-                                        RatingView(
-                                            currentRating: .constant(Float(data.instanceRating)),
-                                            enableEditing: false,
-                                            starFont: .subheadline
-                                        )
-                                    }
-                                })
-                                .id(UUID())
-                                .tint(.clear)
-                            }
+                            instanceList
                         }
                         Spacer()
                     }
@@ -78,6 +55,38 @@ struct PeerInstanceListView: View {
             vm.fetchPeerInstnaceData()
         }
         
+    }
+    var instanceList: some View {
+        ForEach(vm.peerInstanceModel, id: \.peerInstanceId){ data in
+            NavigationLink(
+                destination: {
+                    EditPeerInstanceView(
+                        peerModel: vm.peerModel,
+                        isUpdate: true,
+                        peerInstanceModel: data,
+                        coreDataHandler: vm.coreDataHandler,
+                        ratedPeerModel: vm.ratedPeerModel
+                    )
+            }, label: {
+                getLabelView(data: data)
+            })
+            .id(UUID())
+            .tint(.clear)
+        }
+    }
+    func getLabelView(data: PeerInstanceModel) -> some View {
+        return HStack {
+            Text("\(CommonFunctions.formattedInstanceDate(data.instanceDate))")
+                .foregroundColor(.accentColor)
+                .font(.headline)
+                .padding([.trailing,.vertical],4)
+            Spacer()
+            RatingView(
+                currentRating: .constant(Float(data.instanceRating)),
+                enableEditing: false,
+                starFont: .subheadline
+            )
+        }
     }
 }
 

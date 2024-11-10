@@ -39,6 +39,8 @@
 		834254E22CB17B1300A696B2 /* PeerRankLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 834254E12CB17B1300A696B2 /* PeerRankLaunchScreen.storyboard */; };
 		83790B2C2CDB7BAC00C1C475 /* RatedPeerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83790B2B2CDB7BAB00C1C475 /* RatedPeerModel.swift */; };
 		83790B2E2CDD026700C1C475 /* WarningTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83790B2D2CDD026700C1C475 /* WarningTextView.swift */; };
+		83790B302CDE4DD200C1C475 /* MyRatingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83790B2F2CDE4DD200C1C475 /* MyRatingTabView.swift */; };
+		83790B322CDE4DEE00C1C475 /* MyRatingTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83790B312CDE4DEE00C1C475 /* MyRatingTabViewModel.swift */; };
 		837ED01F2CBA348400A6F0AE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837ED01E2CBA348400A6F0AE /* SettingsView.swift */; };
 		837ED0212CBA36E300A6F0AE /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837ED0202CBA36E300A6F0AE /* SettingViewModel.swift */; };
 		837ED03D2CBA608F00A6F0AE /* CustomShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837ED03C2CBA608F00A6F0AE /* CustomShareSheetView.swift */; };
@@ -129,6 +131,8 @@
 		834254E12CB17B1300A696B2 /* PeerRankLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PeerRankLaunchScreen.storyboard; sourceTree = "<group>"; };
 		83790B2B2CDB7BAB00C1C475 /* RatedPeerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatedPeerModel.swift; sourceTree = "<group>"; };
 		83790B2D2CDD026700C1C475 /* WarningTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningTextView.swift; sourceTree = "<group>"; };
+		83790B2F2CDE4DD200C1C475 /* MyRatingTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRatingTabView.swift; sourceTree = "<group>"; };
+		83790B312CDE4DEE00C1C475 /* MyRatingTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRatingTabViewModel.swift; sourceTree = "<group>"; };
 		837ED01E2CBA348400A6F0AE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		837ED0202CBA36E300A6F0AE /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		837ED03C2CBA608F00A6F0AE /* CustomShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShareSheetView.swift; sourceTree = "<group>"; };
@@ -281,6 +285,7 @@
 				839052382CCD26DD00DCEE3B /* RegisterAccountView.swift */,
 				8390523C2CD00CDE00DCEE3B /* PeerSelectorView.swift */,
 				83790B2D2CDD026700C1C475 /* WarningTextView.swift */,
+				83790B2F2CDE4DD200C1C475 /* MyRatingTabView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 				837ED0202CBA36E300A6F0AE /* SettingViewModel.swift */,
 				8390523A2CCD271F00DCEE3B /* RegisterAccountViewModel.swift */,
 				8390523E2CD2B42700DCEE3B /* PeerSelectorViewModel.swift */,
+				83790B312CDE4DEE00C1C475 /* MyRatingTabViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -469,9 +475,11 @@
 				837ED0412CBAB5FE00A6F0AE /* CircleDesignView.swift in Sources */,
 				832351FA2C8DCD18008A7D1C /* PeerTabViewModel.swift in Sources */,
 				83954EF22C82D612000D7492 /* PeerRankApp.swift in Sources */,
+				83790B302CDE4DD200C1C475 /* MyRatingTabView.swift in Sources */,
 				8316B1092CA96A1600D4511E /* PeerListViewModel.swift in Sources */,
 				834254E02CB11D9E00A696B2 /* Toggleview.swift in Sources */,
 				832351DA2C8C0F41008A7D1C /* PeerPhotoView.swift in Sources */,
+				83790B322CDE4DEE00C1C475 /* MyRatingTabViewModel.swift in Sources */,
 				83954F0C2C82DBBE000D7492 /* Enums.swift in Sources */,
 				83E2B5BE2CA030DE00928672 /* CommonFunctions.swift in Sources */,
 				83954F082C82D8DD000D7492 /* PeerModel.swift in Sources */,

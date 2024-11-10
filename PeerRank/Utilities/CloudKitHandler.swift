@@ -62,6 +62,9 @@ class CloudKitHandler {
         let query = CKQuery(recordType: Constants.userConfigiCloudRecordName, predicate: predicate)
         
         do {
+//            let (results,_) = try await CommonFunctions.cancelOperation(after: 10.0) {
+//                try await self.database.records(matching: query)
+//            }
             let (results,_) = try await database.records(matching: query)
             
             for (_, result) in results {
@@ -91,7 +94,7 @@ class CloudKitHandler {
                 switch result {
                 case .success(let record):
                     let recordToUpdate = mapUserConfigModelToCKRecord(from: userConfigModel, to: record)
-                    try await database.save(recordToUpdate)
+                    try await saveDataToCloudKit(record: recordToUpdate)
                 case .failure(_):
                     throw iCloudError.faliureUpdatingRecord
                 }
@@ -160,7 +163,8 @@ class CloudKitHandler {
         do {
             try await dataBase.save(record)
         } catch {
-            throw iCloudError.faliureWritingRecord
+//            throw iCloudError.faliureWritingRecord
+            throw error
         }
     }
     
@@ -197,7 +201,6 @@ class CloudKitHandler {
         do {
             
             let (results,_) = try await database.records(matching: query,resultsLimit: resultLimit)
-            print("fetchData")
             var fetchedRecords: [CKRecord] = []
             for (_, result) in results {
                 switch result {
@@ -254,6 +257,18 @@ class CloudKitHandler {
         } catch {
             throw iCloudError.faliureExtractingRecordFromMetaData
         }
-        
+    }
+    
+    func deleteRatedPeerRecord(ratedPeerModel: RatedPeerModel) async throws {
+        let recordToDelete = try mapRatedPeerModelToCKRecord(from: ratedPeerModel)
+        try await deleteRecord(recordId: recordToDelete.recordID)
+    }
+    
+    private func deleteRecord(recordId: CKRecord.ID) async throws {
+        do {
+            let _ = try await database.deleteRecord(withID: recordId)
+        } catch {
+            throw iCloudError.faliureDeletingRecord
+        }
     }
 }

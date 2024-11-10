@@ -11,8 +11,10 @@ class PeerBannerViewModel: ObservableObject {
     
     var coreDataHandler: CoreDataHandler
     @Published var peerDataModel: [PeerModel] = PeerModel.sampleData
+    @Published var hasScreenAppeared: Bool = false
     init(coreDataHandler: CoreDataHandler) {
         self.coreDataHandler = coreDataHandler
+        
     }
     
     func fetchBannerData(fetchTopRatedPeers: Bool = true){

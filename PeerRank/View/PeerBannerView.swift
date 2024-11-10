@@ -26,74 +26,62 @@ struct PeerBannerView: View {
     var body: some View {
         Group {
             VStack(alignment: .leading) {
-                Text(fetchTopRatedPeers ? "Top Rated Peers" : "Worst Rated Peers")
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                VStack(spacing: 0) {
-                    
-                    ForEach(vm.peerDataModel.indices, id: \.self) { index in
-                        let starSize: CGFloat = 35 - (CGFloat(index) * 1.5)
-                        HStack {
-                            ZStack {
-                                Image(systemName: "star.fill")
-                                    
-                                    .font(
-                                        .system(
-                                            size: starSize
-                                                
-                                        )
-                                    )
-                                    .foregroundStyle(.yellow)
-                                    
-                                Text("\(vm.peerDataModel[index].averageRating, specifier: "%.1f")")
-                                    
-                                    .font(
-                                        .system(
-//                                            size: 10
-                                            size: 15 - (CGFloat(index) * 1)
-                                        )
-                                    )
-                                    .foregroundStyle(.black)
-                            }
-                            .padding(.horizontal, CGFloat(index) * 1)
-                            Text("\(vm.peerDataModel[index].name)")
-                                .fontWeight(.semibold)
-                                .font(
-                                    .system(
-//                                        size: 10
-                                        size: 15 - (CGFloat(index) * 1)
-                                    )
-                                )
-                            Spacer()
-                        }
+                Spacer()
+                
+                HStack(spacing: 10) {
+                    ForEach(0..<3) { index in
+                        singleRatingView(index: index)
                     }
-                    
                 }
-                .padding(8)
-                .background {
-                    RoundedRectangle(cornerRadius: 25)
-                        .foregroundColor(
-                            fetchTopRatedPeers ? .green : .pink
-                        )
-                        
-                }
+                
             }
+            .foregroundStyle(.white)
             .padding()
+            .background(
+                Color.accentColor.clipShape(RoundedRectangle(cornerRadius: 10))
+            )
+            .padding(.bottom)
+            
         }
+        
         .onAppear{
             vm.fetchBannerData(fetchTopRatedPeers: fetchTopRatedPeers)
+            DispatchQueue.main.async {
+                withAnimation(.bouncy.delay(0.5)) {
+                    vm.hasScreenAppeared = true
+                }
+            }
+            
         }
+    }
+    func singleRatingView(index: Int = 0) -> some View{
+        VStack(alignment: .center){
+            Spacer()
+            Text(vm.peerDataModel[index].initials)
+            Text(vm.peerDataModel[index].name)
+                .lineLimit(1)
+                .font(.caption)
+            HStack{
+                Spacer()
+                Image(systemName: "star.fill")
+                    .foregroundStyle(.yellow)
+                Text("\(vm.peerDataModel[index].averageRating, specifier: "%.2f")")
+                
+                Spacer()
+            }
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundStyle(.ultraThinMaterial)
+                    .frame(height: vm.hasScreenAppeared ? CGFloat(UIScreen.main.bounds.height * 0.3 - CGFloat((index * 50))) : 0)
+                Text("\(index+1)")
+            }
+        }
+        .frame(height: 350)
     }
 }
 
 #Preview {
-    HStack(spacing: 0) {
-        PeerBannerView(
-            coreDataHandler: CoreDataHandler()
-        )
-        PeerBannerView(
-            coreDataHandler: CoreDataHandler(),
-            fetchTopRatedPeers: false
-        )
-    }
+    PeerBannerView(
+        coreDataHandler: CoreDataHandler()
+    )
 }

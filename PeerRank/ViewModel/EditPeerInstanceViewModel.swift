@@ -6,29 +6,34 @@
 //
 
 import Foundation
+@MainActor
 class EditPeerInstanceViewModel: ObservableObject {
     @Published var instanceRatingWeightage: Double = 1.0
     @Published var instanceRating: Float = 3.0
     @Published var peerInstanceModel: PeerInstanceModel
     @Published var showDeleteConfirmation: Bool = false
     @Published var validationStatus: ValidationStatus = .noError
+    @Published var dataWriteStatus: LoadingStatus = .notStarted
     var peerModel: PeerModel
     var coreDataHandler: CoreDataHandler
-    
+    var ratedPeerModel: RatedPeerModel?
     init(
         peerModel: PeerModel,
         peerInstanceModel: PeerInstanceModel,
-        coreDataHandler: CoreDataHandler
+        coreDataHandler: CoreDataHandler,
+        ratedPeerModel: RatedPeerModel?
     ) {
+//        print("model: \(ratedPeerModel)")
         self.peerModel = peerModel
         self.peerInstanceModel = peerInstanceModel
         self.coreDataHandler = coreDataHandler
         self.instanceRating = Float(peerInstanceModel.instanceRating)
         self.instanceRatingWeightage = Double(peerInstanceModel.instanceRatingWeightage)
+        self.ratedPeerModel = ratedPeerModel
     }
     
-    func writeToPeerInstance(isUpdate: Bool = false) {
-        
+    func writeToPeerInstance(isUpdate: Bool = false) async {
+        dataWriteStatus = .inprogress
         validationStatus = CommonFunctions.validatePeerInstanceData(peerInstanceModel: peerInstanceModel)
         
         guard validationStatus == .noError else {
@@ -58,6 +63,8 @@ class EditPeerInstanceViewModel: ObservableObject {
         coreDataHandler.saveData()
         
         setAverageRating(peerEntity: peerEntity,peerInstanceEntity: peerInstanceEntity)
+        await writeToRatedPeerData()
+        dataWriteStatus = .notStarted
         
     }
     func setData(isUpdate: Bool){
@@ -76,16 +83,28 @@ class EditPeerInstanceViewModel: ObservableObject {
         peerEntity.averageRating = averageRating
         peerInstanceEntity.averageRatingAtTimeOfInstance = averageRating
         coreDataHandler.saveData()
+        ratedPeerModel?.peerToRateRating = averageRating
     }
     func getPeerInstanceEntity() -> PeerInstanceEntity? {
         PeerInstanceModel.getEntityFromDataModelId(id: peerInstanceModel.peerInstanceId, viewContext: coreDataHandler.viewContext)
     }
-    func deleteData(){
+    
+    private func writeToRatedPeerData() async {
+        guard let ratedPeerModel else {return}
+        do {
+            try await CloudKitHandler.shared.writeToRatedPeerModel(ratedPeerModel: ratedPeerModel)
+        } catch {
+            print("Error at writeToRatedPeerData of EditPeerInstanceViewModel: \(error)")
+        }
+    }
+    
+    func deleteData() async {
         let peerInstanceEntity = getPeerInstanceEntity()
         
         guard let peerInstanceEntity else {
             return
         }
         coreDataHandler.deleteData(entityToDelete: peerInstanceEntity)
+        await writeToRatedPeerData()
     }
 }

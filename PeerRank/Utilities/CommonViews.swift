@@ -34,8 +34,14 @@ class CommonViews {
             )
             .frame(height: 100)
     }
-    static func buttonLabel(buttonText: String = "Save") -> some View {
-        Text(buttonText)
+    static func buttonLabel(buttonText: String = "Save", loadingStatus: LoadingStatus = .notStarted) -> some View {
+        Group {
+            if loadingStatus == .inprogress {
+                ProgressView()
+            } else {
+                Text(buttonText)
+            }
+        }
             .tint(.white)
             .fontWeight(.bold)
             .frame(maxWidth: .infinity)

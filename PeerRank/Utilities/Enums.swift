@@ -90,6 +90,8 @@ enum DataUnavailable{
     case peerData
     case instanceData
     case peerDetailDataAuthenticationFailed
+    case ratedPeerData
+    case iCloudConnection
     func getDataUnavailableMap() -> [String:String]{
         switch self {
         case .chartData:
@@ -121,6 +123,18 @@ enum DataUnavailable{
                 "title": "Data Hidden",
                 "icon": "person.fill.xmark",
                 "description": "Authentication Failed"
+            ]
+        case .ratedPeerData:
+            return [
+                "title": "No Data Available",
+                "icon": "person.fill.xmark",
+                "description": "Seems like no one has linked your account as a peer."
+            ]
+        case .iCloudConnection:
+            return [
+                "title": "Unable to fetch data",
+                "icon": "exclamationmark.icloud",
+                "description": "Either device is not connected with iCloud, or user is not registerd"
             ]
         }
     }
@@ -198,6 +212,8 @@ enum iCloudError: Error, CustomStringConvertible {
     case faliureFetchingRecord
     case faliureUpdatingRecord
     case faliureExtractingRecordFromMetaData
+    case connectionTimeout
+    case faliureDeletingRecord
     public var description: String {
         switch self{
         case .faliureFetchingAccountStatus:
@@ -212,6 +228,10 @@ enum iCloudError: Error, CustomStringConvertible {
             return "Error in updating data in iCloud"
         case .faliureExtractingRecordFromMetaData:
             return "Error in extracting record data from meta data"
+        case .connectionTimeout:
+            return "Connection Timeout"
+        case .faliureDeletingRecord:
+            return "Error in deleting iCloud Record"
         }
     }
 }

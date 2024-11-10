@@ -19,15 +19,17 @@ struct HomeView: View {
                 localFileManager: localFileManager
             )
         )
+//        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
     }
     var body: some View {
         VStack(alignment: .leading) {
             Group {
+                
                 if vm.peerDataModel.count >= 3 {
-                    HStack(spacing: 0) {
-                        PeerBannerView(coreDataHandler: vm.coreDataHandler)
-                        PeerBannerView(coreDataHandler: vm.coreDataHandler,fetchTopRatedPeers: false)
-                    }
+                    PeerBannerView(coreDataHandler: vm.coreDataHandler)
+                        .frame(height: UIScreen.main.bounds.height * 0.55)
+//                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    
                 } else {
                     DataUnavailableView(noDataType: .kpiData)
                 }
@@ -45,10 +47,19 @@ struct HomeView: View {
             )
             Spacer()
         }
+        .ignoresSafeArea(.container,edges: .top)
         .background{
             Color.clear
         }
-        .navigationTitle("Peer Rank")
+        .toolbar {
+            ToolbarItem(placement: .navigation) {
+                Text("Leaderboard")
+                    .fontWeight(.bold)
+                    .foregroundColor(.white) // Set your desired color here
+                    .font(.headline) // Customize font if desired
+                }
+        }
+       
     }
 }
 
@@ -59,4 +70,5 @@ struct HomeView: View {
             localFileManager: LocalFileManager()
         )
     }
+    
 }

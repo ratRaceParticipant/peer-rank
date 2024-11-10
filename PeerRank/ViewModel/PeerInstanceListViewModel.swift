@@ -12,12 +12,15 @@ class PeerInstanceListViewModel: ObservableObject {
     @Published var peerInstanceModel: [PeerInstanceModel] = []
     var peerModel: PeerModel
     var coreDataHandler: CoreDataHandler
+    var ratedPeerModel: RatedPeerModel?
     init(
         peerModel: PeerModel,
-        coreDataHandler: CoreDataHandler
+        coreDataHandler: CoreDataHandler,
+        ratedPeerModel: RatedPeerModel?
     ) {
         self.peerModel = peerModel
         self.coreDataHandler = coreDataHandler
+        self.ratedPeerModel = ratedPeerModel
     }
     
     func fetchPeerInstnaceData() {

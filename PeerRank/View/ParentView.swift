@@ -48,6 +48,7 @@ struct ParentView: View {
                                 localFileManager: localFileManager
                             )
                         }
+                        
                         .background(Color.clear)
                         
                     }
@@ -62,6 +63,12 @@ struct ParentView: View {
                     }
                     .tabItem {
                         Label("Peers", systemImage: "person")
+                    }
+                    NavigationStack {
+                        MyRatingTabView()
+                    }
+                    .tabItem {
+                        Label("My Ratings", systemImage: "star.fill")
                     }
                     NavigationStack {
                         SettingsView(
