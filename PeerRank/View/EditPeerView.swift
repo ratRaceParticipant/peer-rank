@@ -11,7 +11,7 @@ import PhotosUI
 struct EditPeerView: View {
     @StateObject var vm: EditPeerViewModel
     var isUpdate: Bool
-    
+    @ObservedObject var sharedData: SharedData
     @Environment(\.presentationMode) var presentationMode
     init(
         localFileManager: LocalFileManager,
@@ -20,6 +20,7 @@ struct EditPeerView: View {
         coreDataHandler: CoreDataHandler,
         peerImage: UIImage? = nil,
         ratedPeerModel: RatedPeerModel? = nil,
+        sharedData: SharedData = SharedData(),
         updateParentVarData: ((_ peerDataModel: PeerModel, _ peerImage: UIImage?) -> Void)? = nil
     ) {
         
@@ -35,6 +36,7 @@ struct EditPeerView: View {
         )
         
         self.isUpdate = isUpdate
+        self._sharedData = ObservedObject(wrappedValue: sharedData)
     }
     
     var body: some View {
@@ -78,11 +80,7 @@ struct EditPeerView: View {
                 HStack {
 //                    Spacer()
                     Button {
-                        vm.writePeerData(isUpdate: isUpdate)
-                        if !vm.showValidationError {
-                            vm.updateParentVarData?(vm.peerModel, vm.peerImage)
-                            presentationMode.wrappedValue.dismiss()
-                        }
+                        saveButtonAction()
                     } label: {
                         CommonViews.buttonLabel()
                     }
@@ -108,13 +106,24 @@ struct EditPeerView: View {
         })
         .navigationTitle(isUpdate ? "Edit Peer Details" : "Add Peer")
     }
+    func saveButtonAction(){
+        vm.writePeerData(isUpdate: isUpdate)
+        if isUpdate {
+            sharedData.forceUpdateData = true
+        }
+        if !vm.showValidationError {
+            vm.updateParentVarData?(vm.peerModel, vm.peerImage)
+            presentationMode.wrappedValue.dismiss()
+        }
+    }
 }
 
 #Preview {
     NavigationStack{
         EditPeerView(
             localFileManager: LocalFileManager(), 
-            coreDataHandler: CoreDataHandler()
+            coreDataHandler: CoreDataHandler(),
+            sharedData: SharedData()
         )
     }
 }

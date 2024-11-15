@@ -12,7 +12,9 @@ struct PeerDetailView: View {
     @StateObject var vm: PeerDetailViewModel
     @State var peerImage: UIImage?
     @Binding var isDataDeleted: Bool
+    @State var iCloudDataLoadingStatus: LoadingStatus
     @Environment(\.presentationMode) var presentationMode
+    @StateObject var sharedData: SharedData = SharedData()
     init(
         peerDataModel: PeerModel = PeerModel.sampleData[0],
         peerImage: UIImage? = nil,
@@ -31,6 +33,7 @@ struct PeerDetailView: View {
             )
         )
         self._isDataDeleted = isDataDeleted
+        self._iCloudDataLoadingStatus = State(initialValue: .notStarted)
     }
     
     var body: some View {
@@ -46,13 +49,7 @@ struct PeerDetailView: View {
                         }
                         .padding(.horizontal)
                         navigationLinkToAddInstanceView
-                        if let _ = vm.ratedPeerModel {
-                            PeerInstanceListView(
-                                peerModel: peerDataModel,
-                                coreDataHandler: vm.coreDataHandler,
-                                ratedPeerModel: vm.ratedPeerModel
-                            )
-                        }
+                        peerInstanceList
                         PeerInstancesChartView(coreDataHandler: vm.coreDataHandler, peerData: peerDataModel)
                             .padding(.horizontal)
                         Spacer()
@@ -82,23 +79,21 @@ struct PeerDetailView: View {
                 DataUnavailableView(noDataType: .peerDetailDataAuthenticationFailed)
             }
         }
-        .onAppear{
-            print("on appear called")
-            vm.authenticate(peerDataModel: peerDataModel)
-            
-            vm.getAverageRatingToDisplay(peerModel: peerDataModel)
-            peerDataModel = vm.getUpdatedPeerModelData(peerModel: peerDataModel)
-            Task {
-                vm.ratedPeerModel = await vm.setRatedPeerData(peerModel: peerDataModel)
-            }
+        .task {
+            iCloudDataLoadingStatus = .notStarted
+            vm.ratedPeerModel = await vm.setRatedPeerData(peerModel: peerDataModel, forceSetData: sharedData.forceUpdateData)
+            sharedData.forceUpdateData = false
+            iCloudDataLoadingStatus = .complete
         }
-//        .task {
-//            vm.ratedPeerModel = await vm.setRatedPeerData(peerModel: peerDataModel)
-//        }
-        
-        
+        .onAppear{
+            executeOnAppear()
+        }
     }
-    
+    func executeOnAppear() {
+        vm.authenticate(peerDataModel: peerDataModel)
+        vm.getAverageRatingToDisplay(peerModel: peerDataModel)
+        peerDataModel = vm.getUpdatedPeerModelData(peerModel: peerDataModel)
+    }
     var deleteIcon: some View {
         Button {
             vm.showDeleteConfirmation = true
@@ -112,7 +107,23 @@ struct PeerDetailView: View {
         }
         .tint(.red)
     }
-    
+    var peerInstanceList: some View {
+        if iCloudDataLoadingStatus == .complete {
+            PeerInstanceListView(
+                peerModel: peerDataModel,
+                coreDataHandler: vm.coreDataHandler,
+                ratedPeerModel: vm.ratedPeerModel,
+                sharedData: sharedData
+            )
+        } else {
+            PeerInstanceListView(
+                peerModel: peerDataModel,
+                coreDataHandler: vm.coreDataHandler,
+                ratedPeerModel: nil,
+                sharedData: sharedData
+            )
+        }
+    }
     var peerImageView: some View {
         Group{
             if let image = peerImage {
@@ -160,21 +171,18 @@ struct PeerDetailView: View {
     }
     var navigationLinkToEditView: some View {
         NavigationLink {
-            if let _ = vm.ratedPeerModel {
-                EditPeerView(
-                    localFileManager: vm.localFileManager,
-                    isUpdate: true,
-                    peerModel: peerDataModel,
-                    coreDataHandler: vm.coreDataHandler,
-                    peerImage: peerImage,
-                    ratedPeerModel: vm.ratedPeerModel){ _, peerImage  in
-                       
-                        self.peerImage = peerImage
-                    }
-            } else {
-                ProgressView()
-            }
-                
+            EditPeerView(
+                localFileManager: vm.localFileManager,
+                isUpdate: true,
+                peerModel: peerDataModel,
+                coreDataHandler: vm.coreDataHandler,
+                peerImage: peerImage,
+                ratedPeerModel: iCloudDataLoadingStatus == .complete ? vm.ratedPeerModel : nil,
+                sharedData: sharedData
+            ){ _, peerImage  in
+                   
+                    self.peerImage = peerImage
+                }
         } label: {
             Label(
                 title: {
@@ -192,17 +200,13 @@ struct PeerDetailView: View {
     }
     var navigationLinkToAddInstanceView: some View {
         NavigationLink {
-            if let _ = vm.ratedPeerModel {
-                EditPeerInstanceView(
-                    peerModel: peerDataModel,
-                    isUpdate: false,
-                    coreDataHandler: vm.coreDataHandler,
-                    ratedPeerModel: vm.ratedPeerModel
-                )
-                
-            } else {
-                ProgressView()
-            }
+            EditPeerInstanceView(
+                peerModel: peerDataModel,
+                isUpdate: false,
+                coreDataHandler: vm.coreDataHandler,
+                ratedPeerModel: iCloudDataLoadingStatus == .complete ? vm.ratedPeerModel : nil,
+                sharedData: sharedData
+            )
         } label: {
             Label(
                 title: { Text("Add Instance") },

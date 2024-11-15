@@ -25,13 +25,14 @@ struct EditPeerInstanceView: View {
     var isUpdate: Bool
     @StateObject var vm: EditPeerInstanceViewModel
     @Environment(\.presentationMode) var presentationMode
-    
+    @ObservedObject var sharedData: SharedData
     init(
         peerModel: PeerModel,
         isUpdate: Bool = false,
         peerInstanceModel: PeerInstanceModel = PeerInstanceModel.emptyData,
         coreDataHandler: CoreDataHandler,
-        ratedPeerModel: RatedPeerModel?
+        ratedPeerModel: RatedPeerModel?,
+        sharedData: SharedData = SharedData()
     ) {
         
         self.isUpdate = isUpdate
@@ -43,6 +44,7 @@ struct EditPeerInstanceView: View {
                 ratedPeerModel: ratedPeerModel
             )
         )
+        self._sharedData = ObservedObject(wrappedValue: sharedData)
     }
     
     var body: some View {
@@ -65,12 +67,7 @@ struct EditPeerInstanceView: View {
                 HStack {
 //                    Spacer()
                     Button {
-                        Task {
-                            await vm.writeToPeerInstance(isUpdate: isUpdate)
-                            if vm.validationStatus == .noError {
-                                presentationMode.wrappedValue.dismiss()
-                            }
-                        }
+                        saveButtonAction()
                     } label: {
                         CommonViews.buttonLabel(loadingStatus: vm.dataWriteStatus)
                     }
@@ -107,6 +104,19 @@ struct EditPeerInstanceView: View {
         .navigationTitle(isUpdate ? "Edit Instance" : "Add Instance")
         .navigationBarTitleDisplayMode(.inline)
     }
+    
+    func saveButtonAction() {
+        Task {
+            await vm.writeToPeerInstance(isUpdate: isUpdate)
+            if isUpdate {
+                sharedData.forceUpdateData = true
+            }
+            if vm.validationStatus == .noError {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }
+    }
+    
     var deleteIcon: some View {
         Button {
             vm.showDeleteConfirmation = true

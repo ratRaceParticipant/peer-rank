@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 @MainActor
 class EditPeerInstanceViewModel: ObservableObject {
     @Published var instanceRatingWeightage: Double = 1.0
@@ -23,7 +24,6 @@ class EditPeerInstanceViewModel: ObservableObject {
         coreDataHandler: CoreDataHandler,
         ratedPeerModel: RatedPeerModel?
     ) {
-//        print("model: \(ratedPeerModel)")
         self.peerModel = peerModel
         self.peerInstanceModel = peerInstanceModel
         self.coreDataHandler = coreDataHandler
@@ -32,7 +32,8 @@ class EditPeerInstanceViewModel: ObservableObject {
         self.ratedPeerModel = ratedPeerModel
     }
     
-    func writeToPeerInstance(isUpdate: Bool = false) async {
+    func writeToPeerInstance(isUpdate: Bool) async {
+        
         dataWriteStatus = .inprogress
         validationStatus = CommonFunctions.validatePeerInstanceData(peerInstanceModel: peerInstanceModel)
         
@@ -45,10 +46,11 @@ class EditPeerInstanceViewModel: ObservableObject {
             viewContext: coreDataHandler.viewContext
         )
         
-        
+        print("id: \(peerInstanceModel.peerInstanceId)")
         let peerInstanceEntity = isUpdate ?
         getPeerInstanceEntity() :
         PeerInstanceEntity(context: coreDataHandler.viewContext)
+        print("instance: \(peerInstanceEntity)")
         guard let peerEntity, let peerInstanceEntity else {
             print("error updating instance data \(peerInstanceModel.peerInstanceId)")
             return

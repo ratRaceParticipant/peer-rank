@@ -58,8 +58,9 @@ class PeerDetailViewModel: ObservableObject {
         }
     }
     
-    func setRatedPeerData(peerModel: PeerModel) async -> RatedPeerModel?{
-        if ratedPeerModel != nil {
+    func setRatedPeerData(peerModel: PeerModel, forceSetData: Bool = false) async -> RatedPeerModel?{
+        
+        guard forceSetData else {
             return ratedPeerModel
         }
         do {
@@ -69,7 +70,7 @@ class PeerDetailViewModel: ObservableObject {
                 key: "peerToRatePeerId",
                 cloudKitHandler: cloudKitHandler
             )
-            print("setRatedPeerData")
+            print("setRatedPeerData2")
             guard let fetchedData else {return nil}
         
             return RatedPeerModel(

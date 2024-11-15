@@ -17,6 +17,7 @@
 		8316B1042CA87EA100D4511E /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B1032CA87EA100D4511E /* WidgetView.swift */; };
 		8316B1072CA969FC00D4511E /* PeerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B1062CA969FB00D4511E /* PeerListView.swift */; };
 		8316B1092CA96A1600D4511E /* PeerListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8316B1082CA96A1600D4511E /* PeerListViewModel.swift */; };
+		831E180A2CE77D090008DBC6 /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E18092CE77D090008DBC6 /* SharedData.swift */; };
 		832351D82C8C0B8C008A7D1C /* EditPeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351D72C8C0B8C008A7D1C /* EditPeerView.swift */; };
 		832351DA2C8C0F41008A7D1C /* PeerPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351D92C8C0F41008A7D1C /* PeerPhotoView.swift */; };
 		832351DC2C8C0F9C008A7D1C /* PeerPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832351DB2C8C0F9C008A7D1C /* PeerPhotoViewModel.swift */; };
@@ -109,6 +110,7 @@
 		8316B1032CA87EA100D4511E /* WidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetView.swift; sourceTree = "<group>"; };
 		8316B1062CA969FB00D4511E /* PeerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerListView.swift; sourceTree = "<group>"; };
 		8316B1082CA96A1600D4511E /* PeerListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerListViewModel.swift; sourceTree = "<group>"; };
+		831E18092CE77D090008DBC6 /* SharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		832351D72C8C0B8C008A7D1C /* EditPeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPeerView.swift; sourceTree = "<group>"; };
 		832351D92C8C0F41008A7D1C /* PeerPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerPhotoView.swift; sourceTree = "<group>"; };
 		832351DB2C8C0F9C008A7D1C /* PeerPhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerPhotoViewModel.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				832351F12C8D7D7D008A7D1C /* LocalFileManager.swift */,
 				83E2B5BD2CA030DE00928672 /* CommonFunctions.swift */,
 				839052342CCBD59900DCEE3B /* CloudKitHandler.swift */,
+				831E18092CE77D090008DBC6 /* SharedData.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				839052392CCD26DD00DCEE3B /* RegisterAccountView.swift in Sources */,
 				832351EC2C8C8CF0008A7D1C /* IconWithPopoverView.swift in Sources */,
 				832351DE2C8C3D3A008A7D1C /* RatingView.swift in Sources */,
+				831E180A2CE77D090008DBC6 /* SharedData.swift in Sources */,
 				8316B0D62CA7C40000D4511E /* PeerBannerView.swift in Sources */,
 				838A38932C95E1C700BE0381 /* EditPeerInstanceViewModel.swift in Sources */,
 				832351F42C8D8196008A7D1C /* PeerDetailView.swift in Sources */,

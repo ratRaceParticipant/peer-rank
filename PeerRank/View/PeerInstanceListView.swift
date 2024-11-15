@@ -9,11 +9,12 @@ import SwiftUI
 
 struct PeerInstanceListView: View {
     @StateObject var vm: PeerInstanceListViewModel
-    
+    @ObservedObject var sharedData: SharedData
     init(
         peerModel: PeerModel,
         coreDataHandler: CoreDataHandler,
-        ratedPeerModel: RatedPeerModel? = nil
+        ratedPeerModel: RatedPeerModel? = nil,
+        sharedData: SharedData = SharedData()
     ){
         self._vm = StateObject(
             wrappedValue: PeerInstanceListViewModel(
@@ -22,6 +23,7 @@ struct PeerInstanceListView: View {
                 ratedPeerModel: ratedPeerModel
             )
         )
+        self._sharedData = ObservedObject(wrappedValue: sharedData)
     }
     
     var body: some View {
@@ -65,7 +67,8 @@ struct PeerInstanceListView: View {
                         isUpdate: true,
                         peerInstanceModel: data,
                         coreDataHandler: vm.coreDataHandler,
-                        ratedPeerModel: vm.ratedPeerModel
+                        ratedPeerModel: vm.ratedPeerModel,
+                        sharedData: sharedData
                     )
             }, label: {
                 getLabelView(data: data)

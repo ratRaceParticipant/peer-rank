@@ -32,6 +32,7 @@ class EditPeerViewModel: ObservableObject {
         ratedPeerModel: RatedPeerModel?,
         onChange: ((_ peerDataModel: PeerModel, _ peerImage: UIImage?) -> Void)? = nil
     ){
+        
         self.localFileManager = localFileManager
         self.coreDataHandler = coreDatHandler
         self.peerModel = peerModel
@@ -60,6 +61,7 @@ class EditPeerViewModel: ObservableObject {
             viewContext: coreDataHandler.viewContext
         ) :
         PeerEntity(context: coreDataHandler.viewContext)
+    
         guard let peerEntity else {
             print("error in updating")
             return
